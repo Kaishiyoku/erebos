@@ -1,23 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import isLoggedIn from './core/local_storage/isLoggedIn';
+import Index from './pages/Index';
+import Login from './pages/Login';
 
 function App() {
+    const Component = isLoggedIn() ? Index : Login;
+
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="text-blue-300 hover:text-blue-400"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+        <div className="container mt-8 px-4 lg:px-20 mx-auto">
+            <Component/>
         </div>
     );
 }
