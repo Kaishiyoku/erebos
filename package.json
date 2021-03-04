@@ -15,7 +15,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src --ext .js,.jsx"
   },
   "eslintConfig": {
     "extends": [
@@ -39,6 +40,12 @@
     "@craco/craco": "^6.1.1",
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "autoprefixer": "9",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.21.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-no-switch-statements": "^1.0.0",
+    "eslint-plugin-no-unsafe-chars": "^1.0.2",
     "postcss": "7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
