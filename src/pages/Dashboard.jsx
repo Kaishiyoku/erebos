@@ -3,6 +3,7 @@ import getUserName from '../core/local_storage/getUserName';
 import isLoggedIn from '../core/local_storage/isLoggedIn';
 import {Link} from '@reach/router';
 import authGet from '../core/request/authGet';
+import {parseISO, format, parse} from 'date-fns';
 
 function Dashboard() {
     if (!isLoggedIn()) {
@@ -19,11 +20,22 @@ function Dashboard() {
 
     const renderLoans = userData.user.loans.map((loan) => (
         <div key={loan.id}>
-            <div>due: {loan.due}</div>
-            <div>id: {loan.id}</div>
-            <div>repaymentAmount: {loan.repaymentAmount}</div>
-            <div>status: {loan.status}</div>
-            <div>type: {loan.type}</div>
+            <div className="flex">
+                <div className="w-40">Due:</div>
+                <div>{format(parseISO(loan.due), 'dd.MM.yyyy HH:mm')}</div>
+            </div>
+            <div className="flex">
+                <div className="w-40">Repayment amount:</div>
+                <div>{loan.repaymentAmount}</div>
+            </div>
+            <div className="flex">
+                <div className="w-40">Status:</div>
+                <div>{loan.status}</div>
+            </div>
+            <div className="flex">
+                <div className="w-40">Type:</div>
+                <div>{loan.type}</div>
+            </div>
         </div>
     ));
 
@@ -35,11 +47,28 @@ function Dashboard() {
 
     return (
         <>
-            <div>Dashboard</div>
-            <div>User name: {userData.user.username}</div>
-            <div>Credits: {userData.user.credits}</div>
-            <div>Loans: {renderLoans}</div>
-            <div>Ships: {renderShips}</div>
+            <div className="text-2xl pb-4">Dashboard</div>
+
+            <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white">
+                <div className="px-6 py-4">
+                    <div className="flex">
+                        <div className="w-32">User name:</div>
+                        <div>{userData.user.username}</div>
+                    </div>
+                    <div className="flex">
+                        <div className="w-32">Credits:</div>
+                        <div>{userData.user.credits}</div>
+                    </div>
+                    <div className="flex">
+                        <div className="w-32">Loans:</div>
+                        <div>{renderLoans}</div>
+                    </div>
+                    <div className="flex">
+                        <div className="w-32">Ships:</div>
+                        <div>{renderShips}</div>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }
