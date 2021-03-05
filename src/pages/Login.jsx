@@ -1,10 +1,11 @@
 import {Link, useNavigate} from '@reach/router';
-import axios from 'axios';
 import {useForm} from 'react-hook-form';
 import login from '../core/local_storage/login';
 import LoadingButton from '../components/button/LoadingButton';
 import {useState} from 'react';
 import Input from '../components/button/Input';
+import logout from '../core/local_storage/logout';
+import authGet from '../core/request/authGet';
 
 function Login() {
     const navigate = useNavigate();
@@ -14,17 +15,18 @@ function Login() {
     const sendCheckUserRequest = ({userName, accessToken}) => {
         setIsLoading(true);
 
-        axios.get(`https://api.spacetraders.io/users/${userName}`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        }).then((response) => {
-            login(userName, accessToken);
+        login(userName, accessToken);
 
-            navigate('/dashboard');
-        }).catch((error) => {
-            // TODO: handle error
-        }).finally(() => setIsLoading(false));
+        authGet(`/users/${userName}`)
+            .then((response) => {
+                navigate('/dashboard');
+            })
+            .catch((error) => {
+                logout();
+
+                // TODO: handle error
+            })
+            .finally(() => setIsLoading(false));
     };
 
     return (

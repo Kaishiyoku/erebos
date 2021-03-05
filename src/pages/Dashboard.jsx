@@ -1,9 +1,8 @@
-import axios from 'axios';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import getUserName from '../core/local_storage/getUserName';
-import getAccessToken from '../core/local_storage/getAccessToken';
 import isLoggedIn from '../core/local_storage/isLoggedIn';
 import {Link} from '@reach/router';
+import authGet from '../core/request/authGet';
 
 function Dashboard() {
     if (!isLoggedIn()) {
@@ -12,13 +11,11 @@ function Dashboard() {
 
     const [userData, setUserData] = useState({user: {loans: [], ships: []}});
 
-    axios.get(`https://api.spacetraders.io/users/${getUserName()}`, {
-        headers: {
-            Authorization: `Bearer ${getAccessToken()}`,
-        },
-    }).then(({data}) => {
-        setUserData(data);
-    });
+    useEffect(() => {
+        authGet(`/users/${getUserName()}`).then(({data}) => {
+            setUserData(data);
+        });
+    }, []);
 
     const renderLoans = userData.user.loans.map((loan) => (
         <div key={loan.id}>

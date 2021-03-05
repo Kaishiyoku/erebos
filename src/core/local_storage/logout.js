@@ -1,6 +1,6 @@
 import {ACCESS_TOKEN, USER_NAME} from '../constants';
 
-const logout = (userName, accessToken) => {
+const logout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(USER_NAME);
 };

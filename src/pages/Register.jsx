@@ -1,9 +1,9 @@
 import {Link} from '@reach/router';
 import {useForm} from 'react-hook-form';
 import {useState} from 'react';
-import axios from 'axios';
 import Input from '../components/button/Input';
 import LoadingButton from '../components/button/LoadingButton';
+import authPost from '../core/request/authPost';
 
 function Register() {
     const {register, handleSubmit, watch, errors} = useForm();
@@ -13,11 +13,14 @@ function Register() {
     const sendRegisterRequest = ({userName}) => {
         setIsLoading(true);
 
-        axios.post(`https://api.spacetraders.io/users/${userName}/token`).then(({data}) => {
-            setUserData(data);
-        }).catch((error) => {
-            // TODO: handle error
-        }).finally(() => setIsLoading(false));
+        authPost(`/users/${userName}/token`)
+            .then(({data}) => {
+                setUserData(data);
+            })
+            .catch((error) => {
+                // TODO: handle error
+            })
+            .finally(() => setIsLoading(false));
     };
 
     const userDataInfo = userData ? (
