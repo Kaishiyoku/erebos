@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import {Router} from '@reach/router';
 import Navbar from './components/navbar/Navbar';
 import Logout from './pages/Logout';
+import AvailableLoans from './pages/AvailableLoans';
 
 function App() {
     const Home = isLoggedIn() ? Dashboard : Login;
@@ -16,6 +17,7 @@ function App() {
             <Router>
                 <Home path="/"/>
                 <Dashboard path="/dashboard"/>
+                <AvailableLoans path="/loans/available"/>
                 <Login path="/login"/>
                 <Logout path="/logout"/>
                 <Register path="/register"/>

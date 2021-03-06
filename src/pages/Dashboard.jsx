@@ -61,7 +61,12 @@ function Dashboard() {
                     </div>
                     <div className="flex">
                         <div className="w-32">Loans:</div>
-                        <div>{renderLoans}</div>
+                        <div className="pr-4">{renderLoans}</div>
+                        <div>
+                            <Link to="/loans/available" className="text-blue-600 cursor-pointer hover:text-blue-800 hover:underline">
+                                Show available loans
+                            </Link>
+                        </div>
                     </div>
                     <div className="flex">
                         <div className="w-32">Ships:</div>
