@@ -41,7 +41,16 @@ function Dashboard() {
 
     const renderShips = userData.user.ships.map((ship) => (
         <div key={ship.id}>
-            [TODO]
+            <div>Cargo: {ship.cargo}</div>
+            <div>Class: {ship.class}</div>
+            <div>Location: {ship.location}</div>
+            <div>Manufacturer: {ship.manufacturer}</div>
+            <div>maxCargo: {ship.maxCargo}</div>
+            <div>Plating: {ship.plating}</div>
+            <div>spaceAvailable: {ship.spaceAvailable}</div>
+            <div>Speed: {ship.speed}</div>
+            <div>Type: {ship.type}</div>
+            <div>Weapons: {ship.weapons}</div>
         </div>
     ));
 
@@ -70,7 +79,12 @@ function Dashboard() {
                     </div>
                     <div className="flex">
                         <div className="w-32">Ships:</div>
-                        <div>{renderShips}</div>
+                        <div className="pr-4">{renderShips}</div>
+                        <div>
+                            <Link to="/ships/available" className="text-blue-600 cursor-pointer hover:text-blue-800 hover:underline">
+                                Show available ships
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

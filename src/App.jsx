@@ -6,6 +6,7 @@ import {Router} from '@reach/router';
 import Navbar from './components/navbar/Navbar';
 import Logout from './pages/Logout';
 import AvailableLoans from './pages/AvailableLoans';
+import AvailableShips from './pages/AvailableShips';
 
 function App() {
     const Home = isLoggedIn() ? Dashboard : Login;
@@ -18,6 +19,7 @@ function App() {
                 <Home path="/"/>
                 <Dashboard path="/dashboard"/>
                 <AvailableLoans path="/loans/available"/>
+                <AvailableShips path="/ships/available"/>
                 <Login path="/login"/>
                 <Logout path="/logout"/>
                 <Register path="/register"/>
