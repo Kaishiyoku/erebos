@@ -7,6 +7,7 @@ import Navbar from './components/navbar/Navbar';
 import Logout from './pages/Logout';
 import AvailableLoans from './pages/AvailableLoans';
 import AvailableShips from './pages/AvailableShips';
+import {ToastContainer} from 'react-toastify';
 
 function App() {
     const Home = isLoggedIn() ? Dashboard : Login;
@@ -24,6 +25,8 @@ function App() {
                 <Logout path="/logout"/>
                 <Register path="/register"/>
             </Router>
+
+            <ToastContainer/>
         </div>
     );
 }

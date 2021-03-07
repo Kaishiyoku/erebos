@@ -1,9 +1,6 @@
-import {useState, useEffect} from 'react';
-import getUserName from '../core/local_storage/getUserName';
+import {useEffect, useState} from 'react';
 import isLoggedIn from '../core/local_storage/isLoggedIn';
 import {Link} from '@reach/router';
-import authGet from '../core/request/authGet';
-import {parseISO, format, parse} from 'date-fns';
 import ownUserInfoRequest from '../core/api/ownUserInfoRequest';
 import ActiveLoans from '../components/ActiveLoans';
 import OwnedShips from '../components/OwnedShips';
