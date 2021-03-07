@@ -4,6 +4,7 @@ import isLoggedIn from '../core/local_storage/isLoggedIn';
 import {Link} from '@reach/router';
 import authGet from '../core/request/authGet';
 import {parseISO, format, parse} from 'date-fns';
+import ownUserInfoRequest from '../core/api/ownUserInfoRequest';
 
 function Dashboard() {
     if (!isLoggedIn()) {
@@ -13,9 +14,7 @@ function Dashboard() {
     const [userData, setUserData] = useState({user: {loans: [], ships: []}});
 
     useEffect(() => {
-        authGet(`/users/${getUserName()}`).then(({data}) => {
-            setUserData(data);
-        });
+        ownUserInfoRequest().then(({data}) => setUserData(data));
     }, []);
 
     const renderLoans = userData.user.loans.map((loan) => (

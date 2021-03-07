@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form';
 import {useState} from 'react';
 import Input from '../components/button/Input';
 import LoadingButton from '../components/button/LoadingButton';
-import authPost from '../core/request/authPost';
+import registerRequest from '../core/api/registerRequest';
 
 function Register() {
     const {register, handleSubmit, watch, errors} = useForm();
@@ -13,7 +13,7 @@ function Register() {
     const sendRegisterRequest = ({userName}) => {
         setIsLoading(true);
 
-        authPost(`/users/${userName}/token`)
+        registerRequest(userName)
             .then(({data}) => {
                 setUserData(data);
             })

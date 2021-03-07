@@ -1,6 +1,6 @@
 import {partial} from 'ramda';
 import authRequest from './authRequest';
 
-const authGet = partial(authRequest, ['get']);
+const authPut = partial(authRequest, ['put']);
 
-export default authGet;
+export default authPut;

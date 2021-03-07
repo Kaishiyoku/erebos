@@ -1,19 +1,16 @@
-import {useState, useEffect} from 'react';
-import authGet from '../core/request/authGet';
-import authPost from '../core/request/authPost';
-import getUserName from '../core/local_storage/getUserName';
+import {useEffect, useState} from 'react';
+import ownedShipsRequest from '../core/api/ownedShipsRequest';
+import purchaseShipRequest from '../core/api/purchaseShipRequest';
 
 function AvailableShips() {
     const [ships, setShips] = useState([]);
 
     useEffect(() => {
-        authGet('/game/ships').then(({data}) => {
-            setShips(data.ships);
-        });
+        ownedShipsRequest().then(({data}) => setShips(data.ships));
     }, []);
 
-    const purchaseShipRequest = (location, type) => {
-        authPost(`/users/${getUserName()}/ships`, {location, type});
+    const handlePurchaseShip = (type, location) => {
+        purchaseShipRequest(type, location);
     };
 
     return (
@@ -32,7 +29,7 @@ function AvailableShips() {
                             <div key={purchaseLocation.location}>
                                 <div>Location: {purchaseLocation.location}</div>
                                 <div>Price: {purchaseLocation.price}</div>
-                                <button onClick={() => purchaseShipRequest(purchaseLocation.location, ship.type)} className="text-blue-600 cursor-pointer hover:text-blue-800 hover:underline">
+                                <button onClick={() => handlePurchaseShip(ship.type, purchaseLocation.location)} className="text-blue-600 cursor-pointer hover:text-blue-800 hover:underline">
                                     Buy ship
                                 </button>
                             </div>

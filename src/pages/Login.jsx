@@ -5,7 +5,7 @@ import LoadingButton from '../components/button/LoadingButton';
 import {useState} from 'react';
 import Input from '../components/button/Input';
 import logout from '../core/local_storage/logout';
-import authGet from '../core/request/authGet';
+import ownUserInfoRequest from '../core/api/ownUserInfoRequest';
 
 function Login() {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ function Login() {
 
         login(userName, accessToken);
 
-        authGet(`/users/${userName}`)
+        ownUserInfoRequest()
             .then((response) => {
                 navigate('/dashboard');
             })
