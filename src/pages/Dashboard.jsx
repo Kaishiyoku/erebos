@@ -4,6 +4,7 @@ import {Link} from '@reach/router';
 import ownUserInfoRequest from '../core/api/ownUserInfoRequest';
 import ActiveLoans from '../components/ActiveLoans';
 import OwnedShips from '../components/OwnedShips';
+import LabelWithValue from '../components/LabelWithValue';
 
 function Dashboard() {
     if (!isLoggedIn()) {
@@ -22,14 +23,8 @@ function Dashboard() {
 
             <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white mb-8">
                 <div className="px-6 py-4">
-                    <div className="flex">
-                        <div className="w-32">User name:</div>
-                        <div>{userData.user.username}</div>
-                    </div>
-                    <div className="flex">
-                        <div className="w-32">Credits:</div>
-                        <div>{userData.user.credits}</div>
-                    </div>
+                    <LabelWithValue label="User name" value={userData.user.username} showBackgrounds={false}/>
+                    <LabelWithValue label="Credits" value={userData.user.credits} showBackgrounds={false}/>
                 </div>
             </div>
 

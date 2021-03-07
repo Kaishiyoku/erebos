@@ -13,7 +13,7 @@ function App() {
     const Home = isLoggedIn() ? Dashboard : Login;
 
     return (
-        <div className="container px-4 lg:px-20 mx-auto">
+        <div className="container px-4 lg:px-20 mx-auto mb-12">
             <Navbar label="SpaceTraders UI" className="mb-8"/>
 
             <Router>

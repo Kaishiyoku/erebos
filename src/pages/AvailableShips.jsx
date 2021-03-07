@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import ownedShipsRequest from '../core/api/ownedShipsRequest';
 import purchaseShipRequest from '../core/api/purchaseShipRequest';
+import LabelWithValueGroup from '../components/LabelWithValueGroup';
 
 function AvailableShips() {
     const [ships, setShips] = useState([]);
@@ -13,24 +14,31 @@ function AvailableShips() {
         purchaseShipRequest(type, location);
     };
 
+    const getShipDisplayValuesFor = (ship) => [
+        {label: 'Class', value: ship.class},
+        {label: 'Type', value: ship.type},
+        {label: 'Manufacturer', value: ship.manufacturer},
+        {label: 'Maximum cargo', value: ship.maxCargo},
+        {label: 'Plating', value: ship.plating},
+        {label: 'Speed', value: ship.speed},
+        {label: 'Weapons', value: ship.weapons},
+    ];
+
     return (
         <div>
             {ships.map((ship) => (
                 <div key={ship.type} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white mb-4">
                     <div className="font-bold text-xl px-6 py-4">{ship.type}</div>
                     <div className="px-6 pb-4">
-                        <div>Class: {ship.class}</div>
-                        <div>Manufacturer: {ship.manufacturer}</div>
-                        <div>maxCargo: {ship.maxCargo}</div>
-                        <div>plating: {ship.plating}</div>
-                        <div>speed: {ship.speed}</div>
-                        <div>weapons: {ship.weapons}</div>
-                        <div>purchaseLocations: {ship.purchaseLocations.map((purchaseLocation) => (
-                            <div key={purchaseLocation.location}>
-                                <div>Location: {purchaseLocation.location}</div>
-                                <div>Price: {purchaseLocation.price}</div>
+                        <LabelWithValueGroup entries={getShipDisplayValuesFor(ship)}/>
+
+                        <div className="text-xl pb-2">Purchase locations</div>
+
+                        <div>{ship.purchaseLocations.map((purchaseLocation) => (
+                            <div key={purchaseLocation.location} className="flex px-2 py-1 odd:bg-gray-50">
+                                <div className="w-40 text-gray-500">{purchaseLocation.location}</div>
                                 <button onClick={() => handlePurchaseShip(ship.type, purchaseLocation.location)} className="text-blue-600 cursor-pointer hover:text-blue-800 hover:underline">
-                                    Buy ship
+                                    Buy ship for {purchaseLocation.price} credits
                                 </button>
                             </div>
                         ))}</div>

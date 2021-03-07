@@ -3,28 +3,19 @@ import {Link} from '@reach/router';
 import {format, parseISO} from 'date-fns';
 import Button from './button/Button';
 import clsx from 'clsx';
+import LabelWithValueGroup from './LabelWithValueGroup';
 
 function ActiveLoans(props) {
+    const getLoanDisplayValuesFor = (loan) => [
+        {label: 'Due', value: format(parseISO(loan.due), 'dd.MM.yyyy HH:mm')},
+        {label: 'Repayment amount', value: loan.repaymentAmount},
+        {label: 'Type', value: loan.type},
+        {label: 'Status', value: loan.status},
+    ];
+
     const renderLoans = props.loans.map((loan) => (
         <div key={loan.id}>
-            <div className="mb-4">
-                <div className="flex">
-                    <div className="w-40">Due:</div>
-                    <div>{format(parseISO(loan.due), 'dd.MM.yyyy HH:mm')}</div>
-                </div>
-                <div className="flex">
-                    <div className="w-40">Repayment amount:</div>
-                    <div>{loan.repaymentAmount}</div>
-                </div>
-                <div className="flex">
-                    <div className="w-40">Status:</div>
-                    <div>{loan.status}</div>
-                </div>
-                <div className="flex">
-                    <div className="w-40">Type:</div>
-                    <div>{loan.type}</div>
-                </div>
-            </div>
+            <LabelWithValueGroup entries={getLoanDisplayValuesFor(loan)}/>
 
             <Button label="Pay back"/>
         </div>
