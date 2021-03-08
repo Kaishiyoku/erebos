@@ -4,7 +4,7 @@ import LabelWithValue from './LabelWithValue';
 function LabelWithValueGroup(props) {
     return (
         <div className="pb-4">
-            {props.entries.map((entry) => <LabelWithValue label={entry.label} value={entry.value} showBackgrounds={props.showBackgrounds}/>)}
+            {props.entries.map((entry) => <LabelWithValue key={entry.label} label={entry.label} value={entry.value} showBackgrounds={props.showBackgrounds}/>)}
         </div>
     );
 }
