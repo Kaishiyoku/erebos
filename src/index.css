@@ -5,3 +5,45 @@
 button:disabled {
     @apply opacity-50 cursor-not-allowed hover:bg-transparent hover:text-blue-600;
 }
+
+.Toastify__toast--dark {
+    @apply rounded bg-gray-900 !important;
+}
+.Toastify__progress-bar--dark {
+    @apply bg-purple-400 !important;
+}
+
+.Toastify__toast--default {
+    @apply rounded bg-white !important;
+}
+.Toastify__progress-bar--default {
+
+}
+
+.Toastify__toast--info {
+    @apply rounded bg-blue-400 !important;
+}
+.Toastify__progress-bar--info {
+
+}
+
+.Toastify__toast--success {
+    @apply rounded bg-green-400 !important;
+}
+.Toastify__progress-bar--success {
+
+}
+
+.Toastify__toast--warning {
+    @apply rounded bg-yellow-400 !important;
+}
+.Toastify__progress-bar--warning {
+
+}
+
+.Toastify__toast--error {
+    @apply rounded bg-red-500 !important;
+}
+.Toastify__progress-bar--error {
+
+}
