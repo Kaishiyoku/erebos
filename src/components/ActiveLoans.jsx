@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import {Link} from '@reach/router';
 import {format, parseISO} from 'date-fns';
 import Button from './button/Button';
-import clsx from 'clsx';
 import LabelWithValueGroup from './LabelWithValueGroup';
 import {length} from 'ramda';
 
@@ -15,10 +14,17 @@ function ActiveLoans(props) {
     ];
 
     const renderLoans = length(props.loans) > 0 ? props.loans.map((loan) => (
-        <div key={loan.id}>
-            <LabelWithValueGroup entries={getLoanDisplayValuesFor(loan)}/>
+        <div key={loan.id} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white">
+            <div className="font-bold text-xl px-6 py-4">{loan.type}</div>
+            <div className="px-6 pb-4">
+                <LabelWithValueGroup entries={getLoanDisplayValuesFor(loan)}/>
+            </div>
 
-            <Button label="Pay back"/>
+            <div className="border-t border-gray-200 bg-gray-50 px-6 py-4">
+                <div className="flex gap-x-2">
+                    <Button label="Pay back"/>
+                </div>
+            </div>
         </div>
     )) : <div className="text-gray-500 italic">You don't have any active loans.</div>;
 
@@ -26,7 +32,7 @@ function ActiveLoans(props) {
         <div className={props.className}>
             <div className="text-xl pb-4">Active loans</div>
 
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
+            <div className="grid md:grid-cols-2 gap-4 mb-8">
                 {renderLoans}
             </div>
 

@@ -30,7 +30,7 @@ function OwnedShips(props) {
         <div className={props.className}>
             <div className="text-xl pb-4">Owned Ships</div>
 
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
+            <div className="grid md:grid-cols-2 gap-4 mb-8">
                 {renderShips}
             </div>
 

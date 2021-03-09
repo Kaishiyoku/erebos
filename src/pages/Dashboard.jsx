@@ -23,7 +23,7 @@ function Dashboard() {
 
             <UserInfo user={userData.user}/>
 
-            <ActiveLoans loans={userData.user.loans} className="mb-8"/>
+            <ActiveLoans loans={userData.user.loans} className="mb-12"/>
 
             <OwnedShips ships={userData.user.ships}/>
         </>
