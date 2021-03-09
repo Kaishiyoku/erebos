@@ -5,6 +5,7 @@ import Button from './button/Button';
 import LabelWithValueGroup from './LabelWithValueGroup';
 import {length} from 'ramda';
 import formatNumber from '../core/formatNumber';
+import payBackLoanRequest from '../core/api/payBackLoanRequest';
 
 function ActiveLoans(props) {
     const getLoanDisplayValuesFor = (loan) => [
@@ -23,7 +24,7 @@ function ActiveLoans(props) {
 
             <div className="border-t border-gray-200 bg-gray-50 px-6 py-4">
                 <div className="flex gap-x-2">
-                    <Button label="Pay back"/>
+                    <Button label="Pay back" onClick={() => payBackLoanRequest(loan.id)}/>
                 </div>
             </div>
         </div>
