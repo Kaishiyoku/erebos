@@ -1,33 +1,34 @@
-import isLoggedIn from './core/local_storage/isLoggedIn';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import {Router} from '@reach/router';
 import Navbar from './components/navbar/Navbar';
-import Logout from './pages/Logout';
 import AvailableLoans from './pages/AvailableLoans';
 import AvailableShips from './pages/AvailableShips';
 import {ToastContainer} from 'react-toastify';
+import LoggedInContext from './LoggedInContext';
+import {useState} from 'react';
+import getAccessToken from './core/local_storage/getAccessToken';
 
 function App() {
-    const Home = isLoggedIn() ? Dashboard : Login;
+    const [isLoggedInState, setIsLoggedInState] = useState(!!getAccessToken());
 
     return (
-        <div className="container px-4 lg:px-20 mx-auto mb-12">
-            <Navbar label="SpaceTraders UI" className="mb-8"/>
+        <LoggedInContext.Provider value={[isLoggedInState, setIsLoggedInState]}>
+            <div className="container px-4 lg:px-20 mx-auto mb-12">
+                <Navbar label="SpaceTraders UI" className="mb-8"/>
 
-            <Router>
-                <Home path="/"/>
-                <Dashboard path="/dashboard"/>
-                <AvailableLoans path="/loans/available"/>
-                <AvailableShips path="/ships/available"/>
-                <Login path="/login"/>
-                <Logout path="/logout"/>
-                <Register path="/register"/>
-            </Router>
+                <Router>
+                    <Dashboard path="/"/>
+                    <AvailableLoans path="/loans/available"/>
+                    <AvailableShips path="/ships/available"/>
+                    <Login path="/login"/>
+                    <Register path="/register"/>
+                </Router>
 
-            <ToastContainer/>
-        </div>
+                <ToastContainer/>
+            </div>
+        </LoggedInContext.Provider>
     );
 }
 

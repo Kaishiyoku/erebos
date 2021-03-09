@@ -1,14 +1,14 @@
 import {useEffect, useState} from 'react';
-import isLoggedIn from '../core/local_storage/isLoggedIn';
-import {Link} from '@reach/router';
 import ownUserInfoRequest from '../core/api/ownUserInfoRequest';
 import ActiveLoans from '../components/ActiveLoans';
 import OwnedShips from '../components/OwnedShips';
 import UserInfo from '../components/UserInfo';
+import getAccessToken from '../core/local_storage/getAccessToken';
+import Login from './Login';
 
 function Dashboard() {
-    if (!isLoggedIn()) {
-        return <div>Please <Link to="/login" className="py-2 text-blue-600 cursor-pointer hover:text-blue-800 hover:underline">login</Link> first!</div>;
+    if (!getAccessToken()) {
+        return <Login/>;
     }
 
     const [userData, setUserData] = useState({user: {credits: 0, loans: [], ships: [], username: ''}});

@@ -1,16 +1,26 @@
-import {Link, useNavigate} from '@reach/router';
+import {Link, navigate} from '@reach/router';
 import {useForm} from 'react-hook-form';
 import login from '../core/local_storage/login';
 import LoadingButton from '../components/button/LoadingButton';
-import {useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import Input from '../components/button/Input';
 import logout from '../core/local_storage/logout';
 import ownUserInfoRequest from '../core/api/ownUserInfoRequest';
+import LoggedInContext from '../LoggedInContext';
+import getAccessToken from '../core/local_storage/getAccessToken';
 
 function Login() {
-    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
     const {register, handleSubmit, watch, errors} = useForm();
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        return () => {
+            if (getAccessToken()) {
+                setIsLoggedIn(true);
+            }
+        };
+    }, []);
 
     const sendCheckUserRequest = ({userName, accessToken}) => {
         setIsLoading(true);
@@ -19,7 +29,7 @@ function Login() {
 
         ownUserInfoRequest()
             .then((response) => {
-                navigate('/dashboard');
+                navigate('/');
             })
             .catch((error) => {
                 logout();
