@@ -52,6 +52,7 @@
     "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-no-switch-statements": "^1.0.0",
     "eslint-plugin-no-unsafe-chars": "^1.0.2",
+    "numeral": "^2.0.6",
     "postcss": "7",
     "prop-types": "^15.7.2",
     "react-hook-form": "^6.15.4",

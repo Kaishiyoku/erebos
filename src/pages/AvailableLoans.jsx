@@ -2,6 +2,8 @@ import {useEffect, useState} from 'react';
 import availableLoansRequest from '../core/api/availableLoansRequest';
 import takeOutLoanRequest from '../core/api/takeOutLoanRequest';
 import LabelWithValueGroup from '../components/LabelWithValueGroup';
+import formatBool from '../core/formatBool';
+import formatNumber from '../core/formatNumber';
 
 function AvailableLoans() {
     const [loans, setLoans] = useState([]);
@@ -15,9 +17,9 @@ function AvailableLoans() {
     };
 
     const getLoanDisplayValuesFor = (loan) => [
-        {label: 'Amount', value: loan.amount},
-        {label: 'Collateral required', value: loan.collateralRequired},
-        {label: 'Rate', value: loan.rate},
+        {label: 'Amount', value: formatNumber(loan.amount)},
+        {label: 'Collateral required', value: formatBool(loan.collateralRequired)},
+        {label: 'Rate', value: formatNumber(loan.rate)},
         {label: 'Term (days)', value: loan.termInDays},
     ];
 

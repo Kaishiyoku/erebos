@@ -4,11 +4,12 @@ import {format, parseISO} from 'date-fns';
 import Button from './button/Button';
 import LabelWithValueGroup from './LabelWithValueGroup';
 import {length} from 'ramda';
+import formatNumber from '../core/formatNumber';
 
 function ActiveLoans(props) {
     const getLoanDisplayValuesFor = (loan) => [
         {label: 'Due', value: format(parseISO(loan.due), 'dd.MM.yyyy HH:mm')},
-        {label: 'Repayment amount', value: loan.repaymentAmount},
+        {label: 'Repayment amount', value: formatNumber(loan.repaymentAmount)},
         {label: 'Type', value: loan.type},
         {label: 'Status', value: loan.status},
     ];

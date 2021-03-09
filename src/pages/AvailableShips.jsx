@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import ownedShipsRequest from '../core/api/ownedShipsRequest';
 import purchaseShipRequest from '../core/api/purchaseShipRequest';
 import LabelWithValueGroup from '../components/LabelWithValueGroup';
+import formatNumber from '../core/formatNumber';
 
 function AvailableShips() {
     const [ships, setShips] = useState([]);
@@ -18,7 +19,7 @@ function AvailableShips() {
         {label: 'Class', value: ship.class},
         {label: 'Type', value: ship.type},
         {label: 'Manufacturer', value: ship.manufacturer},
-        {label: 'Maximum cargo', value: ship.maxCargo},
+        {label: 'Maximum cargo', value: formatNumber(ship.maxCargo)},
         {label: 'Plating', value: ship.plating},
         {label: 'Speed', value: ship.speed},
         {label: 'Weapons', value: ship.weapons},
@@ -38,7 +39,7 @@ function AvailableShips() {
                             <div key={purchaseLocation.location} className="flex px-2 py-1 odd:bg-gray-50">
                                 <div className="w-40 text-gray-500">{purchaseLocation.location}</div>
                                 <button onClick={() => handlePurchaseShip(ship.type, purchaseLocation.location)} className="text-blue-600 cursor-pointer hover:text-blue-800 hover:underline">
-                                    Buy ship for {purchaseLocation.price} credits
+                                    Buy ship for {formatNumber(purchaseLocation.price)} credits
                                 </button>
                             </div>
                         ))}</div>

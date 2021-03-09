@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import {Link} from '@reach/router';
 import LabelWithValueGroup from './LabelWithValueGroup';
 import {length} from 'ramda';
+import formatNumber from '../core/formatNumber';
 
 function OwnedShips(props) {
     const getShipDisplayValuesFor = (ship) => [
@@ -9,9 +10,9 @@ function OwnedShips(props) {
         {label: 'Type', value: ship.type},
         {label: 'Location', value: ship.location},
         {label: 'Cargo', value: ship.cargo},
-        {label: 'Space available', value: ship.spaceAvailable},
+        {label: 'Space available', value: formatNumber(ship.spaceAvailable)},
         {label: 'Manufacturer', value: ship.manufacturer},
-        {label: 'Maximum cargo', value: ship.maxCargo},
+        {label: 'Maximum cargo', value: formatNumber(ship.maxCargo)},
         {label: 'Plating', value: ship.plating},
         {label: 'Speed', value: ship.speed},
         {label: 'Weapons', value: ship.weapons},
