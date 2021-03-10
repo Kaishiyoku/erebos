@@ -4,16 +4,22 @@ import takeOutLoanRequest from '../core/api/takeOutLoanRequest';
 import LabelWithValueGroup from '../components/LabelWithValueGroup';
 import formatBool from '../core/formatBool';
 import formatNumber from '../core/formatNumber';
+import LoadingButton from '../components/button/LoadingButton';
 
 function AvailableLoans() {
     const [loans, setLoans] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         availableLoansRequest().then(({data}) => setLoans(data.loans));
     }, []);
 
     const handleTakeOutLoan = (type) => {
-        takeOutLoanRequest(type);
+        setIsLoading(true);
+
+        takeOutLoanRequest(type).finally(() => {
+            setIsLoading(false);
+        });
     };
 
     const getLoanDisplayValuesFor = (loan) => [
@@ -32,9 +38,7 @@ function AvailableLoans() {
                         <LabelWithValueGroup entries={getLoanDisplayValuesFor(loan)}/>
                     </div>
                     <div className="border-t border-gray-200 bg-gray-50 px-6 py-4">
-                        <button onClick={() => handleTakeOutLoan(loan.type)} className="text-left text-blue-600 shadow-md border border-blue-300 bg-white rounded-full transition-all duration-200 focus:ring-4 focus:ring-blue-200 hover:bg-blue-500 hover:text-white focus:outline-none px-4 py-2">
-                            Take out loan
-                        </button>
+                        <LoadingButton label="Take out loan" isLoading={isLoading} onClick={() => handleTakeOutLoan(loan.type)}/>
                     </div>
                 </div>
             ))}
