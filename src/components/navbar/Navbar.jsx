@@ -22,7 +22,7 @@ function Navbar(props) {
     const logoutButton = isLoggedIn ? (
         <a
             onClick={handleLogout}
-            className="block cursor-pointer block transition-all duration-200 px-4 py-5 text-black lg:border-b-4 border-l-4 border-transparent lg:border-l-0 hover:text-black hover:bg-gray-50"
+            className="block cursor-pointer block transition-all duration-200 px-4 py-5 text-black lg:border-b-4 border-l-4 lg:border-l-0 border-transparent hover:text-black hover:bg-gray-50 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
         >
             Logout
         </a>
@@ -35,12 +35,12 @@ function Navbar(props) {
     };
 
     return (
-        <div className="bg-white shadow mb-8">
+        <div className="bg-white shadow mb-8 dark:bg-gray-800">
             <div className="container lg:px-20 mx-auto">
                 <div className="lg:flex lg:items-center">
                     <div className="flex justify-between items-center">
                         <div className="text-xl mr-2 ml-2 md:ml-0 py-5">
-                            <Link to="/" className="text-white text-gray-700 transition-all duration-200 hover:text-black">
+                            <Link to="/" className="text-gray-700 transition-all duration-200 hover:text-black dark:text-gray-400 dark:hover:text-white">
                                 {props.label}
                             </Link>
                         </div>
@@ -58,7 +58,7 @@ function Navbar(props) {
                             {logoutButton}
                             <a
                                 onClick={props.toggleDarkModeFn}
-                                className="block cursor-pointer block transition-all duration-200 px-4 py-5 text-black lg:border-b-4 border-l-4 border-transparent lg:border-l-0 hover:text-black hover:bg-gray-50"
+                                className="block cursor-pointer block transition-all duration-200 px-4 py-5 text-black lg:border-b-4 border-l-4 lg:border-l-0 border-transparent hover:text-black hover:bg-gray-50 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
                             >
                                 {darkModeIcons[props.darkMode]}
                             </a>

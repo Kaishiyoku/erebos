@@ -7,7 +7,7 @@ function NavbarItem(props) {
     }
 
     return (
-        <NavLink to={props.to} className="block cursor-pointer block transition-all duration-200 px-4 py-5 text-black lg:border-b-4 border-l-4 lg:border-l-0 hover:text-black hover:bg-gray-50">
+        <NavLink to={props.to} className="block cursor-pointer block transition-all duration-200 px-4 py-5 text-black lg:border-b-4 border-l-4 lg:border-l-0 hover:text-black hover:bg-gray-50 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700">
             {props.label}
         </NavLink>
     );
