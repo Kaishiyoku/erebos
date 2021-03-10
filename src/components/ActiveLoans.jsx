@@ -6,14 +6,26 @@ import LabelWithValueGroup from './LabelWithValueGroup';
 import {length} from 'ramda';
 import formatNumber from '../core/formatNumber';
 import payBackLoanRequest from '../core/api/payBackLoanRequest';
+import {useState} from 'react';
+import LoadingButton from './button/LoadingButton';
 
 function ActiveLoans(props) {
+    const [isLoading, setIsLoading] = useState(false);
+
     const getLoanDisplayValuesFor = (loan) => [
         {label: 'Due', value: format(parseISO(loan.due), 'dd.MM.yyyy HH:mm')},
         {label: 'Repayment amount', value: formatNumber(loan.repaymentAmount)},
         {label: 'Type', value: loan.type},
         {label: 'Status', value: loan.status},
     ];
+
+    const handlePayBack = (id) => {
+        setIsLoading(true);
+
+        payBackLoanRequest(id).finally(() => {
+            setIsLoading(false);
+        });
+    };
 
     const renderLoans = length(props.loans) > 0 ? props.loans.map((loan) => (
         <div key={loan.id} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white">
@@ -24,7 +36,7 @@ function ActiveLoans(props) {
 
             <div className="border-t border-gray-200 bg-gray-50 px-6 py-4">
                 <div className="flex gap-x-2">
-                    <Button label="Pay back" onClick={() => payBackLoanRequest(loan.id)}/>
+                    <LoadingButton label="Pay back" onClick={() => handlePayBack(loan.id)} isLoading={isLoading}/>
                 </div>
             </div>
         </div>
