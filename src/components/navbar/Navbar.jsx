@@ -4,6 +4,9 @@ import NavbarItem from './NavbarItem';
 import LoggedInContext from '../../LoggedInContext';
 import {useContext} from 'react';
 import logout from '../../core/local_storage/logout';
+import SunIcon from '../../icons/SunIcon';
+import MoonIcon from '../../icons/MoonIcon';
+import SparklesIcon from '../../icons/SparklesIcon';
 
 function Navbar(props) {
     const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
@@ -24,6 +27,12 @@ function Navbar(props) {
             Logout
         </a>
     ) : null;
+
+    const darkModeIcons = {
+        dark: <MoonIcon/>,
+        light: <SunIcon/>,
+        os: <SparklesIcon/>,
+    };
 
     return (
         <div className="bg-white shadow mb-8">
@@ -47,6 +56,12 @@ function Navbar(props) {
                             <NavbarItem to="/ships/available" label="Ship market" isVisible={isLoggedIn}/>
                             <NavbarItem to="/loans/available" label="Available Loans" isVisible={isLoggedIn}/>
                             {logoutButton}
+                            <a
+                                onClick={props.toggleDarkModeFn}
+                                className="block cursor-pointer block transition-all duration-200 px-4 py-5 text-black lg:border-b-4 border-l-4 border-transparent lg:border-l-0 hover:text-black hover:bg-gray-50"
+                            >
+                                {darkModeIcons[props.darkMode]}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -56,7 +71,9 @@ function Navbar(props) {
 }
 
 Navbar.propTypes = {
+    darkMode: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    toggleDarkModeFn: PropTypes.func.isRequired,
 };
 
 export default Navbar;

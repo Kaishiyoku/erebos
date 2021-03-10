@@ -29,8 +29,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <title>SpaceTraders UI</title>
+
+    <script type="text/javascript">
+      if (localStorage.getItem('darkMode') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector('html').classList.add('dark');
+      }
+    </script>
   </head>
-  <body class="bg-gray-50 text-gray-600">
+  <body class="bg-gray-50 h-screen antialiased font-sans dark:bg-gray-900 dark:text-gray-300 transition-all transition-duration-1000 ease-in">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
