@@ -15,6 +15,7 @@ function LoadingButton({disabled, isLoading, ...otherProps}) {
 
 LoadingButton.propTypes = {
     isLoading: PropTypes.bool,
+    label: PropTypes.string.isRequired,
 };
 
 LoadingButton.defaultProps = {

@@ -3,6 +3,7 @@ import ownedShipsRequest from '../core/api/ownedShipsRequest';
 import purchaseShipRequest from '../core/api/purchaseShipRequest';
 import LabelWithValueGroup from '../components/LabelWithValueGroup';
 import formatNumber from '../core/formatNumber';
+import MultiLoadingButton from '../components/button/MultiLoadingButton';
 
 function AvailableShips() {
     const [ships, setShips] = useState([]);
@@ -10,10 +11,6 @@ function AvailableShips() {
     useEffect(() => {
         ownedShipsRequest().then(({data}) => setShips(data.ships));
     }, []);
-
-    const handlePurchaseShip = (type, location) => {
-        purchaseShipRequest(type, location);
-    };
 
     const getShipDisplayValuesFor = (ship) => [
         {label: 'Class', value: ship.class},
@@ -36,11 +33,13 @@ function AvailableShips() {
                         <div className="text-xl pb-2">Purchase locations</div>
 
                         <div>{ship.purchaseLocations.map((purchaseLocation) => (
-                            <div key={purchaseLocation.location} className="flex px-2 py-1 odd:bg-gray-50">
+                            <div key={purchaseLocation.location} className="flex items-center px-2 py-1 odd:bg-gray-50">
                                 <div className="w-40 text-gray-500">{purchaseLocation.location}</div>
-                                <button onClick={() => handlePurchaseShip(ship.type, purchaseLocation.location)} className="text-blue-600 cursor-pointer hover:text-blue-800 hover:underline">
-                                    Buy ship for {formatNumber(purchaseLocation.price)} credits
-                                </button>
+                                <MultiLoadingButton
+                                    label={`Buy ship for ${formatNumber(purchaseLocation.price)} credits`}
+                                    size="sm"
+                                    promiseFn={() => purchaseShipRequest(ship.type, purchaseLocation.location)}
+                                />
                             </div>
                         ))}</div>
                     </div>
