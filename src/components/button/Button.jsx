@@ -3,7 +3,7 @@ import noop from '../../core/noop';
 import clsx from 'clsx';
 
 function Button(props) {
-    const baseButtonClasses = 'flex items-center text-left text-blue-600 shadow-md border border-blue-300 bg-white rounded-full transition-all duration-200 focus:ring-4 focus:ring-blue-200 hover:bg-blue-500 hover:text-white focus:outline-none';
+    const baseButtonClasses = 'flex items-center text-left text-blue-600 shadow-md border border-blue-300 bg-white rounded-full transition-all duration-200 focus:ring-4 focus:ring-blue-200 hover:bg-blue-500 hover:text-white focus:outline-none dark:text-blue-400 dark:border-blue-500 dark:bg-black dark:bg-opacity-50 dark:hover:text-white dark:hover:border-blue-400 dark:hover:bg-blue-500';
 
     const buttonClasses = clsx(baseButtonClasses, {
         'px-2 py-1 text-sm': props.size === 'sm',

@@ -23,12 +23,12 @@ function AvailableLoans() {
     return (
         <div>
             {loans.map((loan) => (
-                <div key={loan.type} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white mb-4">
+                <div key={loan.type} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white mb-4 dark:border-gray-700 dark:bg-gray-800">
                     <div className="font-bold text-xl px-6 py-4">{loan.type}</div>
                     <div className="px-6">
                         <LabelWithValueGroup entries={getLoanDisplayValuesFor(loan)}/>
                     </div>
-                    <div className="border-t border-gray-200 bg-gray-50 px-6 py-4">
+                    <div className="border-t border-gray-200 bg-gray-50 px-6 py-4 dark:border-gray-700 dark:bg-gray-900 dark:bg-opacity-50">
                         <MultiLoadingButton label="Take out loan" promiseFn={() => takeOutLoanRequest(loan.type)}/>
                     </div>
                 </div>

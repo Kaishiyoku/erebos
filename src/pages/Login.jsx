@@ -40,8 +40,8 @@ function Login() {
     };
 
     return (
-        <div className="mx-auto w-full max-w-sm bg-white shadow-md rounded text-left">
-            <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white">
+        <div className="mx-auto w-full max-w-sm text-left">
+            <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800">
                 <div className="font-bold text-xl px-6 py-4">Login</div>
 
                 <div className="px-6 pb-4">
@@ -59,7 +59,7 @@ function Login() {
                         <div className="flex justify-between space-x-2">
                             <LoadingButton type="submit" label="Login" isLoading={isFormSubmitting} disabled={!formState.isValid}/>
 
-                            <Link to="/register" className="py-2 text-blue-600 cursor-pointer hover:text-blue-800 hover:underline">
+                            <Link to="/register" className="py-2 text-blue-600 cursor-pointer hover:text-blue-800 hover:underline dark:text-blue-500 dark:hover:text-white">
                                 Register
                             </Link>
                         </div>

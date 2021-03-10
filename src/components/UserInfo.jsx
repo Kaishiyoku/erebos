@@ -8,7 +8,7 @@ function UserInfo(props) {
     }
 
     return (
-        <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white mb-8">
+        <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white mb-8 dark:border-gray-700 dark:bg-gray-800">
             <div className="px-6 py-4">
                 <LabelWithValue label="User name" value={props.user.username} showBackgrounds={false}/>
                 <LabelWithValue label="Credits" value={formatNumber(props.user.credits)} showBackgrounds={false}/>

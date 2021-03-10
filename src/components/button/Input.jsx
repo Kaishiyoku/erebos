@@ -9,7 +9,7 @@ function Input(props) {
             id={props.name}
             placeholder={props.placeholder}
             disabled={props.disabled}
-            className="rounded outline-none px-3 py-2 shadow border w-full text-gray-700 leading-tight transition-all duration-200 focus:border-blue-300 focus:ring focus:ring-blue-100 focus:ring-opacity-50"
+            className="rounded outline-none px-3 py-2 shadow border w-full text-gray-700 leading-tight transition-all duration-200 focus:border-blue-300 focus:ring focus:ring-blue-100 focus:ring-opacity-50 dark:text-gray-300 dark:placeholder-gray-600 dark:border-gray-600 dark:bg-black dark:bg-opacity-50"
         />
     );
 }

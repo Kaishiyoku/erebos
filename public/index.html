@@ -9,6 +9,13 @@
       name="description"
       content="Web site created using create-react-app"
     />
+
+    <script type="text/javascript">
+      if (localStorage.getItem('darkMode') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector('html').classList.add('dark');
+      }
+    </script>
+
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -29,14 +36,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <title>SpaceTraders UI</title>
-
-    <script type="text/javascript">
-      if (localStorage.getItem('darkMode') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector('html').classList.add('dark');
-      }
-    </script>
   </head>
-  <body class="bg-gray-50 h-screen antialiased font-sans dark:bg-gray-900 dark:text-gray-300 transition-all transition-duration-1000 ease-in">
+  <body class="bg-gray-50 antialiased font-sans dark:bg-gray-900 dark:text-gray-300 transition-all transition-duration-1000 ease-in">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

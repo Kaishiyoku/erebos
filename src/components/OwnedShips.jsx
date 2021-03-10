@@ -19,7 +19,7 @@ function OwnedShips(props) {
     ];
 
     const renderShips = length(props.ships) > 0 ? props.ships.map((ship) => (
-        <div key={ship.id} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white">
+        <div key={ship.id} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800">
             <div className="font-bold text-xl px-6 py-4">{ship.type} :: {ship.location}</div>
             <div className="px-6 pb-4">
                 <LabelWithValueGroup entries={getShipDisplayValuesFor(ship)}/>
@@ -35,7 +35,7 @@ function OwnedShips(props) {
                 {renderShips}
             </div>
 
-            <Link to="/ships/available" className="text-left text-blue-600 shadow-md border border-blue-300 bg-white rounded-full transition-all duration-200 focus:ring-4 focus:ring-blue-200 hover:bg-blue-500 hover:text-white focus:outline-none px-4 py-2">
+            <Link to="/ships/available" className="text-left text-blue-600 shadow-md border border-blue-300 bg-white rounded-full transition-all duration-200 focus:ring-4 focus:ring-blue-200 hover:bg-blue-500 hover:text-white focus:outline-none px-4 py-2 dark:text-blue-400 dark:border-blue-500 dark:bg-black dark:bg-opacity-50 dark:hover:text-white dark:hover:border-blue-400 dark:hover:bg-blue-500">
                 Show available ships
             </Link>
         </div>

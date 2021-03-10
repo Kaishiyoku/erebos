@@ -25,7 +25,7 @@ function AvailableShips() {
     return (
         <div>
             {ships.map((ship) => (
-                <div key={ship.type} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white mb-4">
+                <div key={ship.type} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white mb-4 dark:border-gray-700 dark:bg-gray-800">
                     <div className="font-bold text-xl px-6 py-4">{ship.type}</div>
                     <div className="px-6 pb-4">
                         <LabelWithValueGroup entries={getShipDisplayValuesFor(ship)}/>
@@ -33,7 +33,7 @@ function AvailableShips() {
                         <div className="text-xl pb-2">Purchase locations</div>
 
                         <div>{ship.purchaseLocations.map((purchaseLocation) => (
-                            <div key={purchaseLocation.location} className="flex items-center px-2 py-1 odd:bg-gray-50">
+                            <div key={purchaseLocation.location} className="flex items-center px-2 py-1 odd:bg-gray-50 dark:odd:bg-gray-900">
                                 <div className="w-40 text-gray-500">{purchaseLocation.location}</div>
                                 <MultiLoadingButton
                                     label={`Buy ship for ${formatNumber(purchaseLocation.price)} credits`}

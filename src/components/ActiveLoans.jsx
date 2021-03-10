@@ -16,13 +16,13 @@ function ActiveLoans(props) {
     ];
 
     const renderLoans = length(props.loans) > 0 ? props.loans.map((loan) => (
-        <div key={loan.id} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white">
+        <div key={loan.id} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800">
             <div className="font-bold text-xl px-6 py-4">{loan.type}</div>
             <div className="px-6 pb-4">
                 <LabelWithValueGroup entries={getLoanDisplayValuesFor(loan)}/>
             </div>
 
-            <div className="border-t border-gray-200 bg-gray-50 px-6 py-4">
+            <div className="border-t border-gray-200 bg-gray-50 px-6 py-4 dark:border-gray-700 dark:bg-gray-900 dark:bg-opacity-50">
                 <div className="flex gap-x-2">
                     <MultiLoadingButton label="Pay back" promiseFn={() => payBackLoanRequest(loan.id)}/>
                 </div>
@@ -38,7 +38,7 @@ function ActiveLoans(props) {
                 {renderLoans}
             </div>
 
-            <Link to="/loans/available" className="text-left text-blue-600 shadow-md border border-blue-300 bg-white rounded-full transition-all duration-200 focus:ring-4 focus:ring-blue-200 hover:bg-blue-500 hover:text-white focus:outline-none px-4 py-2">
+            <Link to="/loans/available" className="text-left text-blue-600 shadow-md border border-blue-300 bg-white rounded-full transition-all duration-200 focus:ring-4 focus:ring-blue-200 hover:bg-blue-500 hover:text-white focus:outline-none px-4 py-2 dark:text-blue-400 dark:border-blue-500 dark:bg-black dark:bg-opacity-50 dark:hover:text-white dark:hover:border-blue-400 dark:hover:bg-blue-500">
                 Show available loans
             </Link>
         </div>
