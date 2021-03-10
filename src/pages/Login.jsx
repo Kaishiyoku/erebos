@@ -12,7 +12,7 @@ import getAccessToken from '../core/local_storage/getAccessToken';
 function Login() {
     const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
     const {register, handleSubmit, watch, errors, formState} = useForm({mode: 'onChange'});
-    const [isLoading, setIsLoading] = useState(false);
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
     useEffect(() => {
         return () => {
@@ -23,7 +23,7 @@ function Login() {
     }, []);
 
     const sendCheckUserRequest = ({userName, accessToken}) => {
-        setIsLoading(true);
+        setIsFormSubmitting(true);
 
         login(userName, accessToken);
 
@@ -36,7 +36,7 @@ function Login() {
 
                 // TODO: handle error
             })
-            .finally(() => setIsLoading(false));
+            .finally(() => setIsFormSubmitting(false));
     };
 
     return (
@@ -57,7 +57,7 @@ function Login() {
                         </div>
 
                         <div className="flex justify-between space-x-2">
-                            <LoadingButton type="submit" label="Login" isLoading={isLoading} disabled={!formState.isValid}/>
+                            <LoadingButton type="submit" label="Login" isLoading={isFormSubmitting} disabled={!formState.isValid}/>
 
                             <Link to="/register" className="py-2 text-blue-600 cursor-pointer hover:text-blue-800 hover:underline">
                                 Register
