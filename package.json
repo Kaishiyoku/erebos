@@ -55,9 +55,11 @@
     "numeral": "^2.0.6",
     "postcss": "7",
     "prop-types": "^15.7.2",
+    "react-collapse": "^5.1.0",
     "react-hook-form": "^6.15.4",
     "react-toastify": "^7.0.3",
     "rxjs": "^6.6.6",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "transition-height": "^1.0.2"
   }
 }

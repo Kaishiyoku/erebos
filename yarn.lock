@@ -9281,6 +9281,11 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
+react-collapse@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-collapse/-/react-collapse-5.1.0.tgz#36f69ecb0fe797f976aaf5e4f2b2c248d2760140"
+  integrity sha512-5v0ywsn9HjiR/odNzbRDs0RZfrnbdSippJebWOBCFFDA12Vx8DddrbI4qWVf1P2wTiVagrpcSy07AU0b6+gM9Q==
+
 react-dev-utils@^11.0.3:
   version "11.0.3"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.3.tgz#b61ed499c7d74f447d4faddcc547e5e671e97c08"
@@ -10916,6 +10921,11 @@ tr46@^2.0.2:
   integrity sha512-3n1qG+/5kg+jrbTzwAykB5yRYtQCTqOGKq5U5PE3b0a1/mzo6snDhjGS0zJVJunO0NrT3Dg1MLy5TjWP/UJppg==
   dependencies:
     punycode "^2.1.1"
+
+transition-height@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/transition-height/-/transition-height-1.0.2.tgz#ed1945e9f295110cb35ef9d7bece3b08e1f2a4e0"
+  integrity sha512-kss1gdEi03IEyfoB4Uyp1A8hmxqFtv4z7pSSBYrZkwTiFghgFeKYsi1JJQPkwsqjYs/ef/i8ctoJZd7sOALYlQ==
 
 tryer@^1.0.1:
   version "1.0.1"

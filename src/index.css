@@ -47,3 +47,7 @@ button:disabled {
 .Toastify__progress-bar--error {
 
 }
+
+.ReactCollapse--collapse {
+    transition: height 500ms;
+}
