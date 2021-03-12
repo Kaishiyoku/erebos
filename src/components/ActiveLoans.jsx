@@ -4,7 +4,7 @@ import {format, parseISO} from 'date-fns';
 import LabelWithValueGroup from './LabelWithValueGroup';
 import {length} from 'ramda';
 import formatNumber from '../core/formatNumber';
-import payBackLoanRequest from '../core/api/payBackLoanRequest';
+import payOffLoanRequest from '../core/api/payOffLoanRequest';
 import MultiLoadingButton from './button/MultiLoadingButton';
 
 function ActiveLoans(props) {
@@ -24,7 +24,7 @@ function ActiveLoans(props) {
 
             <div className="border-t border-gray-200 bg-gray-50 px-6 py-4 dark:border-gray-700 dark:bg-gray-900 dark:bg-opacity-50">
                 <div className="flex gap-x-2">
-                    <MultiLoadingButton label="Pay back" promiseFn={() => payBackLoanRequest(loan.id)}/>
+                    <MultiLoadingButton label="Pay back" promiseFn={() => payOffLoanRequest(loan.id)}/>
                 </div>
             </div>
         </div>

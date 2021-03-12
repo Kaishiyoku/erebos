@@ -1,5 +1,5 @@
 import authGet from '../request/authGet';
 
-const locationInfoRequest = (symbol) => authGet(`/game/locations/${symbol}`);
+const locationInfoRequest = (systemSymbol) => authGet(`/game/locations/${systemSymbol}`);
 
 export default locationInfoRequest;
