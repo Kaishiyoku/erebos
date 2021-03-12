@@ -77,6 +77,7 @@ function Navbar(props) {
                         <div className={navbarContentClasses}>
                             <div className="lg:flex w-full lg:w-auto">
                                 <NavbarItem to="/" label="Dashboard" isVisible={isLoggedIn}/>
+                                <NavbarItem to="/systems" label="Systems" isVisible={isLoggedIn}/>
                             </div>
                             <div className="lg:flex w-full lg:w-auto">
                                 <NavbarItem to="/ships/available" label="Ship market" isVisible={isLoggedIn}/>
