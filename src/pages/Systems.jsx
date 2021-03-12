@@ -1,12 +1,19 @@
 import {useEffect, useState} from 'react';
 import systemsInfoRequest from '../core/api/systemsInfoRequest';
+import ownedShipsRequest from '../core/api/ownedShipsRequest';
+import Table from '../components/table/Table';
 
 function Systems() {
     const [systems, setSystems] = useState([]);
+    const [ownedShips, setOwnedShips] = useState([]);
 
     useEffect(() => {
         systemsInfoRequest().then(({data}) => {
             setSystems(data.systems);
+        });
+
+        ownedShipsRequest().then(({data}) => {
+            setOwnedShips(data.ships);
         });
     }, []);
 
@@ -14,17 +21,18 @@ function Systems() {
         <div>
             <div className="text-2xl pb-4">Systems</div>
 
+            <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 mb-8">
+                <div className="font-bold text-xl px-6 py-4">Owned ships</div>
+                <div className="px-6 pb-4">
+                    <Table labels={['Type', 'Location']} values={ownedShips.map(({type, location}) => [type, location])} hovered/>
+                </div>
+            </div>
+
             {systems.map((system) => (
-                <div key={system.symbol} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800">
+                <div key={system.symbol} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 mb-4">
                     <div className="font-bold text-xl px-6 py-4">{system.symbol} :: {system.name}</div>
                     <div className="px-6 pb-4">
-                        {system.locations.map((location) => (
-                            <div className="flex px-2 py-1 odd:bg-gray-50 dark:odd:bg-gray-900">
-                                <div className="w-40">{location.symbol}:</div>
-                                <div className="w-28 text-gray-500">{location.name}</div>
-                                <div className="text-gray-500">{location.type}</div>
-                            </div>
-                        ))}
+                        <Table labels={['Symbol', 'X', 'Y', 'Name', 'Type']} values={system.locations.map(({symbol, x, y, name, type}) => [symbol, x, y, name, type])} hovered/>
                     </div>
                 </div>
             ))}
