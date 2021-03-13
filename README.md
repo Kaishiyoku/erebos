@@ -12,6 +12,19 @@ Installation
 3. run `yarn build` or `npm run build` or run `yarn start` or `npm start` for development purposes
 4. deploy the web app or run it locally (localhost:3000)
 
+Development roadmap
+===================
+* [x] Login
+* [x] Registration
+* [x] simple dashboard with account data and ships in possession
+* [x] show available loans
+* [x] take loan
+* [x] show available ships
+* [x] purchase ships
+* [x] show system information with all locations
+* [ ] choose a ship and prepare a flight plan
+* [ ] execute flight plan and visualize it
+
 Screenshots
 ===========
 
