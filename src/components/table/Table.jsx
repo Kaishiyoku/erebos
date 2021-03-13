@@ -2,22 +2,25 @@ import TableHeader from './TableHeader';
 import PropTypes from 'prop-types';
 import TableBody from './TableBody';
 
-function Table({hovered, labels, values}) {
+function Table({hovered, labels, children}) {
     return (
         <table className="w-full text-left">
             <TableHeader labels={labels}/>
-            <TableBody values={values} hovered={hovered}/>
+            <TableBody hovered={hovered}>
+                {children}
+            </TableBody>
         </table>
     );
 }
 
 Table.propTypes = {
+    children: PropTypes.node,
     hovered: PropTypes.bool,
     labels: PropTypes.arrayOf(PropTypes.string).isRequired,
-    values: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.element]))).isRequired,
 };
 
 Table.defaultProps = {
+    children: [],
     hovered: false,
 };
 

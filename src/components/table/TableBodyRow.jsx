@@ -1,15 +1,25 @@
 import * as PropTypes from 'prop-types';
+import clsx from 'clsx';
 
-function TableBodyRow({value}) {
+function TableBodyRow({children, hovered}) {
+    const className = clsx({
+        'transition-all hover:bg-gray-50 dark:hover:bg-gray-900 dark:hover:bg-opacity-50': hovered,
+    });
+
     return (
-        <td className="align-middle py-4 px-3">
-            {value}
-        </td>
+        <tr className={className}>
+            {children}
+        </tr>
     );
 }
 
 TableBodyRow.propTypes = {
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.element]).isRequired,
+    children: PropTypes.node,
+    hovered: PropTypes.bool,
+};
+
+TableBodyRow.defaultProps = {
+    hovered: false,
 };
 
 export default TableBodyRow;

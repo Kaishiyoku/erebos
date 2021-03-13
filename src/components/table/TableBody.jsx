@@ -1,29 +1,22 @@
 import PropTypes from 'prop-types';
-import TableBodyRow from './TableBodyRow';
-import clsx from 'clsx';
 
-function TableBody({hovered, values}) {
-    const className = clsx({
-        'hover:bg-gray-50 transition-all': hovered,
-    });
-
+function TableBody({hovered, children}) {
     return (
-        <tbody className="divide-y divide-solid divide-gray-200">
-            {values.map((valueRow) => (
-                <tr key={valueRow.join()} className={className}>
-                    {valueRow.map((value) => <TableBodyRow key={value} value={value}/>)}
-                </tr>
-            ))}
+        <tbody className="divide-y divide-solid divide-gray-200 dark:divide-gray-700">
+            {children.map((child) => {
+                return <child.type key={child.key} {...child.props} hovered={hovered}/>;
+            })}
         </tbody>
     );
 }
 
 TableBody.propTypes = {
+    children: PropTypes.node,
     hovered: PropTypes.bool,
-    values: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.element]))).isRequired,
 };
 
 TableBody.defaultProps = {
+    children: [],
     hovered: false,
 };
 

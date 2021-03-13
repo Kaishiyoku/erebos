@@ -3,6 +3,8 @@ import systemsInfoRequest from '../core/api/systemsInfoRequest';
 import ownedShipsRequest from '../core/api/ownedShipsRequest';
 import Table from '../components/table/Table';
 import Button from '../components/button/Button';
+import TableBodyRow from '../components/table/TableBodyRow';
+import TableBodyCell from '../components/table/TableBodyCell';
 
 function Systems() {
     const [systems, setSystems] = useState([]);
@@ -25,7 +27,15 @@ function Systems() {
             <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 mb-8">
                 <div className="font-bold text-xl px-6 py-4">Owned ships</div>
                 <div className="px-6 pb-4">
-                    <Table labels={['Type', 'Location', '']} values={ownedShips.map(({type, location}) => [type, location, <Button label="Route" size="sm"/>])} hovered/>
+                    <Table labels={['Type', 'Location', '']} hovered>
+                        {ownedShips.map(({type, location}) => (
+                            <TableBodyRow key={type}>
+                                <TableBodyCell>{type}</TableBodyCell>
+                                <TableBodyCell>{location}</TableBodyCell>
+                                <TableBodyCell><Button label="Route" size="sm"/></TableBodyCell>
+                            </TableBodyRow>
+                        ))}
+                    </Table>
                 </div>
             </div>
 
@@ -33,7 +43,17 @@ function Systems() {
                 <div key={system.symbol} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 mb-4">
                     <div className="font-bold text-xl px-6 py-4">{system.symbol} :: {system.name}</div>
                     <div className="px-6 pb-4">
-                        <Table labels={['Symbol', 'X', 'Y', 'Name', 'Type']} values={system.locations.map(({symbol, x, y, name, type}) => [symbol, x, y, name, type])} hovered/>
+                        <Table labels={['Symbol', 'X', 'Y', 'Name', 'Type']} hovered>
+                            {system.locations.map(({symbol, x, y, name, type}) => (
+                                <TableBodyRow key={symbol}>
+                                    <TableBodyCell>{symbol}</TableBodyCell>
+                                    <TableBodyCell>{x}</TableBodyCell>
+                                    <TableBodyCell>{y}</TableBodyCell>
+                                    <TableBodyCell>{name}</TableBodyCell>
+                                    <TableBodyCell>{type}</TableBodyCell>
+                                </TableBodyRow>
+                            ))}
+                        </Table>
                     </div>
                 </div>
             ))}
