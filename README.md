@@ -24,6 +24,8 @@ Development roadmap
 * [x] show system information with all locations
 * [ ] choose a ship and prepare a flight plan
 * [ ] execute flight plan and visualize it
+* [ ] add loading indicators to several components
+* [ ] refactor page components code
 
 Screenshots
 ===========
