@@ -11,6 +11,9 @@ import {useState} from 'react';
 import getAccessToken from './core/local_storage/getAccessToken';
 import {DARK_MODE} from './core/constants';
 import Systems from './pages/Systems';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 function App() {
     const [isLoggedInState, setIsLoggedInState] = useState(!!getAccessToken());

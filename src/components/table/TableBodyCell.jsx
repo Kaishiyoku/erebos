@@ -9,7 +9,7 @@ function TableBodyCell({children}) {
 }
 
 TableBodyCell.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.element]),
+    children: PropTypes.any,
 };
 
 export default TableBodyCell;

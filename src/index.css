@@ -51,3 +51,19 @@ button:disabled {
 .ReactCollapse--collapse {
     transition: height 500ms;
 }
+
+.ReactModal__Content {
+    @apply bottom-auto left-1/2 right-auto top-1/2 !important;
+
+    margin-right: -50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+.ReactModal__Overlay {
+    @apply transition-all duration-500 opacity-0 ease-out;
+}
+.ReactModal__Overlay--after-open {
+    @apply opacity-100;
+}
+.ReactModal__Overlay--before-close {
+    @apply opacity-0;
+}

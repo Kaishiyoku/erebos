@@ -57,6 +57,7 @@
     "prop-types": "^15.7.2",
     "react-collapse": "^5.1.0",
     "react-hook-form": "^6.15.4",
+    "react-modal": "^3.12.1",
     "react-toastify": "^7.0.3",
     "rxjs": "^6.6.6",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
