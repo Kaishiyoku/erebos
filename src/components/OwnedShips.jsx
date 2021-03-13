@@ -3,13 +3,14 @@ import {Link} from '@reach/router';
 import LabelWithValueGroup from './LabelWithValueGroup';
 import {length} from 'ramda';
 import formatNumber from '../core/formatNumber';
+import Cargo from './Cargo';
 
 function OwnedShips(props) {
     const getShipDisplayValuesFor = (ship) => [
         {label: 'Class', value: ship.class},
         {label: 'Type', value: ship.type},
-        {label: 'Location', value: ship.location},
-        {label: 'Cargo', value: ship.cargo},
+        {label: 'Location', value: ship.location || '/'},
+        {label: 'Cargo', value: <Cargo cargo={ship.cargo}/>},
         {label: 'Space available', value: formatNumber(ship.spaceAvailable)},
         {label: 'Manufacturer', value: ship.manufacturer},
         {label: 'Maximum cargo', value: formatNumber(ship.maxCargo)},
@@ -47,7 +48,7 @@ OwnedShips.propTypes = {
         cargo: PropTypes.array.isRequired,
         class: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
-        location: PropTypes.string.isRequired,
+        location: PropTypes.string,
         manufacturer: PropTypes.string.isRequired,
         maxCargo: PropTypes.number.isRequired,
         plating: PropTypes.number.isRequired,

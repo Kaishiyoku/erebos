@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
-function TableBodyCell({children}) {
+function TableBodyCell({children, className}) {
     return (
-        <td className="align-middle py-4 px-3">
+        <td className={clsx('align-middle py-4 px-3')}>
             {children}
         </td>
     );
@@ -10,6 +11,7 @@ function TableBodyCell({children}) {
 
 TableBodyCell.propTypes = {
     children: PropTypes.any,
+    className: PropTypes.string,
 };
 
 export default TableBodyCell;

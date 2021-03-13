@@ -53,13 +53,19 @@ button:disabled {
 }
 
 .ReactModal__Content {
-    @apply bottom-auto left-1/2 right-auto top-1/2 !important;
+    @apply bottom-auto left-1/2 right-auto top-1/2 bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800 shadow-xl !important;
 
     margin-right: -50% !important;
     transform: translate(-50%, -50%) !important;
+    min-width: 500px;
+    min-height: 500px;
+}
+
+.dark .ReactModal__Overlay {
+    @apply bg-black bg-opacity-80 !important;
 }
 .ReactModal__Overlay {
-    @apply transition-all duration-500 opacity-0 ease-out;
+    @apply transition-all duration-500 opacity-0 ease-out bg-white bg-opacity-80;
 }
 .ReactModal__Overlay--after-open {
     @apply opacity-100;

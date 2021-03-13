@@ -80,7 +80,7 @@ function Systems() {
                 </div>
             </div>
 
-            <SystemsList systems={systems}/>
+            <SystemsList systems={systems} ownedShips={ownedShips}/>
         </div>
     );
 }

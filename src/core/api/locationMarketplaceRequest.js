@@ -1,5 +1,5 @@
 import authGet from '../request/authGet';
 
-const locationMarketplaceRequest = (systemSymbol) => authGet(`/game/locations/${systemSymbol}/marketplace`);
+const locationMarketplaceRequest = (locationSymbol) => authGet(`/game/locations/${locationSymbol}/marketplace`);
 
 export default locationMarketplaceRequest;

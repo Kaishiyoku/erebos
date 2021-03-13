@@ -12,6 +12,7 @@ import getAccessToken from './core/local_storage/getAccessToken';
 import {DARK_MODE} from './core/constants';
 import Systems from './pages/Systems';
 import Modal from 'react-modal';
+import Marketplace from './pages/Marketplace';
 
 Modal.setAppElement('#root');
 
@@ -55,6 +56,7 @@ function App() {
                     <AvailableLoans path="/loans/available"/>
                     <AvailableShips path="/ships/available"/>
                     <Systems path="/systems"/>
+                    <Marketplace path="/marketplaces/:systemSymbol"/>
                     <Login path="/login"/>
                     <Register path="/register"/>
                 </Router>
