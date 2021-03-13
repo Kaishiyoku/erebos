@@ -9,7 +9,7 @@ function TableBodyRow({value}) {
 }
 
 TableBodyRow.propTypes = {
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.element]).isRequired,
 };
 
 export default TableBodyRow;

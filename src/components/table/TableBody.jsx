@@ -20,7 +20,7 @@ function TableBody({hovered, values}) {
 
 TableBody.propTypes = {
     hovered: PropTypes.bool,
-    values: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string]))).isRequired,
+    values: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.element]))).isRequired,
 };
 
 TableBody.defaultProps = {

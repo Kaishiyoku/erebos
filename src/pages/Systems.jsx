@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import systemsInfoRequest from '../core/api/systemsInfoRequest';
 import ownedShipsRequest from '../core/api/ownedShipsRequest';
 import Table from '../components/table/Table';
+import Button from '../components/button/Button';
 
 function Systems() {
     const [systems, setSystems] = useState([]);
@@ -24,7 +25,7 @@ function Systems() {
             <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 mb-8">
                 <div className="font-bold text-xl px-6 py-4">Owned ships</div>
                 <div className="px-6 pb-4">
-                    <Table labels={['Type', 'Location']} values={ownedShips.map(({type, location}) => [type, location])} hovered/>
+                    <Table labels={['Type', 'Location', '']} values={ownedShips.map(({type, location}) => [type, location, <Button label="Route" size="sm"/>])} hovered/>
                 </div>
             </div>
 

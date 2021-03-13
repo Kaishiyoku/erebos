@@ -14,7 +14,7 @@ function Table({hovered, labels, values}) {
 Table.propTypes = {
     hovered: PropTypes.bool,
     labels: PropTypes.arrayOf(PropTypes.string).isRequired,
-    values: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string]))).isRequired,
+    values: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.element]))).isRequired,
 };
 
 Table.defaultProps = {
