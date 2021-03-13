@@ -8,6 +8,7 @@ Installation
 1. clone the repo
 2. run `yarn install` or `npm install`
 3. run `yarn build` or `npm run build` or run `yarn start` or `npm start` for development purposes
+4. deploy the web app or run it locally (localhost:3000)
 
 Screenshots
 ===========
