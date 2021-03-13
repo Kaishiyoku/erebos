@@ -2,43 +2,36 @@ import PropTypes from 'prop-types';
 import {Link} from '@reach/router';
 import {format, parseISO} from 'date-fns';
 import LabelWithValueGroup from './LabelWithValueGroup';
-import {length} from 'ramda';
 import formatNumber from '../core/formatNumber';
 import payOffLoanRequest from '../core/api/payOffLoanRequest';
 import MultiLoadingButton from './button/MultiLoadingButton';
 
-function ActiveLoans(props) {
-    const getLoanDisplayValuesFor = (loan) => [
-        {label: 'Due', value: format(parseISO(loan.due), 'dd.MM.yyyy HH:mm')},
-        {label: 'Repayment amount', value: formatNumber(loan.repaymentAmount)},
-        {label: 'Type', value: loan.type},
-        {label: 'Status', value: loan.status},
-    ];
-
-    const renderLoans = length(props.loans) > 0 ? props.loans.map((loan) => (
-        <div key={loan.id} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800">
-            <div className="font-bold text-xl px-6 py-4">{loan.type}</div>
-            <div className="px-6 pb-4">
-                <LabelWithValueGroup entries={getLoanDisplayValuesFor(loan)}/>
-            </div>
-
-            <div className="border-t border-gray-200 bg-gray-50 px-6 py-4 dark:border-gray-700 dark:bg-gray-900 dark:bg-opacity-50">
-                <div className="flex gap-x-2">
-                    <MultiLoadingButton label="Pay back" promiseFn={() => payOffLoanRequest(loan.id)}/>
-                </div>
-            </div>
-        </div>
-    )) : <div className="text-gray-500 italic">You don't have any active loans.</div>;
-
+function ActiveLoans({loans, className}) {
     return (
-        <div className={props.className}>
+        <div className={className}>
             <div className="text-xl pb-4">Active loans</div>
 
-            <div className="grid md:grid-cols-2 gap-4 mb-8">
-                {renderLoans}
+            <div className="mb-8">
+                {loans.map((loan) => (
+                    <div key={loan.id} className="mb-8">
+                        <LabelWithValueGroup
+                            entries={[
+                                {label: 'Type', value: loan.type},
+                                {label: 'Due', value: format(parseISO(loan.due), 'dd.MM.yyyy HH:mm')},
+                                {label: 'Repayment amount', value: formatNumber(loan.repaymentAmount)},
+                                {label: 'Status', value: loan.status},
+                            ]}
+                        />
+
+                        <MultiLoadingButton label="Pay back loan" promiseFn={() => payOffLoanRequest(loan.id)} size="sm"/>
+                    </div>
+                ))}
             </div>
 
-            <Link to="/loans/available" className="text-left text-blue-600 shadow-md border border-blue-300 bg-white rounded-full transition-all duration-200 focus:ring-4 focus:ring-blue-200 hover:bg-blue-500 hover:text-white focus:outline-none px-4 py-2 dark:text-blue-400 dark:border-blue-500 dark:bg-black dark:bg-opacity-50 dark:hover:text-white dark:hover:border-blue-400 dark:hover:bg-blue-500">
+            <Link
+                to="/loans/available"
+                className="py-2 text-blue-600 cursor-pointer hover:text-blue-800 hover:underline dark:text-blue-500 dark:hover:text-white"
+            >
                 Show available loans
             </Link>
         </div>
@@ -46,13 +39,11 @@ function ActiveLoans(props) {
 }
 
 ActiveLoans.propTypes = {
-    loans: PropTypes.arrayOf(PropTypes.shape({
-        due: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
-        repaymentAmount: PropTypes.number.isRequired,
-        status: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-    })).isRequired,
+    loans: PropTypes.array.isRequired,
+};
+
+ActiveLoans.defaultProps = {
+    loans: [],
 };
 
 export default ActiveLoans;

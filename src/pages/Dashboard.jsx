@@ -1,17 +1,17 @@
 import {useEffect, useState} from 'react';
 import ownUserInfoRequest from '../core/api/ownUserInfoRequest';
-import ActiveLoans from '../components/ActiveLoans';
 import OwnedShips from '../components/OwnedShips';
 import UserInfo from '../components/UserInfo';
 import getAccessToken from '../core/local_storage/getAccessToken';
 import Login from './Login';
+import PageHeading from '../components/PageHeading';
 
 function Dashboard() {
     if (!getAccessToken()) {
         return <Login/>;
     }
 
-    const [userData, setUserData] = useState({user: {credits: 0, loans: [], ships: [], username: ''}});
+    const [userData, setUserData] = useState();
 
     useEffect(() => {
         ownUserInfoRequest().then(({data}) => setUserData(data));
@@ -19,13 +19,11 @@ function Dashboard() {
 
     return (
         <>
-            <div className="text-2xl pb-4">Dashboard</div>
+            <PageHeading label="Dashboard"/>
 
-            <UserInfo user={userData.user}/>
+            <UserInfo userData={userData}/>
 
-            <ActiveLoans loans={userData.user.loans} className="mb-12"/>
-
-            <OwnedShips ships={userData.user.ships}/>
+            {userData && <OwnedShips ships={userData.user.ships}/>}
         </>
     );
 }
