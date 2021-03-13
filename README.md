@@ -1,19 +1,26 @@
+# Table of contents
+
+- [About](#about)
+- [Installation](#installation)
+- [Development roadmap](#development-roadmap)
+- [Screenshots](#screenshots)
+
+# About
+
 A GUI for the https://spacetraders.io game built with React.
 
 The web app is at an early stage at the moment. Some basic functionality is still missing.
 
 Huge code refactorings are planned, too. I'm currently trying to implement basic features as fast as possible and refine them later.
 
-Installation
-============
+# Installation
 
 1. clone the repo
 2. run `yarn install` or `npm install`
 3. run `yarn build` or `npm run build` or run `yarn start` or `npm start` for development purposes
 4. deploy the web app or run it locally (localhost:3000)
 
-Development roadmap
-===================
+# Development roadmap
 * [x] Login
 * [x] Registration
 * [x] simple dashboard with account data and ships in possession
@@ -27,8 +34,7 @@ Development roadmap
 * [ ] add loading indicators to several components
 * [ ] refactor page components code
 
-Screenshots
-===========
+# Screenshots
 
 ![image](https://user-images.githubusercontent.com/5131112/111014336-85a4a580-83a3-11eb-9020-4e9a4e5cc6d6.png)
 
