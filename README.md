@@ -1,4 +1,4 @@
-A GUI for the https://spacetraders.io game.
+A GUI for the https://spacetraders.io game built with React.
 
 The web app is at an early stage at the moment. Some basic functionality is still missing.
 
