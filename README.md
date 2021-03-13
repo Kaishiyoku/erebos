@@ -2,6 +2,8 @@ A GUI for the https://spacetraders.io game.
 
 The web app is at an early stage at the moment. Some basic functionality is still missing.
 
+Huge code refactorings are planned, too. I'm currently trying to implement basic features as fast as possible and refine them later.
+
 Installation
 ============
 
