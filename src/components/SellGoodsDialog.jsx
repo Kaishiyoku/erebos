@@ -3,12 +3,13 @@ import LoadingButton from './button/LoadingButton';
 import {useForm} from 'react-hook-form';
 import Select from './Select';
 import LabelWithValueGroup from './LabelWithValueGroup';
-import purchaseGoodRequest from '../core/api/purchaseGoodRequest';
+import sellGoodRequest from '../core/api/sellGoodRequest';
 import {useEffect, useState} from 'react';
 import {head, prop, toString} from 'ramda';
+import getShipCargoFor from '../core/getShipCargoFor';
 import pascalCaseToWords from '../core/pascalCaseToWords';
 
-function BuyGoodsDialog({ownedShipsAtLocation, selectedGood, callbackFn}) {
+function SellGoodsDialog({ownedShipsAtLocation, selectedGood, callbackFn}) {
     const {register, handleSubmit, watch, errors, formState} = useForm({mode: 'onChange'});
     const [selectedShip, setSelectedShip] = useState();
 
@@ -18,8 +19,8 @@ function BuyGoodsDialog({ownedShipsAtLocation, selectedGood, callbackFn}) {
         setSelectedShip(head(ownedShipsAtLocation));
     }, []);
 
-    const buyGoods = ({shipId, quantity}) => {
-        purchaseGoodRequest(selectedGood.symbol, quantity, shipId).then((response) => {
+    const sellGoods = ({shipId, quantity}) => {
+        sellGoodRequest(selectedGood.symbol, quantity, shipId).then((response) => {
             callbackFn();
         });
     };
@@ -31,26 +32,27 @@ function BuyGoodsDialog({ownedShipsAtLocation, selectedGood, callbackFn}) {
     };
 
     return (
-        <form onSubmit={handleSubmit(buyGoods)}>
-            <div className="text-xl pb-4">Buy {pascalCaseToWords(selectedGood.symbol)}</div>
+        <form onSubmit={handleSubmit(sellGoods)}>
+            <div className="text-xl pb-4">Sell {pascalCaseToWords(selectedGood.symbol)}</div>
 
             <Select name="shipId" options={shipOptions} className="mb-4" value={prop('id', selectedShip)} onChange={handleSelectedShipChange} reference={register({required: true})}/>
 
-            <Input name="quantity" placeholder="Quantity" type="number" min={0} max={prop('spaceAvailable', selectedShip)} className="mb-4" reference={register({required: true})}/>
+            <Input name="quantity" placeholder="Quantity" type="number" min={0} max={getShipCargoFor(selectedGood.symbol, selectedShip)} className="mb-4" reference={register({required: true})}/>
 
             <LabelWithValueGroup
                 labelWidthClass="w-48"
                 entries={[
+                    {label: 'In ship cargo', value: getShipCargoFor(selectedGood.symbol, selectedShip)},
                     {label: 'Ship space available', value: prop('spaceAvailable', selectedShip)},
-                    {label: 'Cost', value: toString(watchQuantity * selectedGood.pricePerUnit)},
-                    {label: 'Needed space', value: toString(watchQuantity * selectedGood.volumePerUnit)},
+                    {label: 'Gaining credits', value: toString(watchQuantity * selectedGood.pricePerUnit)},
+                    {label: 'Gaining space', value: toString(watchQuantity * selectedGood.volumePerUnit)},
                 ]}
                 showBackgrounds
             />
 
-            <LoadingButton type="submit" label="Buy goods" disabled={!formState.isValid}/>
+            <LoadingButton type="submit" label="Sell goods" disabled={!formState.isValid}/>
         </form>
     );
 }
 
-export default BuyGoodsDialog;
+export default SellGoodsDialog;

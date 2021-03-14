@@ -27,7 +27,7 @@ function OwnedShips({ships, ...otherProps}) {
                 {ships.map((ship) => (
                     <Card
                         key={ship.id}
-                        headingLabel={`${ship.type} :: ${ship.location}`}
+                        headingLabel={`${ship.type} :: ${ship.location || 'in transit'}`}
                         headingSubLabel={getFuelForShip(ship)}
                         headingActionButton={(
                             <CardHeadingActionButton

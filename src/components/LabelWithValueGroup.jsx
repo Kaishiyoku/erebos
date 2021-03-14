@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import LabelWithValue from './LabelWithValue';
 import clsx from 'clsx';
 
-function LabelWithValueGroup({entries, showBackgrounds, className, ...otherProps}) {
+function LabelWithValueGroup({entries, showBackgrounds, labelWidthClass, className}) {
     return (
         <div className={clsx('pb-4', className)}>
             {entries.map(({label, value}) => (
@@ -10,6 +10,7 @@ function LabelWithValueGroup({entries, showBackgrounds, className, ...otherProps
                     key={label}
                     label={label}
                     value={value}
+                    labelWidthClass={labelWidthClass}
                     showBackgrounds={showBackgrounds}
                 />
             ))}
@@ -20,8 +21,9 @@ function LabelWithValueGroup({entries, showBackgrounds, className, ...otherProps
 LabelWithValueGroup.propTypes = {
     entries: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string.isRequired,
-        value: PropTypes.any.isRequired,
+        value: PropTypes.any,
     })),
+    labelWidthClass: PropTypes.string,
     showBackgrounds: PropTypes.bool,
 };
 

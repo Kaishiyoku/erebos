@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-function TableBodyRow({children, hovered}) {
+function TableBodyRow({size, hovered, children}) {
     const className = clsx({
-        'transition-all hover:bg-gray-50 dark:hover:bg-gray-900 dark:hover:bg-opacity-50': hovered,
+        'transition-all hover:bg-gray-100 hover:bg-opacity-50 dark:hover:bg-black dark:hover:bg-opacity-25': hovered,
     });
 
     return (
         <tr className={className}>
-            {children}
+            {children.map((child) => <child.type key={child.key} {...child.props} size={size}/>)}
         </tr>
     );
 }
@@ -16,10 +16,12 @@ function TableBodyRow({children, hovered}) {
 TableBodyRow.propTypes = {
     children: PropTypes.node,
     hovered: PropTypes.bool,
+    size: PropTypes.oneOf(['base', 'sm']),
 };
 
 TableBodyRow.defaultProps = {
     hovered: false,
+    size: 'base',
 };
 
 export default TableBodyRow;

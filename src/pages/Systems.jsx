@@ -5,10 +5,10 @@ import Table from '../components/table/Table';
 import Button from '../components/button/Button';
 import TableBodyRow from '../components/table/TableBodyRow';
 import TableBodyCell from '../components/table/TableBodyCell';
-import Modal from 'react-modal';
 import SystemsList from '../components/SystemsList';
 import submitFlightPlanRequest from '../core/api/submitFlightPlanRequest';
 import formatDecimal from '../core/formatDecimal';
+import ModalDialog from '../components/ModalDialog';
 
 function Systems() {
     const [systems, setSystems] = useState([]);
@@ -38,11 +38,10 @@ function Systems() {
 
     return (
         <div>
-            <Modal
+            <ModalDialog
                 isOpen={isRouteSelectionModalOpen}
                 onRequestClose={() => setIsRouteSelectionModalOpen(false)}
                 contentLabel="Select route"
-                closeTimeoutMS={500}
             >
                 <div>Current location: {selectedShip.location} ({selectedShip.x}, {selectedShip.y})</div>
                 <div>Target location:</div>
@@ -61,19 +60,19 @@ function Systems() {
                         </div>
                     ))}
                 </div>
-            </Modal>
+            </ModalDialog>
 
             <div className="text-2xl pb-4">Systems</div>
 
             <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 mb-8">
                 <div className="font-bold text-xl px-6 py-4">Owned ships</div>
                 <div className="px-6 pb-4">
-                    <Table labels={['Type', 'Location', '']} hovered>
+                    <Table labels={['Type', 'Location', 'Actions']} hovered>
                         {ownedShips.map(({id, type, location}) => (
                             <TableBodyRow key={type}>
-                                <TableBodyCell>{type}</TableBodyCell>
-                                <TableBodyCell>{location}</TableBodyCell>
-                                <TableBodyCell><Button label="Route" size="sm" onClick={() => handleRouteClick(id)}/></TableBodyCell>
+                                <TableBodyCell key="type">{type}</TableBodyCell>
+                                <TableBodyCell key="location">{location}</TableBodyCell>
+                                <TableBodyCell key="actions"><Button label="Route" size="sm" onClick={() => handleRouteClick(id)}/></TableBodyCell>
                             </TableBodyRow>
                         ))}
                     </Table>

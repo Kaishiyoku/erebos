@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 
-function TableBody({hovered, children}) {
+function TableBody({size, hovered, children}) {
     return (
         <tbody className="divide-y divide-solid divide-gray-200 dark:divide-gray-700">
-            {children.map((child) => {
-                return <child.type key={child.key} {...child.props} hovered={hovered}/>;
-            })}
+            {children.map((child) => <child.type key={child.key} {...child.props} hovered={hovered} size={size}/>)}
         </tbody>
     );
 }
@@ -13,11 +11,13 @@ function TableBody({hovered, children}) {
 TableBody.propTypes = {
     children: PropTypes.node,
     hovered: PropTypes.bool,
+    size: PropTypes.oneOf(['base', 'sm']),
 };
 
 TableBody.defaultProps = {
     children: [],
     hovered: false,
+    size: 'base',
 };
 
 export default TableBody;
