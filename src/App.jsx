@@ -13,6 +13,7 @@ import {DARK_MODE} from './core/constants';
 import Systems from './pages/Systems';
 import Modal from 'react-modal';
 import Marketplace from './pages/Marketplace';
+import preval from 'preval.macro';
 
 Modal.setAppElement('#root');
 
@@ -62,6 +63,10 @@ function App() {
                 </Router>
 
                 <ToastContainer/>
+
+                <div className="text-xs text-gray-400 dark:text-gray-600 mt-12 text-right">
+                    Build date: {preval`module.exports = new Date().toUTCString();`}
+                </div>
             </div>
         </LoggedInContext.Provider>
     );

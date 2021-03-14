@@ -54,6 +54,7 @@
     "eslint-plugin-no-unsafe-chars": "^1.0.2",
     "numeral": "^2.0.6",
     "postcss": "7",
+    "preval.macro": "^5.0.0",
     "prop-types": "^15.7.2",
     "react-collapse": "^5.1.0",
     "react-dropdown": "^1.9.2",
