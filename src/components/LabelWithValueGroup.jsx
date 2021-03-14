@@ -1,10 +1,18 @@
 import PropTypes from 'prop-types';
 import LabelWithValue from './LabelWithValue';
+import clsx from 'clsx';
 
-function LabelWithValueGroup(props) {
+function LabelWithValueGroup({entries, showBackgrounds, className, ...otherProps}) {
     return (
-        <div className="pb-4">
-            {props.entries.map((entry) => <LabelWithValue key={entry.label} label={entry.label} value={entry.value} showBackgrounds={props.showBackgrounds}/>)}
+        <div className={clsx('pb-4', className)}>
+            {entries.map(({label, value}) => (
+                <LabelWithValue
+                    key={label}
+                    label={label}
+                    value={value}
+                    showBackgrounds={showBackgrounds}
+                />
+            ))}
         </div>
     );
 }

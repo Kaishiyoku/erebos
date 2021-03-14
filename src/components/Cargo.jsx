@@ -8,7 +8,7 @@ function Cargo({cargo}) {
     return (
         <div className="flex space-x-2">
             {cargo.map((item) => (
-                <div key={item.good} className="flex items-center bg-gray-200 rounded-full text-xs px-2">
+                <div key={item.good} className="flex items-center bg-gray-200 rounded-full text-xs px-2 py-1">
                     {item.quantity}/{item.totalVolume} {item.good}
                 </div>
             ))}
