@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import {Link} from '@reach/router';
 import LabelWithValueGroup from './LabelWithValueGroup';
-import formatNumber from '../core/formatNumber';
 import Cargo from './Cargo';
 import SubHeading from './SubHeading';
 import Card from './Card/Card';
@@ -11,6 +10,7 @@ import ChevronDownIcon from '../icons/ChevronDownIcon';
 import {useState} from 'react';
 import clsx from 'clsx';
 import getFuelForShip from '../core/getFuelForShip';
+import formatInteger from '../core/formatInteger';
 
 function OwnedShips({ships, ...otherProps}) {
     if (!ships) {
@@ -36,34 +36,42 @@ function OwnedShips({ships, ...otherProps}) {
                             />
                         )}
                     >
-                        <CardBody className={clsx({hidden: !isDetailVisible})}>
-                            <LabelWithValueGroup
-                                entries={[
-                                    {label: 'Cargo', value: <Cargo cargo={ship.cargo}/>},
-                                    {label: 'Maximum cargo', value: formatNumber(ship.maxCargo)},
-                                    {label: 'Space available', value: formatNumber(ship.spaceAvailable)},
-                                ]}
-                                className="mb-8"
-                            />
+                        <CardBody>
+                            <>
+                                <div className={clsx({hidden: isDetailVisible})}>
+                                    <Cargo cargo={ship.cargo}/>
+                                </div>
 
-                            <LabelWithValueGroup
-                                entries={[
-                                    {label: 'Class', value: ship.class},
-                                    {label: 'Type', value: ship.type},
-                                    {label: 'Location', value: ship.location || '/'},
-                                    {label: 'Manufacturer', value: ship.manufacturer},
-                                    {label: 'Plating', value: ship.plating},
-                                    {label: 'Speed', value: ship.speed},
-                                    {label: 'Weapons', value: ship.weapons},
-                                ]}
-                            />
+                                <div className={clsx({hidden: !isDetailVisible})}>
+                                    <LabelWithValueGroup
+                                        entries={[
+                                            {label: 'Cargo', value: <Cargo cargo={ship.cargo}/>},
+                                            {label: 'Maximum cargo', value: formatInteger(ship.maxCargo)},
+                                            {label: 'Space available', value: formatInteger(ship.spaceAvailable)},
+                                        ]}
+                                        className="mb-8"
+                                    />
+
+                                    <LabelWithValueGroup
+                                        entries={[
+                                            {label: 'Class', value: ship.class},
+                                            {label: 'Type', value: ship.type},
+                                            {label: 'Location', value: ship.location || '/'},
+                                            {label: 'Manufacturer', value: ship.manufacturer},
+                                            {label: 'Plating', value: ship.plating},
+                                            {label: 'Speed', value: ship.speed},
+                                            {label: 'Weapons', value: ship.weapons},
+                                        ]}
+                                    />
+                                </div>
+                            </>
                         </CardBody>
                     </Card>
                 ))}
             </div>
 
-            <Link to="/ships/available" className="py-2 text-blue-600 cursor-pointer hover:text-blue-800 hover:underline dark:text-blue-500 dark:hover:text-white">
-                Show available ships
+            <Link to="/ships/market" className="py-2 text-blue-600 cursor-pointer hover:text-blue-800 hover:underline dark:text-blue-500 dark:hover:text-white">
+                Ship market
             </Link>
         </div>
     );

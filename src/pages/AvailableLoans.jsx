@@ -3,8 +3,8 @@ import availableLoansRequest from '../core/api/availableLoansRequest';
 import takeOutLoanRequest from '../core/api/takeOutLoanRequest';
 import LabelWithValueGroup from '../components/LabelWithValueGroup';
 import formatBool from '../core/formatBool';
-import formatNumber from '../core/formatNumber';
 import MultiLoadingButton from '../components/button/MultiLoadingButton';
+import formatInteger from '../core/formatInteger';
 
 function AvailableLoans() {
     const [loans, setLoans] = useState([]);
@@ -14,9 +14,9 @@ function AvailableLoans() {
     }, []);
 
     const getLoanDisplayValuesFor = (loan) => [
-        {label: 'Amount', value: formatNumber(loan.amount)},
+        {label: 'Amount', value: formatInteger(loan.amount)},
         {label: 'Collateral required', value: formatBool(loan.collateralRequired)},
-        {label: 'Rate', value: formatNumber(loan.rate)},
+        {label: 'Rate', value: formatInteger(loan.rate)},
         {label: 'Term (days)', value: loan.termInDays},
     ];
 

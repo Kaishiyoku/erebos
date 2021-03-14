@@ -4,7 +4,7 @@ import Register from './pages/Register';
 import {Router} from '@reach/router';
 import Navbar from './components/navbar/Navbar';
 import AvailableLoans from './pages/AvailableLoans';
-import AvailableShips from './pages/AvailableShips';
+import ShipMarket from './pages/ShipMarket';
 import {ToastContainer} from 'react-toastify';
 import LoggedInContext from './LoggedInContext';
 import {useState} from 'react';
@@ -54,7 +54,7 @@ function App() {
                 <Router>
                     <Dashboard path="/"/>
                     <AvailableLoans path="/loans/available"/>
-                    <AvailableShips path="/ships/available"/>
+                    <ShipMarket path="/ships/market"/>
                     <Systems path="/systems"/>
                     <Marketplace path="/marketplaces/:systemSymbol"/>
                     <Login path="/login"/>

@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import {Link} from '@reach/router';
 import {format, parseISO} from 'date-fns';
 import LabelWithValueGroup from './LabelWithValueGroup';
-import formatNumber from '../core/formatNumber';
 import payOffLoanRequest from '../core/api/payOffLoanRequest';
 import MultiLoadingButton from './button/MultiLoadingButton';
+import formatInteger from '../core/formatInteger';
 
 function ActiveLoans({loans, className}) {
     return (
@@ -18,7 +18,7 @@ function ActiveLoans({loans, className}) {
                             entries={[
                                 {label: 'Type', value: loan.type},
                                 {label: 'Due', value: format(parseISO(loan.due), 'dd.MM.yyyy HH:mm')},
-                                {label: 'Repayment amount', value: formatNumber(loan.repaymentAmount)},
+                                {label: 'Repayment amount', value: formatInteger(loan.repaymentAmount)},
                                 {label: 'Status', value: loan.status},
                             ]}
                         />

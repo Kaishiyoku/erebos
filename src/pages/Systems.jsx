@@ -7,8 +7,8 @@ import TableBodyRow from '../components/table/TableBodyRow';
 import TableBodyCell from '../components/table/TableBodyCell';
 import Modal from 'react-modal';
 import SystemsList from '../components/SystemsList';
-import formatNumber from '../core/formatNumber';
 import submitFlightPlanRequest from '../core/api/submitFlightPlanRequest';
+import formatDecimal from '../core/formatDecimal';
 
 function Systems() {
     const [systems, setSystems] = useState([]);
@@ -53,7 +53,7 @@ function Systems() {
                             <div>
                                 {system.locations.map((location) => (
                                     <div key={location.symbol} className="flex">
-                                        <div>{location.symbol} ({location.x}, {location.y}) - {formatNumber(calculateDistance(selectedShip, location))}</div>
+                                        <div>{location.symbol} ({location.x}, {location.y}) - {formatDecimal(calculateDistance(selectedShip, location))}</div>
                                         <Button label="Route" size="sm" onClick={() => submitFlightPlanRequest(location.symbol, selectedShip.id)}/>
                                     </div>
                                 ))}

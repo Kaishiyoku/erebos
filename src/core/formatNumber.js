@@ -1,5 +1,5 @@
 import numeral from 'numeral';
 
-const formatNumber = (value) => numeral(value).format('0.00');
+const formatNumber = (format, value) => numeral(value).format(format);
 
 export default formatNumber;
