@@ -3,7 +3,7 @@ import {Link} from '@reach/router';
 import LabelWithValueGroup from './LabelWithValueGroup';
 import formatNumber from '../core/formatNumber';
 import Cargo from './Cargo';
-import PageSubHeading from './PageSubHeading';
+import SubHeading from './SubHeading';
 import Card from './Card/Card';
 import CardBody from './Card/CardBody';
 import CardHeadingActionButton from './Card/CardHeadingActionButton';
@@ -21,7 +21,7 @@ function OwnedShips({ships, ...otherProps}) {
 
     return (
         <div {...otherProps}>
-            <PageSubHeading label="Owned ships"/>
+            <SubHeading label="Owned ships"/>
 
             <div className="grid md:grid-cols-2 gap-4 mb-8">
                 {ships.map((ship) => (

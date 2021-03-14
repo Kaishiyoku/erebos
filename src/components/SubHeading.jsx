@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 
-function PageSubHeading({label}) {
+function SubHeading({label}) {
     return (
         <div className="text-xl pb-4">{label}</div>
     );
 }
 
-PageSubHeading.propTypes = {
+SubHeading.propTypes = {
     label: PropTypes.string.isRequired,
 };
 
-export default PageSubHeading;
+export default SubHeading;
