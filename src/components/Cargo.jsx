@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import Badge from './Badge';
 
 function Cargo({cargo}) {
     if (!cargo) {
@@ -7,11 +8,7 @@ function Cargo({cargo}) {
 
     return (
         <div className="flex space-x-2">
-            {cargo.map((item) => (
-                <div key={item.good} className="flex items-center bg-gray-200 rounded-full text-xs px-2 py-1">
-                    {item.quantity}/{item.totalVolume} {item.good}
-                </div>
-            ))}
+            {cargo.map((item) => <Badge key={item.good} label={`${item.quantity}/${item.totalVolume} ${item.good}`}/>)}
         </div>
     );
 }

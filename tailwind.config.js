@@ -17,6 +17,7 @@ module.exports = {
     variants: {
         extend: {
             backgroundColor: ['odd'],
+            backgroundOpacity: ['odd'],
         },
     },
     plugins: [],
