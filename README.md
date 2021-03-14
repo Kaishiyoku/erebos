@@ -13,6 +13,8 @@ The web app is at an early stage at the moment. Some basic functionality is stil
 
 Huge code refactorings are planned, too. I'm currently trying to implement basic features as fast as possible and refine them later.
 
+**Demo: https://erebos.kaishi.de**
+
 # Installation
 
 1. clone the repo
