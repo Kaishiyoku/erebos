@@ -6,6 +6,8 @@ import availableShipsRequest from '../core/api/availableShipsRequest';
 import SubHeading from '../components/base/SubHeading';
 import Heading from '../components/base/Heading';
 import formatInteger from '../core/formatInteger';
+import Card from '../components/Card/Card';
+import CardBody from '../components/Card/CardBody';
 
 function ShipMarket() {
     const [ships, setShips] = useState([]);
@@ -20,9 +22,8 @@ function ShipMarket() {
 
             <div className="grid lg:grid-cols-2 gap-4 mb-8">
                 {ships.map((ship) => (
-                    <div key={ship.type} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white mb-4 dark:border-gray-700 dark:bg-gray-800">
-                        <div className="font-bold text-xl px-6 py-4">{ship.type}</div>
-                        <div className="px-6 pb-4">
+                    <Card key={ship.type} headingLabel={ship.type}>
+                        <CardBody>
                             <LabelWithValueGroup
                                 entries={[
                                     {label: 'Class', value: ship.class},
@@ -51,8 +52,8 @@ function ShipMarket() {
                                     />
                                 </div>
                             ))}</div>
-                        </div>
-                    </div>
+                        </CardBody>
+                    </Card>
                 ))}
             </div>
         </>

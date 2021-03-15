@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import CardHeading from './CardHeading';
+import clsx from 'clsx';
 
-function Card({children, headingActionButton, headingLabel, headingSubLabel}) {
+function Card({children, headingActionButton, headingLabel, headingSubLabel, className}) {
     return (
-        <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:bg-gray-800 dark:border-gray-700">
+        <div className={clsx('rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:bg-gray-800 dark:border-gray-800', className, {'pt-5': !headingLabel})}>
             {headingLabel && <CardHeading actionButton={headingActionButton} label={headingLabel} subLabel={headingSubLabel}/>}
 
             {children}

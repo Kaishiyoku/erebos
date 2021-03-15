@@ -5,6 +5,7 @@ import getAccessToken from '../core/local_storage/getAccessToken';
 import Login from './Login';
 import Heading from '../components/base/Heading';
 import UserInfoContext from '../UserInfoContext';
+import ActiveFlightPlansContext from '../ActiveFlightPlansContext';
 
 function Dashboard() {
     if (!getAccessToken()) {
@@ -12,6 +13,7 @@ function Dashboard() {
     }
 
     const [userInfo, setUserInfo] = useContext(UserInfoContext);
+    const [activeFlightPlans, setActiveFlightPlans] = useContext(ActiveFlightPlansContext);
 
     return (
         <>
@@ -19,7 +21,7 @@ function Dashboard() {
 
             <UserInfo userInfo={userInfo}/>
 
-            {userInfo && <OwnedShips ships={userInfo.user.ships}/>}
+            <OwnedShips userInfo={userInfo} activeFlightPlans={activeFlightPlans}/>
         </>
     );
 }

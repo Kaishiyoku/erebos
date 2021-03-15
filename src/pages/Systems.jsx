@@ -9,6 +9,8 @@ import submitFlightPlanRequest from '../core/api/submitFlightPlanRequest';
 import formatDecimal from '../core/formatDecimal';
 import ModalDialog from '../components/base/ModalDialog';
 import UserInfoContext from '../UserInfoContext';
+import Card from '../components/Card/Card';
+import CardBody from '../components/Card/CardBody';
 
 function Systems() {
     const [systems, setSystems] = useState([]);
@@ -62,20 +64,19 @@ function Systems() {
 
             <div className="text-2xl pb-4">Systems</div>
 
-            <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 mb-8">
-                <div className="font-bold text-xl px-6 py-4">Owned ships</div>
-                <div className="px-6 pb-4">
+            <Card headingLabel="Owned ships" className="mb-8">
+                <CardBody>
                     <Table labels={['Type', 'Location', 'Actions']} hovered>
                         {ownedShips.map(({id, type, location}) => (
                             <TableBodyRow key={type}>
                                 <TableBodyCell key="type">{type}</TableBodyCell>
-                                <TableBodyCell key="location">{location}</TableBodyCell>
+                                <TableBodyCell key="location">{location || 'in transit'}</TableBodyCell>
                                 <TableBodyCell key="actions"><Button label="Route" size="sm" onClick={() => handleRouteClick(id)}/></TableBodyCell>
                             </TableBodyRow>
                         ))}
                     </Table>
-                </div>
-            </div>
+                </CardBody>
+            </Card>
 
             <SystemsList systems={systems} ownedShips={ownedShips}/>
         </div>

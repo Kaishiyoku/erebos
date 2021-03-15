@@ -1,5 +1,6 @@
 import authGet from '../request/authGet';
+import getUserName from '../local_storage/getUserName';
 
-const activeFlightPlansRequest = (systemSymbol) => authGet(`/game/systems/${systemSymbol}/flight-plans`);
+const activeFlightPlansRequest = () => authGet(`/users/${getUserName()}/flight-plans`);
 
 export default activeFlightPlansRequest;

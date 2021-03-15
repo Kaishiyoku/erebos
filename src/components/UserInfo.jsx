@@ -2,8 +2,10 @@ import LabelWithValue from './base/LabelWithValue';
 import PropTypes from 'prop-types';
 import ActiveLoans from './ActiveLoans';
 import formatInteger from '../core/formatInteger';
+import Card from './Card/Card';
+import CardBody from './Card/CardBody';
 
-function UserInfo({userInfo, ...otherProps}) {
+function UserInfo({userInfo}) {
     if (!userInfo) {
         return null;
     }
@@ -12,14 +14,14 @@ function UserInfo({userInfo, ...otherProps}) {
     const {username, credits, loans} = user;
 
     return (
-        <div className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white mb-8 dark:border-gray-700 dark:bg-gray-800" {...otherProps}>
-            <div className="px-6 py-4">
+        <Card className="mb-8">
+            <CardBody>
                 <LabelWithValue label="User name" value={username} showBackgrounds={false}/>
                 <LabelWithValue label="Credits" value={`${formatInteger(credits)}`} showBackgrounds={false}/>
 
                 <ActiveLoans loans={loans} className="mt-8"/>
-            </div>
-        </div>
+            </CardBody>
+        </Card>
     );
 }
 

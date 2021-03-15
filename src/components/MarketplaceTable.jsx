@@ -2,16 +2,26 @@ import Table from './table/Table';
 import TableBodyRow from './table/TableBodyRow';
 import TableBodyCell from './table/TableBodyCell';
 import Button from './base/button/Button';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import BuyGoodsDialog from './BuyGoodsDialog';
 import SellGoodsDialog from './SellGoodsDialog';
 import ModalDialog from './base/ModalDialog';
+import hasOwnedShipsAtLocation from '../core/hasOwnedShipsAtLocation';
+import locationMarketplaceRequest from '../core/api/locationMarketplaceRequest';
 
-function MarketplaceTable({planet, ownedShipsAtLocation}) {
-    if (!planet) {
-        return <div>Swag</div>;
+function MarketplaceTable({location, ownedShipsAtLocation}) {
+    if (!hasOwnedShipsAtLocation(ownedShipsAtLocation, location)) {
+        return null;
     }
+
+    const [marketplace, setMarketplace] = useState([]);
+
+    useEffect(() => {
+        locationMarketplaceRequest(location.symbol).then(({data}) => {
+            setMarketplace(data.location.marketplace);
+        });
+    }, []);
 
     const [isBuyGoodsModalOpen, setIsBuyGoodsModalOpen] = useState(false);
     const [isSellGoodsModalOpen, setIsSellGoodsModalOpen] = useState(false);
@@ -32,7 +42,7 @@ function MarketplaceTable({planet, ownedShipsAtLocation}) {
     return (
         <>
             <Table labels={['Name', 'Volume per unit', 'Price per unit', 'Quantity available', 'Actions']} hovered size="sm">
-                {planet.marketplace.map((good) => (
+                {marketplace.map((good) => (
                     <TableBodyRow key={good.symbol}>
                         <TableBodyCell key="symbol">{good.symbol}</TableBodyCell>
                         <TableBodyCell key="volumePerUnit">{good.volumePerUnit}</TableBodyCell>
@@ -66,8 +76,8 @@ function MarketplaceTable({planet, ownedShipsAtLocation}) {
 }
 
 MarketplaceTable.propTypes = {
+    location: PropTypes.object,
     ownedShipsAtLocation: PropTypes.array,
-    planet: PropTypes.any,
 };
 
 export default MarketplaceTable;

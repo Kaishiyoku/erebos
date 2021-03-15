@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
 import Location from './Location';
+import Card from './Card/Card';
+import CardBody from './Card/CardBody';
 
 function SystemsList({systems, ownedShips}) {
     return systems.map((system) => (
-        <div key={system.symbol} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 mb-4">
-            <div className="font-bold text-xl px-6 py-4">{system.symbol} :: {system.name}</div>
-            <div className="px-6 pb-4">
+        <Card key={system.symbol} headingLabel={`${system.symbol} :: ${system.name}`}>
+            <CardBody>
                 {system.locations.map((location) => <Location key={location.symbol} location={location} ownedShips={ownedShips}/>)}
-            </div>
-        </div>
+            </CardBody>
+        </Card>
     ));
 }
 

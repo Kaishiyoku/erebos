@@ -8,20 +8,22 @@ function baseRequest(baseUrl, accessToken, method, uri, paramsOrData) {
     const data = ['post', 'put'].includes(method) ? paramsOrData : {};
 
     return new Promise((resolve, reject) => {
-        axios.request({
-            baseURL: baseUrl,
-            data,
-            headers: accessToken ? {Authorization: `Bearer ${accessToken}`} : {},
-            method,
-            params,
-            url: uri,
-        })
-            .then(resolve)
-            .catch((error) => {
-                toast.error(error.response.data.error.message);
+        window.rateLimiter.schedule(() => {
+            axios.request({
+                baseURL: baseUrl,
+                data,
+                headers: accessToken ? {Authorization: `Bearer ${accessToken}`} : {},
+                method,
+                params,
+                url: uri,
+            })
+                .then(resolve)
+                .catch((error) => {
+                    toast.error(error.response.data.error.message);
 
-                reject(error);
-            });
+                    reject(error);
+                });
+        });
     });
 }
 

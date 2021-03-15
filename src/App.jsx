@@ -17,23 +17,45 @@ import preval from 'preval.macro';
 import UserInfoContext from './UserInfoContext';
 import {timer} from 'rxjs';
 import ownUserInfoRequest from './core/api/ownUserInfoRequest';
+import ActiveFlightPlansContext from './ActiveFlightPlansContext';
+import sequential from 'promise-sequential';
+import ownedShipsRequest from './core/api/ownedShipsRequest';
+import Bottleneck from 'bottleneck';
+import activeFlightPlanInfoRequest from './core/api/activeFlightPlanInfoRequest';
 
 Modal.setAppElement('#root');
+
+if (!window.rateLimiter) {
+    // eslint-disable-next-line fp/no-mutation
+    window.rateLimiter = new Bottleneck({maxConcurrent: 2, minTime: 500});
+}
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(!!getAccessToken());
     const [userInfo, setUserInfo] = useState({user: {ships: []}});
-    const [isUserInfoLoading, setIsUserInfoLoading] = useState(false);
+    const [activeFlightPlans, setActiveFlightPlans] = useState([]);
+    const [isGlobalDataLoading, setIsGlobalDataLoading] = useState(false);
     const [darkMode, setDarkMode] = useState(localStorage.getItem(DARK_MODE) || 'os');
 
     useEffect(() => {
         timer(0, USER_INFO_REQUEST_INTERVAL).subscribe((value) => {
-            setIsUserInfoLoading(true);
+            setIsGlobalDataLoading(true);
 
-            ownUserInfoRequest().then(({data}) => {
-                setUserInfo(data);
+            sequential([
+                ownUserInfoRequest,
+                ownedShipsRequest,
+            ]).then(([{data: userInfoData}, {data: ownedShipsData}]) => {
+                setUserInfo(userInfoData);
 
-                setIsUserInfoLoading(false);
+                const activeFlightPlanRequests = ownedShipsData.ships.filter(({flightPlanId}) => !!flightPlanId).map(({flightPlanId}) => () => activeFlightPlanInfoRequest(flightPlanId));
+
+                setActiveFlightPlans([]);
+
+                sequential(activeFlightPlanRequests).then((activeFlightPlanResponses) => {
+                    setActiveFlightPlans(activeFlightPlanResponses.map((activeFlightPlanResponse) => activeFlightPlanResponse.data.flightPlan));
+                });
+
+                setIsGlobalDataLoading(false);
             });
         });
     }, []);
@@ -62,31 +84,33 @@ function App() {
     return (
         <LoggedInContext.Provider value={[isLoggedIn, setIsLoggedIn]}>
             <UserInfoContext.Provider value={[userInfo, setUserInfo]}>
-                <div className="container px-4 lg:px-20 mx-auto mb-12">
-                    <Navbar
-                        label="SpaceTraders UI"
-                        darkMode={darkMode}
-                        toggleDarkModeFn={toggleDarkMode}
-                        isGlobalDataLoading={isUserInfoLoading}
-                        className="mb-8"
-                    />
+                <ActiveFlightPlansContext.Provider value={[activeFlightPlans, setActiveFlightPlans]}>
+                    <div className="container px-4 lg:px-20 mx-auto mb-12">
+                        <Navbar
+                            label="SpaceTraders UI"
+                            darkMode={darkMode}
+                            toggleDarkModeFn={toggleDarkMode}
+                            isGlobalDataLoading={isGlobalDataLoading}
+                            className="mb-8"
+                        />
 
-                    <Router>
-                        <Dashboard path="/"/>
-                        <AvailableLoans path="/loans/available"/>
-                        <ShipMarket path="/ships/market"/>
-                        <Systems path="/systems"/>
-                        <Marketplace path="/marketplaces/:systemSymbol"/>
-                        <Login path="/login"/>
-                        <Register path="/register"/>
-                    </Router>
+                        <Router>
+                            <Dashboard path="/"/>
+                            <AvailableLoans path="/loans/available"/>
+                            <ShipMarket path="/ships/market"/>
+                            <Systems path="/systems"/>
+                            <Marketplace path="/marketplaces/:systemSymbol"/>
+                            <Login path="/login"/>
+                            <Register path="/register"/>
+                        </Router>
 
-                    <ToastContainer/>
+                        <ToastContainer/>
 
-                    <div className="text-xs text-gray-400 dark:text-gray-600 mt-12 text-right">
-                        Build date: {preval`module.exports = new Date().toUTCString();`}
+                        <div className="text-xs text-gray-400 dark:text-gray-600 mt-12 text-right">
+                            Build date: {preval`module.exports = new Date().toUTCString();`}
+                        </div>
                     </div>
-                </div>
+                </ActiveFlightPlansContext.Provider>
             </UserInfoContext.Provider>
         </LoggedInContext.Provider>
     );

@@ -5,6 +5,9 @@ import LabelWithValueGroup from '../components/base/LabelWithValueGroup';
 import formatBool from '../core/formatBool';
 import MultiLoadingButton from '../components/base/button/MultiLoadingButton';
 import formatInteger from '../core/formatInteger';
+import Card from '../components/Card/Card';
+import CardBody from '../components/Card/CardBody';
+import CardFooter from '../components/Card/CardFooter';
 
 function AvailableLoans() {
     const [loans, setLoans] = useState([]);
@@ -23,15 +26,15 @@ function AvailableLoans() {
     return (
         <div>
             {loans.map((loan) => (
-                <div key={loan.type} className="rounded-lg overflow-hidden shadow-lg border border-gray-100 bg-white mb-4 dark:border-gray-700 dark:bg-gray-800">
-                    <div className="font-bold text-xl px-6 py-4">{loan.type}</div>
-                    <div className="px-6">
+                <Card key={loan.type} headingLabel={loan.type}>
+                    <CardBody>
                         <LabelWithValueGroup entries={getLoanDisplayValuesFor(loan)}/>
-                    </div>
-                    <div className="border-t border-gray-200 bg-gray-50 px-6 py-4 dark:border-gray-700 dark:bg-gray-900 dark:bg-opacity-50">
+                    </CardBody>
+
+                    <CardFooter>
                         <MultiLoadingButton label="Take out loan" promiseFn={() => takeOutLoanRequest(loan.type)}/>
-                    </div>
-                </div>
+                    </CardFooter>
+                </Card>
             ))}
         </div>
     );
