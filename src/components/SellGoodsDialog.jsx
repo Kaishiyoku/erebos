@@ -8,6 +8,8 @@ import {useEffect, useState} from 'react';
 import {head, prop, toString} from 'ramda';
 import getShipCargoFor from '../core/getShipCargoFor';
 import pascalCaseToWords from '../core/pascalCaseToWords';
+import {toast} from 'react-toastify';
+import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
 
 function SellGoodsDialog({ownedShipsAtLocation, selectedGood, callbackFn}) {
     const {register, handleSubmit, watch, errors, formState} = useForm({mode: 'onChange'});
@@ -21,6 +23,8 @@ function SellGoodsDialog({ownedShipsAtLocation, selectedGood, callbackFn}) {
 
     const sellGoods = ({shipId, quantity}) => {
         sellGoodRequest(selectedGood.symbol, quantity, shipId).then((response) => {
+            toast.success(`${quantity}x ${pascalCaseToWordsAndUpperCaseFirstChar(selectedGood.symbol)} sold.`);
+
             callbackFn();
         });
     };

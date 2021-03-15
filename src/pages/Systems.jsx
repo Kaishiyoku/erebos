@@ -68,7 +68,7 @@ function Systems() {
                 <CardBody>
                     <Table labels={['Type', 'Location', 'Actions']} hovered>
                         {ownedShips.map(({id, type, location}) => (
-                            <TableBodyRow key={type}>
+                            <TableBodyRow key={id}>
                                 <TableBodyCell key="type">{type}</TableBodyCell>
                                 <TableBodyCell key="location">{location || 'in transit'}</TableBodyCell>
                                 <TableBodyCell key="actions"><Button label="Route" size="sm" onClick={() => handleRouteClick(id)}/></TableBodyCell>

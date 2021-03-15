@@ -8,6 +8,7 @@ import formatInteger from '../core/formatInteger';
 import Card from '../components/Card/Card';
 import CardBody from '../components/Card/CardBody';
 import CardFooter from '../components/Card/CardFooter';
+import {toast} from 'react-toastify';
 
 function AvailableLoans() {
     const [loans, setLoans] = useState([]);
@@ -32,7 +33,11 @@ function AvailableLoans() {
                     </CardBody>
 
                     <CardFooter>
-                        <MultiLoadingButton label="Take out loan" promiseFn={() => takeOutLoanRequest(loan.type)}/>
+                        <MultiLoadingButton
+                            label="Take out loan"
+                            promiseFn={() => takeOutLoanRequest(loan.type)}
+                            onSuccess={() => toast.success('Loan taken out.')}
+                        />
                     </CardFooter>
                 </Card>
             ))}

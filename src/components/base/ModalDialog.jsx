@@ -3,16 +3,20 @@ import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import noop from '../../core/noop';
 
-function ModalDialog({isOpen, onAfterOpen, onRequestClose, contentLabel, children}) {
+function ModalDialog({isOpen, onAfterOpen, onAfterClose, onRequestClose, contentLabel, children}) {
     const handleOnAfterOpen = () => {
         document.querySelector('body').style.overflowY = 'hidden';
 
         onAfterOpen();
     };
 
-    const handleOnRequestClose = () => {
+    const handleOnAfterClose = () => {
         document.querySelector('body').style.overflowY = 'inherit';
 
+        onAfterClose();
+    };
+
+    const handleOnRequestClose = () => {
         onRequestClose();
     };
 
@@ -20,7 +24,9 @@ function ModalDialog({isOpen, onAfterOpen, onRequestClose, contentLabel, childre
         <Modal
             isOpen={isOpen}
             onAfterOpen={handleOnAfterOpen}
+            onAfterClose={handleOnAfterClose}
             onRequestClose={handleOnRequestClose}
+
             contentLabel={contentLabel}
             closeTimeoutMS={500}
         >
@@ -33,11 +39,13 @@ ModalDialog.propTypes = {
     children: PropTypes.node.isRequired,
     contentLabel: PropTypes.string.isRequired,
     isOpen: PropTypes.bool.isRequired,
+    onAfterClose: PropTypes.func,
     onAfterOpen: PropTypes.func,
     onRequestClose: PropTypes.func,
 };
 
 ModalDialog.defaultProps = {
+    onAfterClose: noop,
     onAfterOpen: noop,
 };
 

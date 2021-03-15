@@ -8,6 +8,7 @@ import Heading from '../components/base/Heading';
 import formatInteger from '../core/formatInteger';
 import Card from '../components/Card/Card';
 import CardBody from '../components/Card/CardBody';
+import {toast} from 'react-toastify';
 
 function ShipMarket() {
     const [ships, setShips] = useState([]);
@@ -49,6 +50,7 @@ function ShipMarket() {
                                         label="Buy ship"
                                         size="sm"
                                         promiseFn={() => purchaseShipRequest(ship.type, purchaseLocation.location)}
+                                        onSuccess={() => toast.success('Ship bought.')}
                                     />
                                 </div>
                             ))}</div>
