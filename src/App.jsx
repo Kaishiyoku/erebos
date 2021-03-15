@@ -16,12 +16,12 @@ import Marketplace from './pages/Marketplace';
 import preval from 'preval.macro';
 import UserInfoContext from './UserInfoContext';
 import {timer} from 'rxjs';
-import ownUserInfoRequest from './core/api/ownUserInfoRequest';
+import ownUserInfoRequest from './core/api_requests/miscellaneous/ownUserInfoRequest';
 import ActiveFlightPlansContext from './ActiveFlightPlansContext';
 import sequential from 'promise-sequential';
-import ownedShipsRequest from './core/api/ownedShipsRequest';
+import ownedShipsRequest from './core/api_requests/ships/ownedShipsRequest';
 import Bottleneck from 'bottleneck';
-import activeFlightPlanInfoRequest from './core/api/activeFlightPlanInfoRequest';
+import activeFlightPlanInfoRequest from './core/api_requests/flight_plans/activeFlightPlanInfoRequest';
 
 Modal.setAppElement('#root');
 
@@ -38,7 +38,11 @@ function App() {
     const [darkMode, setDarkMode] = useState(localStorage.getItem(DARK_MODE) || 'os');
 
     useEffect(() => {
-        timer(0, USER_INFO_REQUEST_INTERVAL).subscribe((value) => {
+        if (!isLoggedIn) {
+            return;
+        }
+
+        const userInfoRequestTimer = timer(0, USER_INFO_REQUEST_INTERVAL).subscribe((value) => {
             setIsGlobalDataLoading(true);
 
             sequential([
@@ -58,7 +62,11 @@ function App() {
                 setIsGlobalDataLoading(false);
             });
         });
-    }, []);
+
+        if (!isLoggedIn) {
+            userInfoRequestTimer.unsubscribe();
+        }
+    }, [isLoggedIn]);
 
     const toggleDarkMode = () => {
         const nextDarkModes = {
@@ -91,7 +99,6 @@ function App() {
                             darkMode={darkMode}
                             toggleDarkModeFn={toggleDarkMode}
                             isGlobalDataLoading={isGlobalDataLoading}
-                            className="mb-8"
                         />
 
                         <Router>

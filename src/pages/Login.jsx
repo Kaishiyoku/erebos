@@ -5,7 +5,7 @@ import LoadingButton from '../components/base/button/LoadingButton';
 import {useContext, useEffect, useState} from 'react';
 import Input from '../components/input/Input';
 import logout from '../core/local_storage/logout';
-import ownUserInfoRequest from '../core/api/ownUserInfoRequest';
+import ownUserInfoRequest from '../core/api_requests/miscellaneous/ownUserInfoRequest';
 import LoggedInContext from '../LoggedInContext';
 import getAccessToken from '../core/local_storage/getAccessToken';
 

@@ -1,5 +1,5 @@
-import authGet from '../request/authGet';
-import getUserName from '../local_storage/getUserName';
+import authGet from '../../request/authGet';
+import getUserName from '../../local_storage/getUserName';
 
 const activeFlightPlansRequest = () => authGet(`/users/${getUserName()}/flight-plans`);
 

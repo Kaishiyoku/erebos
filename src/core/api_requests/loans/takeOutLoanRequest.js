@@ -1,5 +1,5 @@
-import authPost from '../request/authPost';
-import getUserName from '../local_storage/getUserName';
+import authPost from '../../request/authPost';
+import getUserName from '../../local_storage/getUserName';
 
 const takeOutLoanRequest = (type) => authPost(`/users/${getUserName()}/loans`, {type});
 

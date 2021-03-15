@@ -1,4 +1,4 @@
-import authGet from '../request/authGet';
+import authGet from '../../request/authGet';
 
 const allActiveFlightPlansInSystemRequest = (systemSymbol) => authGet(`/game/systems/${systemSymbol}/flight-plans`);
 

@@ -1,4 +1,4 @@
-import authGet from '../request/authGet';
+import authGet from '../../request/authGet';
 
 const availableShipsRequest = (shipClass = null) => authGet('/game/ships', {class: shipClass});
 

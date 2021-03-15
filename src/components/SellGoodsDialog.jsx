@@ -3,7 +3,7 @@ import LoadingButton from './base/button/LoadingButton';
 import {useForm} from 'react-hook-form';
 import Select from './input/Select';
 import LabelWithValueGroup from './base/LabelWithValueGroup';
-import sellGoodRequest from '../core/api/sellGoodRequest';
+import sellGoodRequest from '../core/api_requests/goods/sellGoodRequest';
 import {useEffect, useState} from 'react';
 import {head, prop, toString} from 'ramda';
 import getShipCargoFor from '../core/getShipCargoFor';

@@ -1,11 +1,11 @@
 import {useContext, useEffect, useState} from 'react';
-import systemsInfoRequest from '../core/api/systemsInfoRequest';
+import systemsInfoRequest from '../core/api_requests/locations/systemsInfoRequest';
 import Table from '../components/table/Table';
 import Button from '../components/base/button/Button';
 import TableBodyRow from '../components/table/TableBodyRow';
 import TableBodyCell from '../components/table/TableBodyCell';
 import SystemsList from '../components/SystemsList';
-import submitFlightPlanRequest from '../core/api/submitFlightPlanRequest';
+import submitFlightPlanRequest from '../core/api_requests/flight_plans/submitFlightPlanRequest';
 import formatDecimal from '../core/formatDecimal';
 import ModalDialog from '../components/base/ModalDialog';
 import UserInfoContext from '../UserInfoContext';

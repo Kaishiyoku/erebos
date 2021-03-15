@@ -8,7 +8,7 @@ import BuyGoodsDialog from './BuyGoodsDialog';
 import SellGoodsDialog from './SellGoodsDialog';
 import ModalDialog from './base/ModalDialog';
 import hasOwnedShipsAtLocation from '../core/hasOwnedShipsAtLocation';
-import locationMarketplaceRequest from '../core/api/locationMarketplaceRequest';
+import locationMarketplaceRequest from '../core/api_requests/locations/locationMarketplaceRequest';
 
 function MarketplaceTable({location, ownedShipsAtLocation}) {
     if (!hasOwnedShipsAtLocation(ownedShipsAtLocation, location)) {

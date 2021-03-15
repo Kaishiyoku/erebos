@@ -1,4 +1,4 @@
-import authPost from '../request/authPost';
+import authPost from '../../request/authPost';
 
 const registerRequest = (userName) => authPost(`/users/${userName}/token`);
 

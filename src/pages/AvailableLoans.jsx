@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
-import availableLoansRequest from '../core/api/availableLoansRequest';
-import takeOutLoanRequest from '../core/api/takeOutLoanRequest';
+import availableLoansRequest from '../core/api_requests/loans/availableLoansRequest';
+import takeOutLoanRequest from '../core/api_requests/loans/takeOutLoanRequest';
 import LabelWithValueGroup from '../components/base/LabelWithValueGroup';
 import formatBool from '../core/formatBool';
 import MultiLoadingButton from '../components/base/button/MultiLoadingButton';

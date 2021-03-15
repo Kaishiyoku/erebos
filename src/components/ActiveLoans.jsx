@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import {format, parseISO} from 'date-fns';
 import LabelWithValueGroup from './base/LabelWithValueGroup';
-import payOffLoanRequest from '../core/api/payOffLoanRequest';
+import payOffLoanRequest from '../core/api_requests/loans/payOffLoanRequest';
 import MultiLoadingButton from './base/button/MultiLoadingButton';
 import formatInteger from '../core/formatInteger';
 import {length} from 'ramda';

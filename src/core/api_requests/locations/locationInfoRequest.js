@@ -1,4 +1,4 @@
-import authGet from '../request/authGet';
+import authGet from '../../request/authGet';
 
 const locationInfoRequest = (systemSymbol) => authGet(`/game/locations/${systemSymbol}`);
 

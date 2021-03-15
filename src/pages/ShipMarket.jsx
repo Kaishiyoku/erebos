@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
-import purchaseShipRequest from '../core/api/purchaseShipRequest';
+import purchaseShipRequest from '../core/api_requests/goods/purchaseShipRequest';
 import LabelWithValueGroup from '../components/base/LabelWithValueGroup';
 import MultiLoadingButton from '../components/base/button/MultiLoadingButton';
-import availableShipsRequest from '../core/api/availableShipsRequest';
+import availableShipsRequest from '../core/api_requests/ships/availableShipsRequest';
 import SubHeading from '../components/base/SubHeading';
 import Heading from '../components/base/Heading';
 import formatInteger from '../core/formatInteger';

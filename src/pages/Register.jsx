@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form';
 import {useState} from 'react';
 import Input from '../components/input/Input';
 import LoadingButton from '../components/base/button/LoadingButton';
-import registerRequest from '../core/api/registerRequest';
+import registerRequest from '../core/api_requests/miscellaneous/registerRequest';
 
 function Register() {
     const {register, handleSubmit, watch, errors} = useForm();

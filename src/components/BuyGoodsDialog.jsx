@@ -3,7 +3,7 @@ import LoadingButton from './base/button/LoadingButton';
 import {useForm} from 'react-hook-form';
 import Select from './input/Select';
 import LabelWithValueGroup from './base/LabelWithValueGroup';
-import purchaseGoodRequest from '../core/api/purchaseGoodRequest';
+import purchaseGoodRequest from '../core/api_requests/goods/purchaseGoodRequest';
 import {useEffect, useState} from 'react';
 import {head, prop, toString} from 'ramda';
 import pascalCaseToWords from '../core/pascalCaseToWords';
