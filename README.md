@@ -31,6 +31,9 @@ Huge code refactorings are planned, too. I'm currently trying to implement basic
 * [x] show available ships
 * [x] purchase ships
 * [x] show system information with all locations
+* [x] purchase goods
+* [x] sell goods
+* [ ] reload user data when goods are purchased/sold
 * [ ] choose a ship and prepare a flight plan
 * [ ] execute flight plan and visualize it
 * [ ] add loading indicators to several components
