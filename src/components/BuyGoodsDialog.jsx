@@ -7,6 +7,7 @@ import purchaseGoodRequest from '../core/api/purchaseGoodRequest';
 import {useEffect, useState} from 'react';
 import {head, prop, toString} from 'ramda';
 import pascalCaseToWords from '../core/pascalCaseToWords';
+import getShipCargoFor from '../core/getShipCargoFor';
 
 function BuyGoodsDialog({ownedShipsAtLocation, selectedGood, callbackFn}) {
     const {register, handleSubmit, watch, errors, formState} = useForm({mode: 'onChange'});
@@ -41,6 +42,7 @@ function BuyGoodsDialog({ownedShipsAtLocation, selectedGood, callbackFn}) {
             <LabelWithValueGroup
                 labelWidthClass="w-48"
                 entries={[
+                    {label: 'In ship cargo', value: getShipCargoFor(selectedGood.symbol, selectedShip)},
                     {label: 'Ship space available', value: prop('spaceAvailable', selectedShip)},
                     {label: 'Cost', value: toString(watchQuantity * selectedGood.pricePerUnit)},
                     {label: 'Needed space', value: toString(watchQuantity * selectedGood.volumePerUnit)},

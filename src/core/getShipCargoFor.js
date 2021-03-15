@@ -3,7 +3,13 @@ const getShipCargoFor = (goodSymbol, ship) => {
         return 0;
     }
 
-    return ship.cargo.find((item) => item.good === goodSymbol).quantity;
+    const good = ship.cargo.find((item) => item.good === goodSymbol);
+
+    if (!good) {
+        return 0;
+    }
+
+    return good.quantity;
 };
 
 export default getShipCargoFor;
