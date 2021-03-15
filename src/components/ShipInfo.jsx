@@ -10,7 +10,7 @@ import {useState} from 'react';
 import PropTypes from 'prop-types';
 import ChevronUpIcon from '../icons/ChevronUpIcon';
 
-function ShipInfo({ship, activeFlightPlan}) {
+function ShipInfo({ship, activeFlightPlan, className}) {
     const [isDetailVisible, setIsDetailVisible] = useState(false);
 
     return (
@@ -24,19 +24,17 @@ function ShipInfo({ship, activeFlightPlan}) {
                     onClick={() => setIsDetailVisible(!isDetailVisible)}
                 />
             )}
+            className={className}
         >
             <CardBody>
                 <>
-                    <div className={clsx('flex space-x-2', {hidden: isDetailVisible})}>
-                        {activeFlightPlan && <div>{activeFlightPlan.departure} -> {activeFlightPlan.destination} ({activeFlightPlan.timeRemainingInSeconds}s)</div>}
+                    <Cargo cargo={ship.cargo}/>
 
-                        <Cargo cargo={ship.cargo}/>
-                    </div>
+                    {activeFlightPlan && <div className="mt-2">{activeFlightPlan.departure} -> {activeFlightPlan.destination} ({activeFlightPlan.timeRemainingInSeconds}s)</div>}
 
-                    <div className={clsx({hidden: !isDetailVisible})}>
+                    <div className={clsx('mt-4', {hidden: !isDetailVisible})}>
                         <LabelWithValueGroup
                             entries={[
-                                {label: 'Cargo', value: <Cargo cargo={ship.cargo}/>},
                                 {label: 'Maximum cargo', value: formatInteger(ship.maxCargo)},
                                 {label: 'Space available', value: formatInteger(ship.spaceAvailable)},
                             ]}
@@ -63,6 +61,7 @@ function ShipInfo({ship, activeFlightPlan}) {
 
 ShipInfo.propTypes = {
     activeFlightPlan: PropTypes.object.isRequired,
+    className: PropTypes.string,
     ship: PropTypes.object,
 };
 

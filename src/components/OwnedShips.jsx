@@ -21,8 +21,8 @@ function OwnedShips({userInfo, activeFlightPlans}) {
         <div>
             <SubHeading label="Owned ships"/>
 
-            <div className="grid md:grid-cols-2 gap-4 mb-8">
-                {ships.map((ship) => <ShipInfo ship={ship} activeFlightPlan={getFlightPlanFromListByShipId(ship.id, activeFlightPlans)}/>)}
+            <div className="lg:flex lg:items-start lg:gap-4 mb-8">
+                {ships.map((ship) => <ShipInfo ship={ship} activeFlightPlan={getFlightPlanFromListByShipId(ship.id, activeFlightPlans)} className="lg:w-1/2 mb-4 lg:mb-0"/>)}
             </div>
 
             <Link to="/ships/market" className="py-2 text-blue-600 cursor-pointer hover:text-blue-800 hover:underline dark:text-blue-500 dark:hover:text-white">
