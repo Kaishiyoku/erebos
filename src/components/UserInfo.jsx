@@ -1,4 +1,4 @@
-import LabelWithValue from './LabelWithValue';
+import LabelWithValue from './base/LabelWithValue';
 import PropTypes from 'prop-types';
 import ActiveLoans from './ActiveLoans';
 import formatInteger from '../core/formatInteger';

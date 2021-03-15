@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import noop from '../../core/noop';
+import noop from '../../../core/noop';
 import clsx from 'clsx';
 
 function Button(props) {

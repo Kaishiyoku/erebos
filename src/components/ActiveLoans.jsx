@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import {Link} from '@reach/router';
 import {format, parseISO} from 'date-fns';
-import LabelWithValueGroup from './LabelWithValueGroup';
+import LabelWithValueGroup from './base/LabelWithValueGroup';
 import payOffLoanRequest from '../core/api/payOffLoanRequest';
-import MultiLoadingButton from './button/MultiLoadingButton';
+import MultiLoadingButton from './base/button/MultiLoadingButton';
 import formatInteger from '../core/formatInteger';
 
 function ActiveLoans({loans, className}) {

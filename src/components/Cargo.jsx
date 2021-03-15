@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Badge from './Badge';
+import Badge from './base/Badge';
 
 function Cargo({cargo}) {
     if (!cargo) {

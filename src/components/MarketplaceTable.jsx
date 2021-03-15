@@ -1,12 +1,12 @@
 import Table from './table/Table';
 import TableBodyRow from './table/TableBodyRow';
 import TableBodyCell from './table/TableBodyCell';
-import Button from './button/Button';
+import Button from './base/button/Button';
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 import BuyGoodsDialog from './BuyGoodsDialog';
 import SellGoodsDialog from './SellGoodsDialog';
-import ModalDialog from './ModalDialog';
+import ModalDialog from './base/ModalDialog';
 
 function MarketplaceTable({planet, ownedShipsAtLocation}) {
     if (!planet) {

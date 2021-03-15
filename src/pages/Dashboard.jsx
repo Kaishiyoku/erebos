@@ -4,7 +4,7 @@ import OwnedShips from '../components/OwnedShips';
 import UserInfo from '../components/UserInfo';
 import getAccessToken from '../core/local_storage/getAccessToken';
 import Login from './Login';
-import Heading from '../components/Heading';
+import Heading from '../components/base/Heading';
 
 function Dashboard() {
     if (!getAccessToken()) {

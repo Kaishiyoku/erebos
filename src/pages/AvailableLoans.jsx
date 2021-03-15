@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
 import availableLoansRequest from '../core/api/availableLoansRequest';
 import takeOutLoanRequest from '../core/api/takeOutLoanRequest';
-import LabelWithValueGroup from '../components/LabelWithValueGroup';
+import LabelWithValueGroup from '../components/base/LabelWithValueGroup';
 import formatBool from '../core/formatBool';
-import MultiLoadingButton from '../components/button/MultiLoadingButton';
+import MultiLoadingButton from '../components/base/button/MultiLoadingButton';
 import formatInteger from '../core/formatInteger';
 
 function AvailableLoans() {

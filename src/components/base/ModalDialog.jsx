@@ -1,7 +1,7 @@
 /* eslint-disable fp/no-mutation */
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
-import noop from '../core/noop';
+import noop from '../../core/noop';
 
 function ModalDialog({isOpen, onAfterOpen, onRequestClose, contentLabel, children}) {
     const handleOnAfterOpen = () => {

@@ -1,4 +1,4 @@
-import Button from './button/Button';
+import Button from './base/button/Button';
 import clsx from 'clsx';
 import {useEffect, useState} from 'react';
 import locationMarketplaceRequest from '../core/api/locationMarketplaceRequest';

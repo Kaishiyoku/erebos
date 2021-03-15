@@ -1,7 +1,7 @@
 import Button from './Button';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import LoadingIcon from '../../icons/LoadingIcon';
+import LoadingIcon from '../../../icons/LoadingIcon';
 
 function LoadingButton({disabled, isLoading, ...otherProps}) {
     return (

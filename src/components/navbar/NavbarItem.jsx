@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import NavLink from '../NavLink';
+import NavLink from '../layout/NavLink';
 
 function NavbarItem(props) {
     if (!props.isVisible) {

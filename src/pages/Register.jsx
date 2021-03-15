@@ -1,8 +1,8 @@
 import {Link} from '@reach/router';
 import {useForm} from 'react-hook-form';
 import {useState} from 'react';
-import Input from '../components/button/Input';
-import LoadingButton from '../components/button/LoadingButton';
+import Input from '../components/input/Input';
+import LoadingButton from '../components/base/button/LoadingButton';
 import registerRequest from '../core/api/registerRequest';
 
 function Register() {

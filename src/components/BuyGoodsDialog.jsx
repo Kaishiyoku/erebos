@@ -1,8 +1,8 @@
-import Input from './button/Input';
-import LoadingButton from './button/LoadingButton';
+import Input from './input/Input';
+import LoadingButton from './base/button/LoadingButton';
 import {useForm} from 'react-hook-form';
-import Select from './Select';
-import LabelWithValueGroup from './LabelWithValueGroup';
+import Select from './input/Select';
+import LabelWithValueGroup from './base/LabelWithValueGroup';
 import purchaseGoodRequest from '../core/api/purchaseGoodRequest';
 import {useEffect, useState} from 'react';
 import {head, prop, toString} from 'ramda';

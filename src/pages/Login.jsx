@@ -1,9 +1,9 @@
 import {Link, navigate} from '@reach/router';
 import {useForm} from 'react-hook-form';
 import login from '../core/local_storage/login';
-import LoadingButton from '../components/button/LoadingButton';
+import LoadingButton from '../components/base/button/LoadingButton';
 import {useContext, useEffect, useState} from 'react';
-import Input from '../components/button/Input';
+import Input from '../components/input/Input';
 import logout from '../core/local_storage/logout';
 import ownUserInfoRequest from '../core/api/ownUserInfoRequest';
 import LoggedInContext from '../LoggedInContext';

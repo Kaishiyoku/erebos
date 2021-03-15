@@ -2,13 +2,13 @@ import {useEffect, useState} from 'react';
 import systemsInfoRequest from '../core/api/systemsInfoRequest';
 import ownedShipsRequest from '../core/api/ownedShipsRequest';
 import Table from '../components/table/Table';
-import Button from '../components/button/Button';
+import Button from '../components/base/button/Button';
 import TableBodyRow from '../components/table/TableBodyRow';
 import TableBodyCell from '../components/table/TableBodyCell';
 import SystemsList from '../components/SystemsList';
 import submitFlightPlanRequest from '../core/api/submitFlightPlanRequest';
 import formatDecimal from '../core/formatDecimal';
-import ModalDialog from '../components/ModalDialog';
+import ModalDialog from '../components/base/ModalDialog';
 
 function Systems() {
     const [systems, setSystems] = useState([]);
