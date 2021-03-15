@@ -1,6 +1,5 @@
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import systemsInfoRequest from '../core/api/systemsInfoRequest';
-import ownedShipsRequest from '../core/api/ownedShipsRequest';
 import Table from '../components/table/Table';
 import Button from '../components/base/button/Button';
 import TableBodyRow from '../components/table/TableBodyRow';
@@ -9,20 +8,19 @@ import SystemsList from '../components/SystemsList';
 import submitFlightPlanRequest from '../core/api/submitFlightPlanRequest';
 import formatDecimal from '../core/formatDecimal';
 import ModalDialog from '../components/base/ModalDialog';
+import UserInfoContext from '../UserInfoContext';
 
 function Systems() {
     const [systems, setSystems] = useState([]);
-    const [ownedShips, setOwnedShips] = useState([]);
     const [isRouteSelectionModalOpen, setIsRouteSelectionModalOpen] = useState(false);
     const [selectedShip, setSelectedShip] = useState({});
+    const [userInfo, setUserInfo] = useContext(UserInfoContext);
+
+    const ownedShips = userInfo.user.ships;
 
     useEffect(() => {
         systemsInfoRequest().then(({data}) => {
             setSystems(data.systems);
-        });
-
-        ownedShipsRequest().then(({data}) => {
-            setOwnedShips(data.ships);
         });
     }, []);
 

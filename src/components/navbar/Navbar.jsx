@@ -11,8 +11,10 @@ import {Collapse} from 'react-collapse';
 import {fromEvent} from 'rxjs';
 import {debounceTime, map, pairwise, startWith} from 'rxjs/operators';
 import {MEDIA_MD_BREAKPOINT} from '../../core/constants';
+import clsx from 'clsx';
+import LoadingIcon from '../../icons/LoadingIcon';
 
-function Navbar(props) {
+function Navbar({label, darkMode, toggleDarkModeFn, isGlobalDataLoading}) {
     const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
     const [isNavbarOpened, setIsNavbarOpened] = useState(window.innerWidth >= MEDIA_MD_BREAKPOINT);
 
@@ -62,8 +64,10 @@ function Navbar(props) {
                 <div className="xl:flex xl:items-center">
                     <div className="flex justify-between items-center">
                         <div className="text-xl mr-2 ml-6 xl:ml-0 py-5">
-                            <Link to="/" className="text-gray-700 transition-all duration-200 hover:text-black dark:text-gray-400 dark:hover:text-white">
-                                {props.label}
+                            <Link to="/" className="flex items-center text-gray-700 transition-all duration-200 hover:text-black dark:text-gray-400 dark:hover:text-white">
+                                <LoadingIcon className={clsx({'mr-0 w-0 h-0': !isGlobalDataLoading, 'mr-3 w-5 h-5': isGlobalDataLoading})}/>
+
+                                {label}
                             </Link>
                         </div>
                         <button
@@ -84,10 +88,10 @@ function Navbar(props) {
                                 <NavbarItem to="/loans/available" label="Available Loans" isVisible={isLoggedIn}/>
                                 {logoutButton}
                                 <a
-                                    onClick={props.toggleDarkModeFn}
+                                    onClick={toggleDarkModeFn}
                                     className="block cursor-pointer block transition-all duration-200 px-4 py-5 text-black xl:border-b-4 border-l-4 xl:border-l-0 border-transparent hover:text-black hover:bg-gray-50 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
                                 >
-                                    {darkModeIcons[props.darkMode]}
+                                    {darkModeIcons[darkMode]}
                                 </a>
                             </div>
                         </div>
@@ -100,6 +104,7 @@ function Navbar(props) {
 
 Navbar.propTypes = {
     darkMode: PropTypes.string.isRequired,
+    isGlobalDataLoading: PropTypes.bool,
     label: PropTypes.string.isRequired,
     toggleDarkModeFn: PropTypes.func.isRequired,
 };

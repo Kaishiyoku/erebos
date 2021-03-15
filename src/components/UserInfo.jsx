@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import ActiveLoans from './ActiveLoans';
 import formatInteger from '../core/formatInteger';
 
-function UserInfo({userData, ...otherProps}) {
-    if (!userData) {
+function UserInfo({userInfo, ...otherProps}) {
+    if (!userInfo) {
         return null;
     }
 
-    const {user} = userData;
+    const {user} = userInfo;
     const {username, credits, loans} = user;
 
     return (
@@ -24,11 +24,11 @@ function UserInfo({userData, ...otherProps}) {
 }
 
 UserInfo.propTypes = {
-    userData: PropTypes.object,
+    userInfo: PropTypes.object,
 };
 
 UserInfo.defaultProps = {
-    userData: null,
+    userInfo: null,
 };
 
 export default UserInfo;
