@@ -15,7 +15,6 @@ function ShipInfo({ship, activeFlightPlan, className}) {
 
     return (
         <Card
-            key={ship.id}
             headingLabel={`${ship.type}`}
             headingSubLabel={`${ship.location || 'in transit'}`}
             headingActionButton={(
@@ -60,9 +59,9 @@ function ShipInfo({ship, activeFlightPlan, className}) {
 }
 
 ShipInfo.propTypes = {
-    activeFlightPlan: PropTypes.object.isRequired,
+    activeFlightPlan: PropTypes.object,
     className: PropTypes.string,
-    ship: PropTypes.object,
+    ship: PropTypes.object.isRequired,
 };
 
 export default ShipInfo;
