@@ -9,6 +9,7 @@ import SellGoodsDialog from './SellGoodsDialog';
 import ModalDialog from './base/ModalDialog';
 import hasOwnedShipsAtLocation from '../core/hasOwnedShipsAtLocation';
 import locationMarketplaceRequest from '../core/api_requests/locations/locationMarketplaceRequest';
+import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
 
 function MarketplaceTable({location, ownedShipsAtLocation}) {
     if (!hasOwnedShipsAtLocation(ownedShipsAtLocation, location)) {
@@ -44,7 +45,7 @@ function MarketplaceTable({location, ownedShipsAtLocation}) {
             <Table labels={['Name', 'Volume per unit', 'Price per unit', 'Quantity available', 'Actions']} hovered size="sm">
                 {marketplace.map((good) => (
                     <TableBodyRow key={good.symbol}>
-                        <TableBodyCell key="symbol">{good.symbol}</TableBodyCell>
+                        <TableBodyCell key="symbol">{pascalCaseToWordsAndUpperCaseFirstChar(good.symbol)}</TableBodyCell>
                         <TableBodyCell key="volumePerUnit">{good.volumePerUnit}</TableBodyCell>
                         <TableBodyCell key="pricePerUnit">{good.pricePerUnit}</TableBodyCell>
                         <TableBodyCell key="quantityAvailable">{good.quantityAvailable}</TableBodyCell>

@@ -5,6 +5,7 @@ import payOffLoanRequest from '../core/api_requests/loans/payOffLoanRequest';
 import MultiLoadingButton from './base/button/MultiLoadingButton';
 import formatInteger from '../core/formatInteger';
 import {length} from 'ramda';
+import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
 
 function ActiveLoans({loans, className}) {
     if (length(loans) === 0) {
@@ -20,10 +21,10 @@ function ActiveLoans({loans, className}) {
                     <div key={loan.id} className="mb-4">
                         <LabelWithValueGroup
                             entries={[
-                                {label: 'Type', value: loan.type},
+                                {label: 'Type', value: pascalCaseToWordsAndUpperCaseFirstChar(loan.type)},
                                 {label: 'Due', value: format(parseISO(loan.due), 'dd.MM.yyyy HH:mm')},
                                 {label: 'Repayment amount', value: formatInteger(loan.repaymentAmount)},
-                                {label: 'Status', value: loan.status},
+                                {label: 'Status', value: pascalCaseToWordsAndUpperCaseFirstChar(loan.status)},
                             ]}
                         />
 

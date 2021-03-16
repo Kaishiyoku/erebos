@@ -9,6 +9,7 @@ import Card from '../components/Card/Card';
 import CardBody from '../components/Card/CardBody';
 import CardFooter from '../components/Card/CardFooter';
 import {toast} from 'react-toastify';
+import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
 
 function AvailableLoans() {
     const [loans, setLoans] = useState([]);
@@ -27,7 +28,7 @@ function AvailableLoans() {
     return (
         <div>
             {loans.map((loan) => (
-                <Card key={loan.type} headingLabel={loan.type}>
+                <Card key={loan.type} headingLabel={pascalCaseToWordsAndUpperCaseFirstChar(loan.type)}>
                     <CardBody>
                         <LabelWithValueGroup entries={getLoanDisplayValuesFor(loan)}/>
                     </CardBody>

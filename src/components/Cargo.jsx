@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Badge from './base/Badge';
+import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
 
 function Cargo({cargo}) {
     if (!cargo) {
@@ -8,7 +9,7 @@ function Cargo({cargo}) {
 
     return (
         <div className="flex space-x-2">
-            {cargo.map((item) => <Badge key={item.good} label={`${item.quantity}/${item.totalVolume} ${item.good}`}/>)}
+            {cargo.map((item) => <Badge key={item.good} label={`${item.quantity}/${item.totalVolume} ${pascalCaseToWordsAndUpperCaseFirstChar(item.good)}`}/>)}
         </div>
     );
 }
