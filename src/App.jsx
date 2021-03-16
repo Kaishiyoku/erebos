@@ -95,7 +95,7 @@ function App() {
                 <ActiveFlightPlansContext.Provider value={[activeFlightPlans, setActiveFlightPlans]}>
                     <div className="container px-4 lg:px-20 mx-auto mb-12">
                         <Navbar
-                            label="SpaceTraders UI"
+                            label="Erebos"
                             darkMode={darkMode}
                             toggleDarkModeFn={toggleDarkMode}
                             isGlobalDataLoading={isGlobalDataLoading}
