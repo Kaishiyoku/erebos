@@ -10,7 +10,7 @@ import LoggedInContext from '../LoggedInContext';
 import getAccessToken from '../core/local_storage/getAccessToken';
 
 function Login() {
-    const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
+    const [, setIsLoggedIn] = useContext(LoggedInContext);
     const {register, handleSubmit, watch, errors, formState} = useForm({mode: 'onChange'});
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 

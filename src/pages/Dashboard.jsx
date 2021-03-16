@@ -12,8 +12,8 @@ function Dashboard() {
         return <Login/>;
     }
 
-    const [userInfo, setUserInfo] = useContext(UserInfoContext);
-    const [activeFlightPlans, setActiveFlightPlans] = useContext(ActiveFlightPlansContext);
+    const [userInfo] = useContext(UserInfoContext);
+    const [activeFlightPlans] = useContext(ActiveFlightPlansContext);
 
     return (
         <>

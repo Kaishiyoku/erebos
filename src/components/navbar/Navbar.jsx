@@ -12,12 +12,10 @@ import {debounceTime, map, pairwise, startWith} from 'rxjs/operators';
 import {MEDIA_XL_BREAKPOINT} from '../../core/constants';
 import clsx from 'clsx';
 import LoadingIcon from '../../icons/LoadingIcon';
-import UserInfoContext from '../../UserInfoContext';
 import AdditionNavbar from './AdditionNavbar';
 
 function Navbar({label, darkMode, toggleDarkModeFn, isGlobalDataLoading}) {
-    const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
-    const [userInfo, setUserInfo] = useContext(UserInfoContext);
+    const [isLoggedIn] = useContext(LoggedInContext);
     const [isNavbarOpened, setIsNavbarOpened] = useState(window.innerWidth >= MEDIA_XL_BREAKPOINT);
 
     fromEvent(window, 'resize')

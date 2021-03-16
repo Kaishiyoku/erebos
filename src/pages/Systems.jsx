@@ -16,7 +16,7 @@ function Systems() {
     const [systems, setSystems] = useState([]);
     const [isRouteSelectionModalOpen, setIsRouteSelectionModalOpen] = useState(false);
     const [selectedShip, setSelectedShip] = useState({});
-    const [userInfo, setUserInfo] = useContext(UserInfoContext);
+    const [userInfo] = useContext(UserInfoContext);
 
     const ownedShips = userInfo.user.ships;
 

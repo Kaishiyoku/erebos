@@ -8,7 +8,7 @@ import LoggedInContext from '../../LoggedInContext';
 
 function AdditionNavbar() {
     const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
-    const [userInfo, setUserInfo] = useContext(UserInfoContext);
+    const [userInfo] = useContext(UserInfoContext);
 
     if (!isLoggedIn) {
         return null;

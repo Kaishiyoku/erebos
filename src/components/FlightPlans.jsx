@@ -8,7 +8,7 @@ import ActiveFlightPlansContext from '../ActiveFlightPlansContext';
 
 function FlightPlans() {
     const [isDetailVisible, setIsDetailVisible] = useState(false);
-    const [activeFlightPlans, setActiveFlightPlans] = useContext(ActiveFlightPlansContext);
+    const [activeFlightPlans] = useContext(ActiveFlightPlansContext);
 
     return (
         <div>
