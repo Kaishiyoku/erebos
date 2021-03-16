@@ -10,13 +10,13 @@ import SparklesIcon from '../../icons/SparklesIcon';
 import {Collapse} from 'react-collapse';
 import {fromEvent} from 'rxjs';
 import {debounceTime, map, pairwise, startWith} from 'rxjs/operators';
-import {MEDIA_MD_BREAKPOINT} from '../../core/constants';
+import {MEDIA_XL_BREAKPOINT} from '../../core/constants';
 import clsx from 'clsx';
 import LoadingIcon from '../../icons/LoadingIcon';
 
 function Navbar({label, darkMode, toggleDarkModeFn, isGlobalDataLoading}) {
     const [isLoggedIn, setIsLoggedIn] = useContext(LoggedInContext);
-    const [isNavbarOpened, setIsNavbarOpened] = useState(window.innerWidth >= MEDIA_MD_BREAKPOINT);
+    const [isNavbarOpened, setIsNavbarOpened] = useState(window.innerWidth >= MEDIA_XL_BREAKPOINT);
 
     fromEvent(window, 'resize')
         .pipe(
@@ -26,9 +26,9 @@ function Navbar({label, darkMode, toggleDarkModeFn, isGlobalDataLoading}) {
             pairwise()
         )
         .subscribe(([previousData, currentData]) => {
-            if (previousData >= MEDIA_MD_BREAKPOINT && currentData < MEDIA_MD_BREAKPOINT) {
+            if (previousData >= MEDIA_XL_BREAKPOINT && currentData < MEDIA_XL_BREAKPOINT) {
                 setIsNavbarOpened(false);
-            } else if (previousData < MEDIA_MD_BREAKPOINT && currentData >= MEDIA_MD_BREAKPOINT) {
+            } else if (previousData < MEDIA_XL_BREAKPOINT && currentData >= MEDIA_XL_BREAKPOINT) {
                 setIsNavbarOpened(true);
             }
         });
