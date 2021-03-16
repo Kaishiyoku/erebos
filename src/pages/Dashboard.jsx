@@ -21,7 +21,7 @@ function Dashboard() {
 
             <UserInfo userInfo={userInfo}/>
 
-            <OwnedShips userInfo={userInfo} activeFlightPlans={activeFlightPlans}/>
+            <OwnedShips userInfo={userInfo} activeFlightPlans={activeFlightPlans} showShipMarketLink/>
         </>
     );
 }

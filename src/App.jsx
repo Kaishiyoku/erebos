@@ -22,6 +22,8 @@ import sequential from 'promise-sequential';
 import ownedShipsRequest from './core/api_requests/ships/ownedShipsRequest';
 import Bottleneck from 'bottleneck';
 import activeFlightPlanInfoRequest from './core/api_requests/flight_plans/activeFlightPlanInfoRequest';
+import systemsInfoRequest from './core/api_requests/locations/systemsInfoRequest';
+import SystemsContext from './SystemsContext';
 
 Modal.setAppElement('#root');
 
@@ -34,6 +36,8 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(!!getAccessToken());
     const [userInfo, setUserInfo] = useState({user: {ships: []}});
     const [activeFlightPlans, setActiveFlightPlans] = useState([]);
+    const [systems, setSystems] = useState([]);
+
     const [isGlobalDataLoading, setIsGlobalDataLoading] = useState(false);
     const [darkMode, setDarkMode] = useState(localStorage.getItem(DARK_MODE) || 'os');
 
@@ -48,8 +52,10 @@ function App() {
             sequential([
                 ownUserInfoRequest,
                 ownedShipsRequest,
-            ]).then(([{data: userInfoData}, {data: ownedShipsData}]) => {
+                systemsInfoRequest,
+            ]).then(([{data: userInfoData}, {data: ownedShipsData}, {data: systemsInfoData}]) => {
                 setUserInfo(userInfoData);
+                setSystems(systemsInfoData.systems);
 
                 const activeFlightPlanRequests = ownedShipsData.ships.filter(({flightPlanId}) => !!flightPlanId).map(({flightPlanId}) => () => activeFlightPlanInfoRequest(flightPlanId));
 
@@ -92,32 +98,34 @@ function App() {
     return (
         <LoggedInContext.Provider value={[isLoggedIn, setIsLoggedIn]}>
             <UserInfoContext.Provider value={[userInfo, setUserInfo]}>
-                <ActiveFlightPlansContext.Provider value={[activeFlightPlans, setActiveFlightPlans]}>
-                    <div className="container px-4 lg:px-20 mx-auto mb-12">
-                        <Navbar
-                            label="Erebos"
-                            darkMode={darkMode}
-                            toggleDarkModeFn={toggleDarkMode}
-                            isGlobalDataLoading={isGlobalDataLoading}
-                        />
+                <SystemsContext.Provider value={[systems, setSystems]}>
+                    <ActiveFlightPlansContext.Provider value={[activeFlightPlans, setActiveFlightPlans]}>
+                        <div className="container px-4 lg:px-20 mx-auto mb-12">
+                            <Navbar
+                                label="Erebos"
+                                darkMode={darkMode}
+                                toggleDarkModeFn={toggleDarkMode}
+                                isGlobalDataLoading={isGlobalDataLoading}
+                            />
 
-                        <Router>
-                            <Dashboard path="/"/>
-                            <AvailableLoans path="/loans/available"/>
-                            <ShipMarket path="/ships/market"/>
-                            <Systems path="/systems"/>
-                            <Marketplace path="/marketplaces/:systemSymbol"/>
-                            <Login path="/login"/>
-                            <Register path="/register"/>
-                        </Router>
+                            <Router>
+                                <Dashboard path="/"/>
+                                <AvailableLoans path="/loans/available"/>
+                                <ShipMarket path="/ships/market"/>
+                                <Systems path="/systems"/>
+                                <Marketplace path="/marketplaces/:systemSymbol"/>
+                                <Login path="/login"/>
+                                <Register path="/register"/>
+                            </Router>
 
-                        <ToastContainer/>
+                            <ToastContainer/>
 
-                        <div className="text-xs text-gray-400 dark:text-gray-600 mt-12 text-right">
-                            Build date: {preval`module.exports = new Date().toUTCString();`}
+                            <div className="text-xs text-gray-400 dark:text-gray-600 mt-12 text-right">
+                                Build date: {preval`module.exports = new Date().toUTCString();`}
+                            </div>
                         </div>
-                    </div>
-                </ActiveFlightPlansContext.Provider>
+                    </ActiveFlightPlansContext.Provider>
+                </SystemsContext.Provider>
             </UserInfoContext.Provider>
         </LoggedInContext.Provider>
     );
