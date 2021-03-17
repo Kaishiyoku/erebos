@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import Badge from './base/Badge';
 import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
 import clsx from 'clsx';
+import {length} from 'ramda';
 
 function Cargo({cargo, className}) {
-    if (!cargo) {
-        return '/';
+    if (length(cargo) === 0) {
+        return <div className="text-gray-500">No cargo</div>;
     }
 
     return (
