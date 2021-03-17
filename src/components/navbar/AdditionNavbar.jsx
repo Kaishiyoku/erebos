@@ -24,7 +24,7 @@ function AdditionNavbar() {
 
     return (
         <div className="flex mb-8 justify-end text-sm">
-            <div className="flex space-x-2 px-4 py-2 bg-white shadow w-full xl:w-auto">
+            <div className="flex space-x-2 px-4 py-2 bg-white shadow w-full xl:w-auto dark:bg-gray-800">
                 <div>Logged in as {getUserName()}</div>
                 <div>—</div>
                 <div>{formatInteger(userInfo.user.credits)} credits</div>
