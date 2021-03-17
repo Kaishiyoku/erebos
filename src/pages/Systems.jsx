@@ -4,6 +4,7 @@ import UserInfoContext from '../UserInfoContext';
 import SystemsContext from '../SystemsContext';
 import OwnedShips from '../components/OwnedShips';
 import ActiveFlightPlansContext from '../ActiveFlightPlansContext';
+import Heading from '../components/base/Heading';
 
 function Systems() {
     const [systems] = useContext(SystemsContext);
@@ -14,7 +15,7 @@ function Systems() {
 
     return (
         <>
-            <div className="text-2xl pb-4">Systems</div>
+            <Heading label="Systems"/>
 
             <OwnedShips userInfo={userInfo} activeFlightPlans={activeFlightPlans} className="mb-8"/>
 

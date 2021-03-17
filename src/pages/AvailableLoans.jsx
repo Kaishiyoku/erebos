@@ -10,6 +10,7 @@ import CardBody from '../components/Card/CardBody';
 import CardFooter from '../components/Card/CardFooter';
 import {toast} from 'react-toastify';
 import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
+import Heading from '../components/base/Heading';
 
 function AvailableLoans() {
     const [loans, setLoans] = useState([]);
@@ -18,19 +19,19 @@ function AvailableLoans() {
         availableLoansRequest().then(({data}) => setLoans(data.loans));
     }, []);
 
-    const getLoanDisplayValuesFor = (loan) => [
-        {label: 'Amount', value: formatInteger(loan.amount)},
-        {label: 'Collateral required', value: formatBool(loan.collateralRequired)},
-        {label: 'Rate', value: formatInteger(loan.rate)},
-        {label: 'Term (days)', value: loan.termInDays},
-    ];
-
     return (
-        <div>
+        <>
+            <Heading label="Available loans"/>
+
             {loans.map((loan) => (
                 <Card key={loan.type} headingLabel={pascalCaseToWordsAndUpperCaseFirstChar(loan.type)}>
                     <CardBody>
-                        <LabelWithValueGroup entries={getLoanDisplayValuesFor(loan)}/>
+                        <LabelWithValueGroup entries={[
+                            {label: 'Amount', value: formatInteger(loan.amount)},
+                            {label: 'Collateral required', value: formatBool(loan.collateralRequired)},
+                            {label: 'Rate', value: formatInteger(loan.rate)},
+                            {label: 'Term (days)', value: loan.termInDays},
+                        ]}/>
                     </CardBody>
 
                     <CardFooter>
@@ -42,7 +43,7 @@ function AvailableLoans() {
                     </CardFooter>
                 </Card>
             ))}
-        </div>
+        </>
     );
 }
 

@@ -66,6 +66,7 @@ function Navbar({label, darkMode, toggleDarkModeFn, isGlobalDataLoading}) {
                                 <div className="xl:flex w-full xl:w-auto">
                                     <NavbarItem to="/" label="Dashboard" isVisible={isLoggedIn}/>
                                     <NavbarItem to="/systems" label="Systems" isVisible={isLoggedIn}/>
+                                    <NavbarItem to="/marketplaces" label="Marketplaces" isVisible={isLoggedIn}/>
                                 </div>
                                 <div className="xl:flex w-full xl:w-auto">
                                     <NavbarItem to="/ships/market" label="Ship market" isVisible={isLoggedIn}/>

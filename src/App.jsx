@@ -9,10 +9,9 @@ import {ToastContainer} from 'react-toastify';
 import LoggedInContext from './LoggedInContext';
 import {useEffect, useState} from 'react';
 import getAccessToken from './core/local_storage/getAccessToken';
-import {DARK_MODE, USER_INFO_REQUEST_INTERVAL} from './core/constants';
+import {BASE_DATA_REQUEST_INTERVAL, DARK_MODE} from './core/constants';
 import Systems from './pages/Systems';
 import Modal from 'react-modal';
-import Marketplace from './pages/Marketplace';
 import preval from 'preval.macro';
 import UserInfoContext from './UserInfoContext';
 import {timer} from 'rxjs';
@@ -24,6 +23,9 @@ import Bottleneck from 'bottleneck';
 import activeFlightPlanInfoRequest from './core/api_requests/flight_plans/activeFlightPlanInfoRequest';
 import systemsInfoRequest from './core/api_requests/locations/systemsInfoRequest';
 import SystemsContext from './SystemsContext';
+import locationMarketplaceRequest from './core/api_requests/locations/locationMarketplaceRequest';
+import getLocationsWithDockedShips from './core/getLocationsWithDockedShips';
+import {length} from 'ramda';
 
 Modal.setAppElement('#root');
 
@@ -46,7 +48,7 @@ function App() {
             return;
         }
 
-        const userInfoRequestTimer = timer(0, USER_INFO_REQUEST_INTERVAL).subscribe(() => {
+        const userInfoRequestTimer = timer(0, BASE_DATA_REQUEST_INTERVAL).subscribe(() => {
             setIsGlobalDataLoading(true);
 
             sequential([
@@ -54,18 +56,42 @@ function App() {
                 ownedShipsRequest,
                 systemsInfoRequest,
             ]).then(([{data: userInfoData}, {data: ownedShipsData}, {data: systemsInfoData}]) => {
-                setUserInfo(userInfoData);
-                setSystems(systemsInfoData.systems);
+                const locationsWithDockedShips = getLocationsWithDockedShips(systemsInfoData.systems, userInfoData.user.ships);
 
-                const activeFlightPlanRequests = ownedShipsData.ships.filter(({flightPlanId}) => !!flightPlanId).map(({flightPlanId}) => () => activeFlightPlanInfoRequest(flightPlanId));
+                const marketplaceRequests = locationsWithDockedShips.map(({symbol}) => () => locationMarketplaceRequest(symbol));
 
-                // setActiveFlightPlans([]);
+                if (length(marketplaceRequests) === 0) {
+                    setSystems(systemsInfoData.systems);
+                }
 
-                sequential(activeFlightPlanRequests).then((activeFlightPlanResponses) => {
-                    setActiveFlightPlans(activeFlightPlanResponses.map((activeFlightPlanResponse) => activeFlightPlanResponse.data.flightPlan));
+                sequential(marketplaceRequests).then((marketplaceResponses) => {
+                    const marketplacesData = marketplaceResponses.map(({data}) => data);
+
+                    const systemsInfoDataWithMarketplaces = systemsInfoData.systems.map((system) => {
+                        const locations = system.locations.map((location) => {
+                            const marketplaceForCurrentLocation = marketplacesData.find((marketplace) => location.symbol === marketplace.location.symbol);
+
+                            if (marketplaceForCurrentLocation) {
+                                return {...location, marketplace: marketplaceForCurrentLocation.location.marketplace};
+                            }
+
+                            return location;
+                        });
+
+                        return {...system, locations};
+                    });
+
+                    setSystems(systemsInfoDataWithMarketplaces);
+                    setUserInfo(userInfoData);
+
+                    const activeFlightPlanRequests = ownedShipsData.ships.filter(({flightPlanId}) => !!flightPlanId).map(({flightPlanId}) => () => activeFlightPlanInfoRequest(flightPlanId));
+
+                    sequential(activeFlightPlanRequests).then((activeFlightPlanResponses) => {
+                        setActiveFlightPlans(activeFlightPlanResponses.map((activeFlightPlanResponse) => activeFlightPlanResponse.data.flightPlan));
+                    });
+
+                    setIsGlobalDataLoading(false);
                 });
-
-                setIsGlobalDataLoading(false);
             });
         });
 
@@ -113,7 +139,6 @@ function App() {
                                 <AvailableLoans path="/loans/available"/>
                                 <ShipMarket path="/ships/market"/>
                                 <Systems path="/systems"/>
-                                <Marketplace path="/marketplaces/:systemSymbol"/>
                                 <Login path="/login"/>
                                 <Register path="/register"/>
                             </Router>

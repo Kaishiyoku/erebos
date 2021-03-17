@@ -2,13 +2,12 @@ import Table from './table/Table';
 import TableBodyRow from './table/TableBodyRow';
 import TableBodyCell from './table/TableBodyCell';
 import Button from './base/button/Button';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import BuyGoodsDialog from './BuyGoodsDialog';
 import SellGoodsDialog from './SellGoodsDialog';
 import ModalDialog from './base/ModalDialog';
 import hasOwnedShipsAtLocation from '../core/hasOwnedShipsAtLocation';
-import locationMarketplaceRequest from '../core/api_requests/locations/locationMarketplaceRequest';
 import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
 
 function MarketplaceTable({location, ownedShipsAtLocation}) {
@@ -16,13 +15,7 @@ function MarketplaceTable({location, ownedShipsAtLocation}) {
         return null;
     }
 
-    const [marketplace, setMarketplace] = useState([]);
-
-    useEffect(() => {
-        locationMarketplaceRequest(location.symbol).then(({data}) => {
-            setMarketplace(data.location.marketplace);
-        });
-    }, []);
+    const {marketplace} = location;
 
     const [isBuyGoodsModalOpen, setIsBuyGoodsModalOpen] = useState(false);
     const [isSellGoodsModalOpen, setIsSellGoodsModalOpen] = useState(false);
