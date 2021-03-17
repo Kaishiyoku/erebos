@@ -15,6 +15,7 @@ import formatDecimal from '../core/formatDecimal';
 import submitFlightPlanRequest from '../core/api_requests/flight_plans/submitFlightPlanRequest';
 import ModalDialog from './base/ModalDialog';
 import calculateDistance from '../core/calculateDistance';
+import {toast} from 'react-toastify';
 
 function ShipInfo({ship, activeFlightPlan, className}) {
     const [systems] = useContext(SystemsContext);
@@ -23,6 +24,14 @@ function ShipInfo({ship, activeFlightPlan, className}) {
 
     const handleRouteClick = () => {
         setIsRouteSelectionModalOpen(true);
+    };
+
+    const handleCreateFlightRoute = (location) => {
+        submitFlightPlanRequest(location.symbol, ship.id).then(() => {
+            toast.success('Flight planned.');
+
+            setIsRouteSelectionModalOpen(false);
+        });
     };
 
     return (
@@ -45,7 +54,7 @@ function ShipInfo({ship, activeFlightPlan, className}) {
                                 <Cargo cargo={ship.cargo}/>
                             </div>
 
-                            <Button label="Route" size="sm" onClick={() => handleRouteClick(ship)}/>
+                            <Button label="Route" size="sm" onClick={handleRouteClick}/>
                         </div>
 
                         {activeFlightPlan && <div className="mt-2">{activeFlightPlan.departure} -> {activeFlightPlan.destination} ({activeFlightPlan.timeRemainingInSeconds}s)</div>}
@@ -80,17 +89,28 @@ function ShipInfo({ship, activeFlightPlan, className}) {
                 onRequestClose={() => setIsRouteSelectionModalOpen(false)}
                 contentLabel="Select route"
             >
-                <div>Current location: {ship.location} ({ship.x}, {ship.y})</div>
-                <div>Target location:</div>
+                <div className="flex space-x-2 items-end pb-2">
+                    <div className="text-xl font-bold">{ship.type}</div>
+                    <div className="text-gray-500">{ship.location}</div>
+                </div>
+
+                <Cargo cargo={ship.cargo} className="pb-4"/>
+
                 <div>
                     {systems.map((system) => (
                         <div key={system.symbol}>
-                            <div className="text-lg">{system.symbol} :: {system.name}</div>
+                            <div className="text-lg px-2 pb-2">{system.symbol} :: {system.name}</div>
                             <div>
                                 {system.locations.map((location) => (
-                                    <div key={location.symbol} className="flex">
-                                        <div>{location.symbol} ({location.x}, {location.y}) - {formatDecimal(calculateDistance(ship, location))}</div>
-                                        <Button label="Route" size="sm" onClick={() => submitFlightPlanRequest(location.symbol, ship.id)}/>
+                                    <div key={location.symbol} className="flex items-center odd:bg-gray-50 px-2 py-1 dark:odd:bg-gray-900 dark:odd:bg-opacity-25">
+                                        <div className="flex-grow">
+                                            <div>{location.symbol}</div>
+                                            <div className="flex text-sm text-gray-500">
+                                                <div className="w-32">({location.x}, {location.y})</div>
+                                                <div>{ship.location === location.symbol ? 'Current location' : formatDecimal(calculateDistance(ship, location))}</div>
+                                            </div>
+                                        </div>
+                                        {ship.location !== location.symbol && <Button label="Route" size="sm" onClick={() => handleCreateFlightRoute(location)}/>}
                                     </div>
                                 ))}
                             </div>

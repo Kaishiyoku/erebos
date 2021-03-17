@@ -23,7 +23,7 @@ function AdditionNavbar() {
     };
 
     return (
-        <div className="flex mb-8 justify-end">
+        <div className="flex mb-8 justify-end text-sm">
             <div className="flex space-x-2 px-4 py-2 bg-white shadow w-full xl:w-auto">
                 <div>Logged in as {getUserName()}</div>
                 <div>—</div>

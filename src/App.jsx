@@ -46,7 +46,7 @@ function App() {
             return;
         }
 
-        const userInfoRequestTimer = timer(0, USER_INFO_REQUEST_INTERVAL).subscribe((value) => {
+        const userInfoRequestTimer = timer(0, USER_INFO_REQUEST_INTERVAL).subscribe(() => {
             setIsGlobalDataLoading(true);
 
             sequential([
@@ -59,7 +59,7 @@ function App() {
 
                 const activeFlightPlanRequests = ownedShipsData.ships.filter(({flightPlanId}) => !!flightPlanId).map(({flightPlanId}) => () => activeFlightPlanInfoRequest(flightPlanId));
 
-                setActiveFlightPlans([]);
+                // setActiveFlightPlans([]);
 
                 sequential(activeFlightPlanRequests).then((activeFlightPlanResponses) => {
                     setActiveFlightPlans(activeFlightPlanResponses.map((activeFlightPlanResponse) => activeFlightPlanResponse.data.flightPlan));

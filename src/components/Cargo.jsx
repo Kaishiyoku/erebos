@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
 import Badge from './base/Badge';
 import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
+import clsx from 'clsx';
 
-function Cargo({cargo}) {
+function Cargo({cargo, className}) {
     if (!cargo) {
         return '/';
     }
 
     return (
-        <div className="flex space-x-2">
+        <div className={clsx('flex space-x-2', className)}>
             {cargo.map((item) => <Badge key={item.good} label={`${item.quantity}/${item.totalVolume} ${pascalCaseToWordsAndUpperCaseFirstChar(item.good)}`}/>)}
         </div>
     );
@@ -20,6 +21,7 @@ Cargo.propTypes = {
         quantity: PropTypes.number.isRequired,
         totalVolume: PropTypes.number.isRequired,
     })),
+    className: PropTypes.string,
 };
 
 export default Cargo;
