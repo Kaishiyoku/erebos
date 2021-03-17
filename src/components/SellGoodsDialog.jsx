@@ -48,8 +48,8 @@ function SellGoodsDialog({ownedShipsAtLocation, selectedGood, callbackFn}) {
                 entries={[
                     {label: 'In ship cargo', value: getShipCargoFor(selectedGood.symbol, selectedShip)},
                     {label: 'Ship space available', value: prop('spaceAvailable', selectedShip)},
-                    {label: 'Gaining credits', value: toString(watchQuantity * selectedGood.pricePerUnit)},
                     {label: 'Gaining space', value: toString(watchQuantity * selectedGood.volumePerUnit)},
+                    {label: 'Gaining credits', value: toString(watchQuantity * selectedGood.pricePerUnit)},
                 ]}
                 showBackgrounds
             />

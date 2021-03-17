@@ -35,21 +35,23 @@ function BuyGoodsDialog({ownedShipsAtLocation, selectedGood, callbackFn}) {
         setSelectedShip(ownedShipsAtLocation.find((ship) => ship.id === event.target.value));
     };
 
+    const maxQuantity = Math.floor(prop('spaceAvailable', selectedShip) / selectedGood.volumePerUnit) || 0;
+
     return (
         <form onSubmit={handleSubmit(buyGoods)}>
             <div className="text-xl pb-4">Buy {pascalCaseToWords(selectedGood.symbol)}</div>
 
             <Select name="shipId" options={shipOptions} className="mb-4" value={prop('id', selectedShip)} onChange={handleSelectedShipChange} reference={register({required: true})}/>
 
-            <Input name="quantity" placeholder="Quantity" type="number" min={0} max={prop('spaceAvailable', selectedShip)} className="mb-4" reference={register({required: true})}/>
+            <Input name="quantity" placeholder="Quantity" type="number" min={0} max={maxQuantity} className="mb-4" reference={register({required: true})}/>
 
             <LabelWithValueGroup
                 labelWidthClass="w-48"
                 entries={[
                     {label: 'In ship cargo', value: getShipCargoFor(selectedGood.symbol, selectedShip)},
                     {label: 'Ship space available', value: prop('spaceAvailable', selectedShip)},
-                    {label: 'Cost', value: toString(watchQuantity * selectedGood.pricePerUnit)},
                     {label: 'Needed space', value: toString(watchQuantity * selectedGood.volumePerUnit)},
+                    {label: 'Cost', value: toString(watchQuantity * selectedGood.pricePerUnit)},
                 ]}
                 showBackgrounds
             />
