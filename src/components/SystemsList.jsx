@@ -5,7 +5,7 @@ import CardBody from './Card/CardBody';
 
 function SystemsList({systems, ownedShips}) {
     return systems.map((system) => (
-        <Card key={system.symbol} headingLabel={`${system.symbol} :: ${system.name}`}>
+        <Card key={system.symbol} headingLabel={`${system.symbol} :: ${system.name}`} className="mb-8">
             <CardBody>
                 {system.locations.map((location) => <Location key={location.symbol} location={location} ownedShips={ownedShips}/>)}
             </CardBody>

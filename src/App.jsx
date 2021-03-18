@@ -25,7 +25,7 @@ import systemsInfoRequest from './core/api_requests/locations/systemsInfoRequest
 import SystemsContext from './SystemsContext';
 import locationMarketplaceRequest from './core/api_requests/locations/locationMarketplaceRequest';
 import getLocationsWithDockedShips from './core/getLocationsWithDockedShips';
-import {length} from 'ramda';
+import MarketplacesContext from './MarketplacesContext';
 
 Modal.setAppElement('#root');
 
@@ -39,9 +39,23 @@ function App() {
     const [userInfo, setUserInfo] = useState({user: {ships: []}});
     const [activeFlightPlans, setActiveFlightPlans] = useState([]);
     const [systems, setSystems] = useState([]);
+    const [marketplaces, setMarketplaces] = useState([]);
 
     const [isGlobalDataLoading, setIsGlobalDataLoading] = useState(false);
     const [darkMode, setDarkMode] = useState(localStorage.getItem(DARK_MODE) || 'os');
+
+    const setAndCacheMarketplaces = (marketplaceData) => {
+        const adjustedMarketplaceData = marketplaceData.map((item) => ({goods: item.location.marketplace, locationSymbol: item.location.symbol, updatedAt: new Date()}));
+
+        const cachedMarketplaceData = JSON.parse(localStorage.getItem('marketplacesCache')) || [];
+        const filteredCachedMarketplaceData = cachedMarketplaceData.filter((cachedMarketplace) => !adjustedMarketplaceData.map(({locationSymbol}) => locationSymbol).includes(cachedMarketplace.locationSymbol));
+
+        const mergedMarketplaceData = filteredCachedMarketplaceData.concat(adjustedMarketplaceData);
+
+        localStorage.setItem('marketplacesCache', JSON.stringify(mergedMarketplaceData));
+
+        setMarketplaces(mergedMarketplaceData);
+    };
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -58,31 +72,15 @@ function App() {
             ]).then(([{data: userInfoData}, {data: ownedShipsData}, {data: systemsInfoData}]) => {
                 const locationsWithDockedShips = getLocationsWithDockedShips(systemsInfoData.systems, userInfoData.user.ships);
 
-                const marketplaceRequests = locationsWithDockedShips.map(({symbol}) => () => locationMarketplaceRequest(symbol));
+                setSystems(systemsInfoData.systems);
+                setUserInfo(userInfoData);
 
-                if (length(marketplaceRequests) === 0) {
-                    setSystems(systemsInfoData.systems);
-                }
+                const marketplaceRequests = locationsWithDockedShips.map(({symbol}) => () => locationMarketplaceRequest(symbol));
 
                 sequential(marketplaceRequests).then((marketplaceResponses) => {
                     const marketplacesData = marketplaceResponses.map(({data}) => data);
 
-                    const systemsInfoDataWithMarketplaces = systemsInfoData.systems.map((system) => {
-                        const locations = system.locations.map((location) => {
-                            const marketplaceForCurrentLocation = marketplacesData.find((marketplace) => location.symbol === marketplace.location.symbol);
-
-                            if (marketplaceForCurrentLocation) {
-                                return {...location, marketplace: marketplaceForCurrentLocation.location.marketplace};
-                            }
-
-                            return location;
-                        });
-
-                        return {...system, locations};
-                    });
-
-                    setSystems(systemsInfoDataWithMarketplaces);
-                    setUserInfo(userInfoData);
+                    setAndCacheMarketplaces(marketplacesData);
 
                     const activeFlightPlanRequests = ownedShipsData.ships.filter(({flightPlanId}) => !!flightPlanId).map(({flightPlanId}) => () => activeFlightPlanInfoRequest(flightPlanId));
 
@@ -126,29 +124,31 @@ function App() {
             <UserInfoContext.Provider value={[userInfo, setUserInfo]}>
                 <SystemsContext.Provider value={[systems, setSystems]}>
                     <ActiveFlightPlansContext.Provider value={[activeFlightPlans, setActiveFlightPlans]}>
-                        <div className="container px-4 lg:px-20 mx-auto mb-12">
-                            <Navbar
-                                label="Erebos"
-                                darkMode={darkMode}
-                                toggleDarkModeFn={toggleDarkMode}
-                                isGlobalDataLoading={isGlobalDataLoading}
-                            />
+                        <MarketplacesContext.Provider value={[marketplaces, setAndCacheMarketplaces]}>
+                            <div className="container px-4 lg:px-20 mx-auto mb-12">
+                                <Navbar
+                                    label="Erebos"
+                                    darkMode={darkMode}
+                                    toggleDarkModeFn={toggleDarkMode}
+                                    isGlobalDataLoading={isGlobalDataLoading}
+                                />
 
-                            <Router>
-                                <Dashboard path="/"/>
-                                <AvailableLoans path="/loans/available"/>
-                                <ShipMarket path="/ships/market"/>
-                                <Systems path="/systems"/>
-                                <Login path="/login"/>
-                                <Register path="/register"/>
-                            </Router>
+                                <Router>
+                                    <Dashboard path="/"/>
+                                    <AvailableLoans path="/loans/available"/>
+                                    <ShipMarket path="/ships/market"/>
+                                    <Systems path="/systems"/>
+                                    <Login path="/login"/>
+                                    <Register path="/register"/>
+                                </Router>
 
-                            <ToastContainer/>
+                                <ToastContainer/>
 
-                            <div className="text-xs text-gray-400 dark:text-gray-600 mt-12 text-right">
-                                Build date: {preval`module.exports = new Date().toUTCString();`}
+                                <div className="text-xs text-gray-400 dark:text-gray-600 mt-12 text-right">
+                                    Build date: {preval`module.exports = new Date().toUTCString();`}
+                                </div>
                             </div>
-                        </div>
+                        </MarketplacesContext.Provider>
                     </ActiveFlightPlansContext.Provider>
                 </SystemsContext.Provider>
             </UserInfoContext.Provider>

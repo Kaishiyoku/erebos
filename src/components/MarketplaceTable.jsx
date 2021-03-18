@@ -7,15 +7,12 @@ import PropTypes from 'prop-types';
 import BuyGoodsDialog from './BuyGoodsDialog';
 import SellGoodsDialog from './SellGoodsDialog';
 import ModalDialog from './base/ModalDialog';
-import hasOwnedShipsAtLocation from '../core/hasOwnedShipsAtLocation';
 import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
 
-function MarketplaceTable({location, ownedShipsAtLocation}) {
-    if (!hasOwnedShipsAtLocation(ownedShipsAtLocation, location)) {
+function MarketplaceTable({marketplace, ownedShipsAtLocation}) {
+    if (!marketplace) {
         return null;
     }
-
-    const {marketplace} = location;
 
     const [isBuyGoodsModalOpen, setIsBuyGoodsModalOpen] = useState(false);
     const [isSellGoodsModalOpen, setIsSellGoodsModalOpen] = useState(false);
@@ -36,7 +33,7 @@ function MarketplaceTable({location, ownedShipsAtLocation}) {
     return (
         <>
             <Table labels={['Name', 'Volume per unit', 'Price per unit', 'Quantity available', 'Actions']} hovered size="sm">
-                {marketplace.map((good) => (
+                {marketplace.goods.map((good) => (
                     <TableBodyRow key={good.symbol}>
                         <TableBodyCell key="symbol">{pascalCaseToWordsAndUpperCaseFirstChar(good.symbol)}</TableBodyCell>
                         <TableBodyCell key="volumePerUnit">{good.volumePerUnit}</TableBodyCell>
@@ -70,7 +67,7 @@ function MarketplaceTable({location, ownedShipsAtLocation}) {
 }
 
 MarketplaceTable.propTypes = {
-    location: PropTypes.object,
+    marketplace: PropTypes.object,
     ownedShipsAtLocation: PropTypes.array,
 };
 

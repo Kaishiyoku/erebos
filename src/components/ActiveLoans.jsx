@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
-import {format, parseISO} from 'date-fns';
+import {parseISO} from 'date-fns';
 import LabelWithValueGroup from './base/LabelWithValueGroup';
 import payOffLoanRequest from '../core/api_requests/loans/payOffLoanRequest';
 import MultiLoadingButton from './base/button/MultiLoadingButton';
 import formatInteger from '../core/formatInteger';
 import {length} from 'ramda';
 import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
+import formatDateTime from '../core/formatDateTime';
 
 function ActiveLoans({loans, className}) {
     if (length(loans) === 0) {
@@ -22,7 +23,7 @@ function ActiveLoans({loans, className}) {
                         <LabelWithValueGroup
                             entries={[
                                 {label: 'Type', value: pascalCaseToWordsAndUpperCaseFirstChar(loan.type)},
-                                {label: 'Due', value: format(parseISO(loan.due), 'dd.MM.yyyy HH:mm')},
+                                {label: 'Due', value: formatDateTime(parseISO(loan.due))},
                                 {label: 'Repayment amount', value: formatInteger(loan.repaymentAmount)},
                                 {label: 'Status', value: pascalCaseToWordsAndUpperCaseFirstChar(loan.status)},
                             ]}
