@@ -1,5 +1,11 @@
-import withDefault from './withDefault';
+import withDefault from '../withDefault';
 
-const parseJson = (str) => JSON.parse(withDefault(str));
+const parseJson = (str) => {
+    try {
+        return JSON.parse(withDefault(str));
+    } catch (e) {
+        return null;
+    }
+};
 
 export default parseJson;

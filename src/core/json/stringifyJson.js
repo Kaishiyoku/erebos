@@ -1,4 +1,4 @@
-import withDefault from './withDefault';
+import withDefault from '../withDefault';
 import {compose} from 'ramda';
 
 const stringifyJson = compose(JSON.stringify, withDefault);
