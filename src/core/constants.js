@@ -1,6 +1,7 @@
 export const USER_NAME = 'userName';
 export const ACCESS_TOKEN = 'accessToken';
 export const DARK_MODE = 'darkMode';
+export const MARKETPLACE_CACHE = 'marketplacesCache';
 export const MEDIA_XL_BREAKPOINT = 1280;
 export const BASE_DATA_REQUEST_INTERVAL = 10 * 1000;
 

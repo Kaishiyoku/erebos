@@ -1,5 +1,7 @@
 import {ACCESS_TOKEN} from '../constants';
+import getLocalStorageItem from './getLocalStorageItem';
+import callIfNotEmpty from '../callIfNotEmpty';
 
-const getAccessToken = () => localStorage.getItem(ACCESS_TOKEN) ? atob(localStorage.getItem(ACCESS_TOKEN)) : null;
+const getAccessToken = () => callIfNotEmpty(atob, getLocalStorageItem(ACCESS_TOKEN));
 
 export default getAccessToken;

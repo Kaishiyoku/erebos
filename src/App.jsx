@@ -9,7 +9,7 @@ import {ToastContainer} from 'react-toastify';
 import LoggedInContext from './LoggedInContext';
 import {useEffect, useState} from 'react';
 import getAccessToken from './core/local_storage/getAccessToken';
-import {BASE_DATA_REQUEST_INTERVAL, DARK_MODE} from './core/constants';
+import {BASE_DATA_REQUEST_INTERVAL, DARK_MODE, MARKETPLACE_CACHE} from './core/constants';
 import Systems from './pages/Systems';
 import Modal from 'react-modal';
 import preval from 'preval.macro';
@@ -26,6 +26,10 @@ import SystemsContext from './SystemsContext';
 import locationMarketplaceRequest from './core/api_requests/locations/locationMarketplaceRequest';
 import getLocationsWithDockedShips from './core/getLocationsWithDockedShips';
 import MarketplacesContext from './MarketplacesContext';
+import getLocalStorageItemAsJson from './core/local_storage/getLocalStorageItemAsJson';
+import setLocalStorageItemAsJson from './core/local_storage/setLocalStorageItemAsJson';
+import setLocalStorageItem from './core/local_storage/setLocalStorageItem';
+import getLocalStorageItem from './core/local_storage/getLocalStorageItem';
 
 Modal.setAppElement('#root');
 
@@ -42,17 +46,17 @@ function App() {
     const [marketplaces, setMarketplaces] = useState([]);
 
     const [isGlobalDataLoading, setIsGlobalDataLoading] = useState(false);
-    const [darkMode, setDarkMode] = useState(localStorage.getItem(DARK_MODE) || 'os');
+    const [darkMode, setDarkMode] = useState(getLocalStorageItem(DARK_MODE) || 'os');
 
     const setAndCacheMarketplaces = (marketplaceData) => {
         const adjustedMarketplaceData = marketplaceData.map((item) => ({goods: item.location.marketplace, locationSymbol: item.location.symbol, updatedAt: new Date()}));
 
-        const cachedMarketplaceData = JSON.parse(localStorage.getItem('marketplacesCache')) || [];
+        const cachedMarketplaceData = getLocalStorageItemAsJson(MARKETPLACE_CACHE) || [];
         const filteredCachedMarketplaceData = cachedMarketplaceData.filter((cachedMarketplace) => !adjustedMarketplaceData.map(({locationSymbol}) => locationSymbol).includes(cachedMarketplace.locationSymbol));
 
         const mergedMarketplaceData = filteredCachedMarketplaceData.concat(adjustedMarketplaceData);
 
-        localStorage.setItem('marketplacesCache', JSON.stringify(mergedMarketplaceData));
+        setLocalStorageItemAsJson(MARKETPLACE_CACHE, mergedMarketplaceData);
 
         setMarketplaces(mergedMarketplaceData);
     };
@@ -115,7 +119,7 @@ function App() {
             document.querySelector('html').classList.add('dark');
         }
 
-        localStorage.setItem(DARK_MODE, nextDarkMode);
+        setLocalStorageItem(DARK_MODE, nextDarkMode);
         setDarkMode(nextDarkMode);
     };
 
