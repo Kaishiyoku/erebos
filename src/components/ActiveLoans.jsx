@@ -3,10 +3,10 @@ import {parseISO} from 'date-fns';
 import LabelWithValueGroup from './base/LabelWithValueGroup';
 import payOffLoanRequest from '../core/api_requests/loans/payOffLoanRequest';
 import MultiLoadingButton from './base/button/MultiLoadingButton';
-import formatInteger from '../core/formatInteger';
+import formatInteger from '../core/formatters/formatInteger';
 import {length} from 'ramda';
-import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
-import formatDateTime from '../core/formatDateTime';
+import pascalCaseToWordsAndUpperCaseFirstChar from '../core/formatters/pascalCaseToWordsAndUpperCaseFirstChar';
+import formatDateTime from '../core/formatters/formatDateTime';
 
 function ActiveLoans({loans, className}) {
     if (length(loans) === 0) {

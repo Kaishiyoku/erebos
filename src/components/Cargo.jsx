@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Badge from './base/Badge';
-import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
+import pascalCaseToWordsAndUpperCaseFirstChar from '../core/formatters/pascalCaseToWordsAndUpperCaseFirstChar';
 import clsx from 'clsx';
 import {length} from 'ramda';
 

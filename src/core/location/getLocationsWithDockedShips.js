@@ -1,4 +1,4 @@
-import getOwnedAndDockedShips from './getOwnedAndDockedShips';
+import getOwnedAndDockedShips from '../ship/getOwnedAndDockedShips';
 
 const getLocationsWithDockedShips = (systems, ownedShips) => systems
     .map((system) => system.locations

@@ -6,10 +6,10 @@ import LabelWithValueGroup from './base/LabelWithValueGroup';
 import sellGoodRequest from '../core/api_requests/goods/sellGoodRequest';
 import {useEffect, useState} from 'react';
 import {head, prop, toString} from 'ramda';
-import getShipCargoFor from '../core/getShipCargoFor';
-import pascalCaseToWords from '../core/pascalCaseToWords';
+import getShipCargoFor from '../core/ship/getShipCargoFor';
+import pascalCaseToWords from '../core/formatters/pascalCaseToWords';
 import {toast} from 'react-toastify';
-import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
+import pascalCaseToWordsAndUpperCaseFirstChar from '../core/formatters/pascalCaseToWordsAndUpperCaseFirstChar';
 
 function SellGoodsDialog({ownedShipsAtLocation, selectedGood, callbackFn}) {
     const {register, handleSubmit, watch, errors, formState} = useForm({mode: 'onChange'});

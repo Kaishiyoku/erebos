@@ -5,7 +5,7 @@ import MultiLoadingButton from '../components/base/button/MultiLoadingButton';
 import availableShipsRequest from '../core/api_requests/ships/availableShipsRequest';
 import SubHeading from '../components/base/SubHeading';
 import Heading from '../components/base/Heading';
-import formatInteger from '../core/formatInteger';
+import formatInteger from '../core/formatters/formatInteger';
 import Card from '../components/Card/Card';
 import CardBody from '../components/Card/CardBody';
 import {toast} from 'react-toastify';

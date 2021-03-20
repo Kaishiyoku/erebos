@@ -1,7 +1,7 @@
 import LabelWithValue from './base/LabelWithValue';
 import PropTypes from 'prop-types';
 import ActiveLoans from './ActiveLoans';
-import formatInteger from '../core/formatInteger';
+import formatInteger from '../core/formatters/formatInteger';
 import Card from './Card/Card';
 import CardBody from './Card/CardBody';
 

@@ -2,14 +2,14 @@ import {useEffect, useState} from 'react';
 import availableLoansRequest from '../core/api_requests/loans/availableLoansRequest';
 import takeOutLoanRequest from '../core/api_requests/loans/takeOutLoanRequest';
 import LabelWithValueGroup from '../components/base/LabelWithValueGroup';
-import formatBool from '../core/formatBool';
+import formatBool from '../core/formatters/formatBool';
 import MultiLoadingButton from '../components/base/button/MultiLoadingButton';
-import formatInteger from '../core/formatInteger';
+import formatInteger from '../core/formatters/formatInteger';
 import Card from '../components/Card/Card';
 import CardBody from '../components/Card/CardBody';
 import CardFooter from '../components/Card/CardFooter';
 import {toast} from 'react-toastify';
-import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
+import pascalCaseToWordsAndUpperCaseFirstChar from '../core/formatters/pascalCaseToWordsAndUpperCaseFirstChar';
 import Heading from '../components/base/Heading';
 
 function AvailableLoans() {

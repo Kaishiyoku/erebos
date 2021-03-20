@@ -4,10 +4,10 @@ import {useContext, useState} from 'react';
 import ChevronDownIcon from '../icons/ChevronDownIcon';
 import ChevronUpIcon from '../icons/ChevronUpIcon';
 import MarketplaceTable from './MarketplaceTable';
-import getOwnedShipsAtLocation from '../core/getOwnedShipsAtLocation';
-import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
+import getOwnedShipsAtLocation from '../core/location/getOwnedShipsAtLocation';
+import pascalCaseToWordsAndUpperCaseFirstChar from '../core/formatters/pascalCaseToWordsAndUpperCaseFirstChar';
 import MarketplacesContext from '../contexts/MarketplacesContext';
-import formatDateTime from '../core/formatDateTime';
+import formatDateTime from '../core/formatters/formatDateTime';
 import {parseJSON} from 'date-fns';
 
 function Location({location, ownedShips}) {

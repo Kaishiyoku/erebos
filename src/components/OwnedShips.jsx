@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import {Link} from '@reach/router';
 import SubHeading from './base/SubHeading';
 import {length} from 'ramda';
-import getFlightPlanFromListByShipId from '../core/getFlightPlanFromListByShipId';
+import getFlightPlanFromListByShipId from '../core/flight/getFlightPlanFromListByShipId';
 import ShipInfo from './ShipInfo';
 
 function OwnedShips({userInfo, activeFlightPlans, showShipMarketLink, className}) {

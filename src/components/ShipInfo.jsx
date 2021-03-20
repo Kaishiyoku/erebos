@@ -4,19 +4,19 @@ import CardBody from './Card/CardBody';
 import clsx from 'clsx';
 import Cargo from './Cargo';
 import LabelWithValueGroup from './base/LabelWithValueGroup';
-import formatInteger from '../core/formatInteger';
+import formatInteger from '../core/formatters/formatInteger';
 import Card from './Card/Card';
 import {useContext, useState} from 'react';
 import PropTypes from 'prop-types';
 import ChevronUpIcon from '../icons/ChevronUpIcon';
 import Button from './base/button/Button';
 import SystemsContext from '../contexts/SystemsContext';
-import formatDecimal from '../core/formatDecimal';
+import formatDecimal from '../core/formatters/formatDecimal';
 import submitFlightPlanRequest from '../core/api_requests/flight_plans/submitFlightPlanRequest';
 import ModalDialog from './base/ModalDialog';
-import calculateDistance from '../core/calculateDistance';
+import calculateDistance from '../core/flight/calculateDistance';
 import {toast} from 'react-toastify';
-import estimateRouteFuelCost from '../core/estimateRouteFuelCost';
+import estimateRouteFuelCost from '../core/flight/estimateRouteFuelCost';
 
 function ShipInfo({ship, activeFlightPlan, className}) {
     const [systems] = useContext(SystemsContext);

@@ -1,5 +1,5 @@
 import getUserName from '../../core/local_storage/getUserName';
-import formatInteger from '../../core/formatInteger';
+import formatInteger from '../../core/formatters/formatInteger';
 import {useContext} from 'react';
 import UserInfoContext from '../../contexts/UserInfoContext';
 import logout from '../../core/local_storage/logout';

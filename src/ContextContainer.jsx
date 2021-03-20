@@ -11,7 +11,7 @@ import sequential from 'promise-sequential';
 import ownUserInfoRequest from './core/api_requests/miscellaneous/ownUserInfoRequest';
 import ownedShipsRequest from './core/api_requests/ships/ownedShipsRequest';
 import systemsInfoRequest from './core/api_requests/locations/systemsInfoRequest';
-import getLocationsWithDockedShips from './core/getLocationsWithDockedShips';
+import getLocationsWithDockedShips from './core/location/getLocationsWithDockedShips';
 import locationMarketplaceRequest from './core/api_requests/locations/locationMarketplaceRequest';
 import activeFlightPlanInfoRequest from './core/api_requests/flight_plans/activeFlightPlanInfoRequest';
 import getAccessToken from './core/local_storage/getAccessToken';

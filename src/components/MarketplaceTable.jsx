@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import BuyGoodsDialog from './BuyGoodsDialog';
 import SellGoodsDialog from './SellGoodsDialog';
 import ModalDialog from './base/ModalDialog';
-import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
+import pascalCaseToWordsAndUpperCaseFirstChar from '../core/formatters/pascalCaseToWordsAndUpperCaseFirstChar';
 
 function MarketplaceTable({marketplace, ownedShipsAtLocation}) {
     if (!marketplace) {
