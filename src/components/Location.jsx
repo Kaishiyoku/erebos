@@ -22,7 +22,7 @@ function Location({location, ownedShips}) {
                 <div className="w-12">{marketplace && <Button icon={(isDetailVisible ? <ChevronUpIcon/> : <ChevronDownIcon/>)} size="sm" onClick={() => setIsDetailVisible(!isDetailVisible)}/>}</div>
                 <div className="w-32">{location.symbol}</div>
                 <div className="w-20">{location.x}, {location.y}</div>
-                <div className="w-20">{location.name}</div>
+                <div className="w-28">{location.name}</div>
                 <div className="w-32">{pascalCaseToWordsAndUpperCaseFirstChar(location.type)}</div>
             </div>
             <div className={clsx('py-4', {hidden: !isDetailVisible})}>
