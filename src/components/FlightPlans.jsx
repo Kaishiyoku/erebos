@@ -4,7 +4,7 @@ import CardBody from './Card/CardBody';
 import CardHeadingActionButton from './Card/CardHeadingActionButton';
 import ChevronDownIcon from '../icons/ChevronDownIcon';
 import {useContext, useState} from 'react';
-import ActiveFlightPlansContext from '../ActiveFlightPlansContext';
+import ActiveFlightPlansContext from '../contexts/ActiveFlightPlansContext';
 
 function FlightPlans() {
     const [isDetailVisible, setIsDetailVisible] = useState(false);

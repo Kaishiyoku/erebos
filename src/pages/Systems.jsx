@@ -1,9 +1,9 @@
 import {useContext} from 'react';
 import SystemsList from '../components/SystemsList';
-import UserInfoContext from '../UserInfoContext';
-import SystemsContext from '../SystemsContext';
+import UserInfoContext from '../contexts/UserInfoContext';
+import SystemsContext from '../contexts/SystemsContext';
 import OwnedShips from '../components/OwnedShips';
-import ActiveFlightPlansContext from '../ActiveFlightPlansContext';
+import ActiveFlightPlansContext from '../contexts/ActiveFlightPlansContext';
 import Heading from '../components/base/Heading';
 
 function Systems() {

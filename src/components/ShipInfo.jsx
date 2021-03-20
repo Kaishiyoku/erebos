@@ -10,7 +10,7 @@ import {useContext, useState} from 'react';
 import PropTypes from 'prop-types';
 import ChevronUpIcon from '../icons/ChevronUpIcon';
 import Button from './base/button/Button';
-import SystemsContext from '../SystemsContext';
+import SystemsContext from '../contexts/SystemsContext';
 import formatDecimal from '../core/formatDecimal';
 import submitFlightPlanRequest from '../core/api_requests/flight_plans/submitFlightPlanRequest';
 import ModalDialog from './base/ModalDialog';

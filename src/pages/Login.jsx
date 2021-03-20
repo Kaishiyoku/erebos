@@ -6,7 +6,7 @@ import {useContext, useEffect, useState} from 'react';
 import Input from '../components/input/Input';
 import logout from '../core/local_storage/logout';
 import ownUserInfoRequest from '../core/api_requests/miscellaneous/ownUserInfoRequest';
-import LoggedInContext from '../LoggedInContext';
+import LoggedInContext from '../contexts/LoggedInContext';
 import getAccessToken from '../core/local_storage/getAccessToken';
 
 function Login() {

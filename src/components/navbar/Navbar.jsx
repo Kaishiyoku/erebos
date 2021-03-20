@@ -1,22 +1,26 @@
 import {Link} from '@reach/router';
 import PropTypes from 'prop-types';
 import NavbarItem from './NavbarItem';
-import LoggedInContext from '../../LoggedInContext';
+import LoggedInContext from '../../contexts/LoggedInContext';
 import {useContext, useState} from 'react';
-import SunIcon from '../../icons/SunIcon';
-import MoonIcon from '../../icons/MoonIcon';
-import SparklesIcon from '../../icons/SparklesIcon';
 import {Collapse} from 'react-collapse';
 import {fromEvent} from 'rxjs';
 import {debounceTime, map, pairwise, startWith} from 'rxjs/operators';
-import {MEDIA_XL_BREAKPOINT} from '../../core/constants';
+import {DARK_MODE, MEDIA_XL_BREAKPOINT} from '../../core/constants';
 import clsx from 'clsx';
 import LoadingIcon from '../../icons/LoadingIcon';
 import AdditionNavbar from './AdditionNavbar';
+import getLocalStorageItem from '../../core/local_storage/getLocalStorageItem';
+import IsGlobalDataLoadingContext from '../../contexts/IsGlobalDataLoadingContext';
+import toggleDarkMode from '../../core/toggleDarkMode';
+import getDarkModeIcon from '../../core/getDarkModeIcon';
 
-function Navbar({label, darkMode, toggleDarkModeFn, isGlobalDataLoading}) {
+function Navbar({label}) {
     const [isLoggedIn] = useContext(LoggedInContext);
+    const [isGlobalDataLoading] = useContext(IsGlobalDataLoadingContext);
+
     const [isNavbarOpened, setIsNavbarOpened] = useState(window.innerWidth >= MEDIA_XL_BREAKPOINT);
+    const [darkMode, setDarkMode] = useState(getLocalStorageItem(DARK_MODE) || 'os');
 
     fromEvent(window, 'resize')
         .pipe(
@@ -32,12 +36,6 @@ function Navbar({label, darkMode, toggleDarkModeFn, isGlobalDataLoading}) {
                 setIsNavbarOpened(true);
             }
         });
-
-    const darkModeIcons = {
-        dark: <MoonIcon/>,
-        light: <SunIcon/>,
-        os: <SparklesIcon/>,
-    };
 
     const navbarContentClasses = 'flex flex-grow flex-col items-center xl:flex-row xl:justify-between transition-all duration-500 overflow-hidden';
 
@@ -71,11 +69,8 @@ function Navbar({label, darkMode, toggleDarkModeFn, isGlobalDataLoading}) {
                                 <div className="xl:flex w-full xl:w-auto">
                                     <NavbarItem to="/ships/market" label="Ship market" isVisible={isLoggedIn}/>
                                     <NavbarItem to="/loans/available" label="Available Loans" isVisible={isLoggedIn}/>
-                                    <a
-                                        onClick={toggleDarkModeFn}
-                                        className="block cursor-pointer block transition-all duration-200 px-4 py-5 text-black xl:border-b-4 border-l-4 xl:border-l-0 border-transparent hover:text-black hover:bg-gray-50 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
-                                    >
-                                        {darkModeIcons[darkMode]}
+                                    <a onClick={() => toggleDarkMode(darkMode, setDarkMode)} className="block cursor-pointer block transition-all duration-200 px-4 py-5 text-black xl:border-b-4 border-l-4 xl:border-l-0 border-transparent hover:text-black hover:bg-gray-50 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700">
+                                        {getDarkModeIcon(darkMode)}
                                     </a>
                                 </div>
                             </div>
@@ -90,10 +85,7 @@ function Navbar({label, darkMode, toggleDarkModeFn, isGlobalDataLoading}) {
 }
 
 Navbar.propTypes = {
-    darkMode: PropTypes.string.isRequired,
-    isGlobalDataLoading: PropTypes.bool,
     label: PropTypes.string.isRequired,
-    toggleDarkModeFn: PropTypes.func.isRequired,
 };
 
 export default Navbar;

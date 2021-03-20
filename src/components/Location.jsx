@@ -6,7 +6,7 @@ import ChevronUpIcon from '../icons/ChevronUpIcon';
 import MarketplaceTable from './MarketplaceTable';
 import getOwnedShipsAtLocation from '../core/getOwnedShipsAtLocation';
 import pascalCaseToWordsAndUpperCaseFirstChar from '../core/pascalCaseToWordsAndUpperCaseFirstChar';
-import MarketplacesContext from '../MarketplacesContext';
+import MarketplacesContext from '../contexts/MarketplacesContext';
 import formatDateTime from '../core/formatDateTime';
 import {parseJSON} from 'date-fns';
 
