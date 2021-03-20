@@ -59,6 +59,7 @@ button:disabled {
     transform: translate(-50%, -50%) !important;
     min-width: 500px;
     min-height: 500px;
+    max-height: 80%;
 }
 
 .dark .ReactModal__Overlay {

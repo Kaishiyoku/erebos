@@ -99,7 +99,7 @@ function ShipInfo({ship, activeFlightPlan, className}) {
                 <div>
                     {systems.map((system) => (
                         <div key={system.symbol}>
-                            <div className="text-lg px-2 pb-2">{system.symbol} :: {system.name}</div>
+                            <div className="text-lg font-bold px-2 pt-6 pb-2">{system.symbol} :: {system.name}</div>
                             <div>
                                 {system.locations.map((location) => (
                                     <div key={location.symbol} className="flex items-center odd:bg-gray-50 px-2 py-1 dark:odd:bg-gray-900 dark:odd:bg-opacity-25">
