@@ -33,10 +33,11 @@ Huge code refactorings are planned, too. I'm currently trying to implement basic
 * [x] show system information with all locations
 * [x] purchase goods
 * [x] sell goods
-* [ ] show flight plans on dashboard
+* [x] show flight plans on dashboard
+* [x] cache marketplaces
 * [ ] reload user data when goods are purchased/sold
 * [ ] choose a ship and prepare a flight plan
-* [ ] execute flight plan and visualize it
+* [x] execute flight plan and visualize it
 * [ ] add loading indicators to several components
 * [ ] refactor page components code
 
