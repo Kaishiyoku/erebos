@@ -16,11 +16,19 @@ import submitFlightPlanRequest from '../core/api_requests/flight_plans/submitFli
 import ModalDialog from './base/ModalDialog';
 import calculateDistance from '../core/calculateDistance';
 import {toast} from 'react-toastify';
+import estimateRouteFuelCost from '../core/estimateRouteFuelCost';
 
 function ShipInfo({ship, activeFlightPlan, className}) {
     const [systems] = useContext(SystemsContext);
     const [isDetailVisible, setIsDetailVisible] = useState(false);
     const [isRouteSelectionModalOpen, setIsRouteSelectionModalOpen] = useState(false);
+
+    const allLocations = systems.reduce((accum, {locations}) => {
+        return accum.concat(locations);
+    }, []);
+    const currentShipLocation = allLocations.find((location) => ship.location === location.symbol);
+
+    // const currentShipLocation = systems.
 
     const handleRouteClick = () => {
         setIsRouteSelectionModalOpen(true);
@@ -107,7 +115,8 @@ function ShipInfo({ship, activeFlightPlan, className}) {
                                             <div>{location.symbol}</div>
                                             <div className="flex text-sm text-gray-500">
                                                 <div className="w-32">({location.x}, {location.y})</div>
-                                                <div>{ship.location === location.symbol ? 'Current location' : formatDecimal(calculateDistance(ship, location))}</div>
+                                                <div className="w-32">{ship.location === location.symbol ? 'Current location' : formatDecimal(calculateDistance(ship, location))}</div>
+                                                <div>~{estimateRouteFuelCost(currentShipLocation, location)} fuel</div>
                                             </div>
                                         </div>
                                         {ship.location !== location.symbol && <Button label="Route" size="sm" onClick={() => handleCreateFlightRoute(location)}/>}
