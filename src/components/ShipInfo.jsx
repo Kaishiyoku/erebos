@@ -28,8 +28,6 @@ function ShipInfo({ship, activeFlightPlan, className}) {
     }, []);
     const currentShipLocation = allLocations.find((location) => ship.location === location.symbol);
 
-    // const currentShipLocation = systems.
-
     const handleRouteClick = () => {
         setIsRouteSelectionModalOpen(true);
     };
@@ -62,7 +60,7 @@ function ShipInfo({ship, activeFlightPlan, className}) {
                                 <Cargo cargo={ship.cargo}/>
                             </div>
 
-                            <Button label="Route" size="sm" onClick={handleRouteClick}/>
+                            <Button label="Route" size="sm" onClick={handleRouteClick} disabled={!currentShipLocation}/>
                         </div>
 
                         {activeFlightPlan && <div className="mt-2">{activeFlightPlan.departure} -> {activeFlightPlan.destination} ({activeFlightPlan.timeRemainingInSeconds}s)</div>}
@@ -104,28 +102,30 @@ function ShipInfo({ship, activeFlightPlan, className}) {
 
                 <Cargo cargo={ship.cargo} className="pb-4"/>
 
-                <div>
-                    {systems.map((system) => (
-                        <div key={system.symbol}>
-                            <div className="text-lg font-bold px-2 pt-6 pb-2">{system.symbol} :: {system.name}</div>
-                            <div>
-                                {system.locations.map((location) => (
-                                    <div key={location.symbol} className="flex items-center odd:bg-gray-50 px-2 py-1 dark:odd:bg-gray-900 dark:odd:bg-opacity-25">
-                                        <div className="flex-grow">
-                                            <div>{location.symbol}</div>
-                                            <div className="flex text-sm text-gray-500">
-                                                <div className="w-32">({location.x}, {location.y})</div>
-                                                <div className="w-32">{ship.location === location.symbol ? 'Current location' : formatDecimal(calculateDistance(ship, location))}</div>
-                                                <div>~{estimateRouteFuelCost(currentShipLocation, location)} fuel</div>
+                {currentShipLocation && (
+                    <div>
+                        {systems.map((system) => (
+                            <div key={system.symbol}>
+                                <div className="text-lg font-bold px-2 pt-6 pb-2">{system.symbol} :: {system.name}</div>
+                                <div>
+                                    {system.locations.map((location) => (
+                                        <div key={location.symbol} className="flex items-center odd:bg-gray-50 px-2 py-1 dark:odd:bg-gray-900 dark:odd:bg-opacity-25">
+                                            <div className="flex-grow">
+                                                <div>{location.symbol}</div>
+                                                <div className="flex text-sm text-gray-500">
+                                                    <div className="w-32">({location.x}, {location.y})</div>
+                                                    <div className="w-32">{ship.location === location.symbol ? 'Current location' : formatDecimal(calculateDistance(ship, location))}</div>
+                                                    <div>~{estimateRouteFuelCost(currentShipLocation, location)} fuel</div>
+                                                </div>
                                             </div>
+                                            {ship.location !== location.symbol && <Button label="Route" size="sm" onClick={() => handleCreateFlightRoute(location)}/>}
                                         </div>
-                                        {ship.location !== location.symbol && <Button label="Route" size="sm" onClick={() => handleCreateFlightRoute(location)}/>}
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
             </ModalDialog>
         </>
     );
